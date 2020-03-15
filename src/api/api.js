@@ -1,8 +1,12 @@
 const urls = {
-  // base: '',
-  // origin: '',
-  base: 'http://127.0.0.1:8086',
-  origin: 'http://127.0.0.1:8086',
-  // Notice: '/api/announcement_list', // 首页公告列表接口
+  base: 'http://ld.haiyunzy.com/tdd',
+  origin: 'http://ld.haiyunzy.com/tdd',
+  Login: '/user/login', // 登陆接口
+  HadpartIn: '/api/hadpartIn', // 检查用户是否已经参与活动接口
+  IndexInfo: '/api/indexInfo', // 获取首页信息接口
+  MyTeam: '/api/myTeam', // 我的团队接口
+  Exhcange: '/api/exhcange', // 兑换接口
+  ExchangeList:'/api/exchangeList', // 订单管理接口
+  GetExchangeRule:'/api/getExchangeRule', // 获取兑换规则
 }
 module.exports = urls

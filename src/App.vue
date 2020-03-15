@@ -49,21 +49,26 @@ export default {
   position: absolute;
   top:0;
 }
-html,
-body {
+*{
   margin: 0;
   padding: 0;
+}
+html,
+body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
   font-weight: 400;
   font-size: 14px;
-  color: #2c3e50;
+  // color: #2c3e50;
   font-family: Helvetica, sans-serif;
   position: relative;
   a {
     text-decoration: none;
   }
+  ul, li{
+  list-style-type: none;
+}
   .child-view {
     will-change: transform;
     transition: all 0.4s cubic-bezier(0.55,0,0.1,1);
