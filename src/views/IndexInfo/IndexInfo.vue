@@ -127,31 +127,30 @@
           <span class="this-text">本次兑换：</span>
           <div class="stepper">
             <p class="strip">
-              <van-stepper
-                class="step"
-                min="0"
-                :value="stepValue"
-                async-change
-                @change="onChangeStep"
-                :disable-plus="prohibitStep"
-                disabled-input
-                @plus="stripPlus"
-                @minus="stripMinus"
-              />
+              <van-stepper 
+              class="step" 
+              min="0" 
+              :value="stepValue" 
+              async-change 
+              @change="onChangeStep" 
+              :disable-plus="prohibitStep" 
+              disable-input 
+              @plus="stripPlus"
+              @minus="stripMinus" 
+               />
               <span>条</span>
             </p>
             <p class="strip marg-top">
-              <van-stepper
-                class="step"
-                min="0"
-                :value="shareValue"
-                async-change
-                @change="onChangeShare"
-                :disable-plus="prohibitShare"
-                disabled-input="true"
-                @plus="sharePlus"
-                @minus="shareMinus"
-              />
+              <van-stepper 
+              class="step" 
+              min="0" 
+              :value="shareValue" 
+              async-change 
+              @change="onChangeShare" 
+              :disable-plus="prohibitShare" 
+              disable-input 
+              @plus="sharePlus" 
+              @minus="shareMinus" />
               <span>份</span>
             </p>
             <p></p>
@@ -179,8 +178,8 @@
           <span>{{stepValue}}条+{{shareValue}}份礼包</span>
         </p>
         <p class="exchange-number">填写邮寄信息：</p>
-        <van-field v-model="name" type="text" label="收货人：" />
-        <van-field v-model="phone" type="tel" label="号码：" />
+        <van-field v-model="name" type="text" label="收货人：" clearable placeholder="请输入收货人姓名"/>
+        <van-field v-model="phone" type="tel" label="号码：" clearable placeholder="请输入收货人号码"/>
         <!-- <van-cell is-link>展示弹出层</van-cell> -->
         <van-field
           readonly
@@ -190,7 +189,7 @@
           placeholder="请选择所在地区"
           @click="showPopup"
         />
-        <van-field v-model="adrress" type="text" label="详细地址：" />
+        <van-field v-model="adrress" type="text" label="详细地址：" clearable placeholder="请输入详细地址（例如：街道门号）"/>
         <div class="but">
           <button class="butts bgkhui" @click="returnModify">返回修改</button>
           <button class="butts bgkblue" @click="postExhcangeData">确认提交</button>
@@ -202,6 +201,7 @@
             @cancel="cancelFn"
             @confirm="confirmFn"
             title="请选择区域"
+            value="450000"
           />
         </van-popup>
       </div>
@@ -227,7 +227,7 @@ export default {
   name: "IndexInfo",
   data() {
     return {
-      test:false,
+      clearable:false,
       show: false, // 进入活动弹框
       show1: false, // 显示地区上拉框
       show2: false, // 兑换规则弹框
@@ -410,7 +410,7 @@ export default {
               recommender: userInfo.recommender
             };
             this.activityInfoData = {
-              prize: activityInfo.prize ,
+              prize: activityInfo.prize =20,
               rank: activityInfo.rank,
               invitees: activityInfo.invitees,
               maxInvitees: activityInfo.maxInvitees,
