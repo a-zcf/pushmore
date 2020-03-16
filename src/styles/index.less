@@ -1,6 +1,10 @@
 @import "theme.less";
 // 首页
 .pushmore-index{
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
   background-color: @backgroundLightGrey;
  .head{
    width: 100%;
@@ -35,7 +39,7 @@
    box-sizing: border-box;
    background-color: @backgroundWhite;
    overflow: hidden;
-   border-bottom: 1px solid @backgroundLightGrey;
+  //  border-bottom: 1px solid @backgroundLightGrey;
    .area{
      width: 50%;
      padding: 0px 10px;
@@ -67,11 +71,21 @@
 
  .progress-bar{
   background-color: @backgroundWhite;
+  padding-bottom: 15px;
+  box-sizing: border-box;
+  .rank{
+    width: 95%;
+    margin: auto;
+    text-align: center;
+    padding:10px 0px;
+    color:@greyColor;
+  }
   ul{
+    width: 95%;
+    margin: auto;
     display: flex;
     flex-wrap: nowrap;
     li{
-      
       .li-p{
         display: flex;
         flex-wrap: nowrap;
@@ -89,7 +103,26 @@
           margin: 0px 10px;
         }
       }
-      
+      .zhengshi{
+        margin: 0px 10px;
+      }
+      .greyColor{
+        color: @greyColor;
+      }
+      .backgroundBlue{
+        color: @backgroundBlue;
+      }
+    }
+    .details{
+      width: 65px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      color: @whiteColor;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: @backgroundBlue;
+      margin:10px 0px 0px 30px;
     }
   }
  }
@@ -508,5 +541,12 @@
       }
     }
   }
+}
 
+//我的推荐二维码
+.my-qr-code{
+  width: 100%;
+  height: 100%;
+  background: url('../assets/img/head-1.png');
+  background-size: 100% 100%;
 }

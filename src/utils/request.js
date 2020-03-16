@@ -46,7 +46,7 @@ export const getRequest = (url) => {
     method: 'get',
     url: `${base}${url}`,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json;charset=UTF-8'
     }
   })
 }

@@ -28,31 +28,63 @@
     </div>
 
     <div class="progress-bar">
+      <p class="rank">发展人数{{activityInfoData.rank}}人</p>
       <ul>
         <li>
-          <p class="li-p"><span :class="activityInfoData.maxInvitees <= 10 || activityInfoData.maxInvitees > 10?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'" ></span><span class="iconfont icon-hengxian1"></span></p>
-          <p>正式1</p>
+          <p class="li-p">
+            <span
+              :class="activityInfoData.maxInvitees <= 10 || activityInfoData.maxInvitees > 10?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'"
+            ></span>
+            <span
+              :class="activityInfoData.maxInvitees >= 20 || activityInfoData.maxInvitees > 20?'iconfont icon-hengxian1 backgroundBlue':'iconfont icon-hengxian1 greyColor'"
+            ></span>
+          </p>
+          <p
+            class="zhengshi"
+            :class="activityInfoData.maxInvitees <= 10 || activityInfoData.maxInvitees > 10?'backgroundBlue':'greyColor'"
+          >正式1</p>
         </li>
         <li>
-          <p class="li-p"><span :class="activityInfoData.maxInvitees == 20 || activityInfoData.maxInvitees > 20?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'" ></span><span class="iconfont icon-hengxian1"></span></p>
-          <p>正式2</p>
+          <p class="li-p">
+            <span
+              :class="activityInfoData.maxInvitees == 20 || activityInfoData.maxInvitees > 20?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'"
+            ></span>
+            <span
+              :class="activityInfoData.maxInvitees >= 30 || activityInfoData.maxInvitees > 30?'iconfont icon-hengxian1 backgroundBlue':'iconfont icon-hengxian1 greyColor'"
+            ></span>
+          </p>
+          <p
+            class="zhengshi"
+            :class="activityInfoData.maxInvitees >= 20 || activityInfoData.maxInvitees > 20?'backgroundBlue':'greyColor'"
+          >正式2</p>
         </li>
         <li>
-          <p class="li-p"><span :class="activityInfoData.maxInvitees == 30 || activityInfoData.maxInvitees >30?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'" ></span><span class="iconfont icon-hengxian1"></span></p>
-          <p>正式3</p>
+          <p class="li-p">
+            <span
+              :class="activityInfoData.maxInvitees == 30 || activityInfoData.maxInvitees >30?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'"
+            ></span>
+            <span
+              :class="activityInfoData.maxInvitees >= 40 || activityInfoData.maxInvitees > 40?'iconfont icon-hengxian1 backgroundBlue':'iconfont icon-hengxian1 greyColor'"
+            ></span>
+          </p>
+          <p
+            class="zhengshi"
+            :class="activityInfoData.maxInvitees >= 30 || activityInfoData.maxInvitees > 30?'backgroundBlue':'greyColor'"
+          >正式3</p>
         </li>
         <li>
-          <p class="li-p"><span :class="activityInfoData.maxInvitees == 40?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'" ></span></p>
-          <p>正式4</p>
+          <p class="li-p">
+            <span
+              :class="activityInfoData.maxInvitees >= 40?'iconfont icon-chenggong buzhou-text01':'iconfont icon-chenggong buzhou-text'"
+            ></span>
+          </p>
+          <p
+            class="zhengshi"
+            :class="activityInfoData.maxInvitees >= 40?'backgroundBlue':'greyColor'"
+          >正式4</p>
         </li>
+        <li class="details" @click="myTeam">详情</li>
       </ul>
-      <!-- <van-steps :active="active" active-icon="passed" inactive-icon="passed" active-color="#38f">
-        <van-step>领奖进度</van-step>
-        <van-step>正式1</van-step>
-        <van-step>正式2</van-step>
-        <van-step>正式3</van-step>
-        <van-step>正式4</van-step>
-      </van-steps> -->
     </div>
 
     <div class="menu-list">
@@ -61,7 +93,7 @@
         <span class="middle-text">我的团队</span>
         <i class="iconfont icon-gengduo icon-more"></i>
       </div>
-      <div class="list">
+      <div class="list" @click="myQrCode">
         <i class="iconfont icon-two-dimensional-code icon icon-middle"></i>
         <span class="middle-text">推广名片</span>
         <i class="iconfont icon-gengduo icon-more"></i>
@@ -87,12 +119,41 @@
     <van-overlay :show="show2">
       <div class="exchange-rules">
         <h3 class="title">填写礼包数</h3>
-        <p class="exchange-number">你当前可兑换礼包数：<span>{{activityInfoData.prize}}</span></p>
+        <p class="exchange-number">
+          你当前可兑换礼包数：
+          <span>{{activityInfoData.prize}}</span>
+        </p>
         <div class="this-exchange">
           <span class="this-text">本次兑换：</span>
           <div class="stepper">
-            <p class="strip"><van-stepper class="step" min="0" integer :value="stepValue" async-change @change="onChangeStep" :disable-plus = 'prohibitStep' disabled-input /><span>条</span></p>
-            <p class="strip marg-top"><van-stepper class="step" min="0" integer :value="shareValue" async-change @change="onChangeShare" :disable-plus = 'prohibitShare' disabled-input /><span>份</span></p>
+            <p class="strip">
+              <van-stepper
+                class="step"
+                min="0"
+                :value="stepValue"
+                async-change
+                @change="onChangeStep"
+                :disable-plus="prohibitStep"
+                disabled-input
+                @plus="stripPlus"
+                @minus="stripMinus"
+              />
+              <span>条</span>
+            </p>
+            <p class="strip marg-top">
+              <van-stepper
+                class="step"
+                min="0"
+                :value="shareValue"
+                async-change
+                @change="onChangeShare"
+                :disable-plus="prohibitShare"
+                disabled-input="true"
+                @plus="sharePlus"
+                @minus="shareMinus"
+              />
+              <span>份</span>
+            </p>
             <p></p>
           </div>
         </div>
@@ -109,37 +170,40 @@
         </div>
       </div>
     </van-overlay>
-    
+
     <van-overlay :show="show3">
       <div class="exchange-rules">
         <h3 class="title">信息确认</h3>
-        <p class="exchange-number">你本次兑换明细：<span>{{stepValue}}条+{{shareValue}}份礼包</span></p>
+        <p class="exchange-number">
+          你本次兑换明细：
+          <span>{{stepValue}}条+{{shareValue}}份礼包</span>
+        </p>
         <p class="exchange-number">填写邮寄信息：</p>
-        <van-field v-model="consignee" type="text" label="收货人：" />
+        <van-field v-model="name" type="text" label="收货人：" />
         <van-field v-model="phone" type="tel" label="号码：" />
         <!-- <van-cell is-link>展示弹出层</van-cell> -->
-      <van-field
-        readonly
-        clickable
-        label="选择区域："
-        :value="valueArea"
-        placeholder="请选择所在地区"
-        @click="showPopup"
-      />
-      <van-field v-model="detailedAddress" type="text" label="详细地址：" />
-      <div class="but">
-          <button class="butts bgkhui" @click="returnModify">返回修改</button>
-          <button class="butts bgkblue" @click="submission">确认提交</button>
-        </div>
-      <van-popup v-model="show1" :close-on-click-overlay="closeOnClickOverlay" position="bottom">
-        <van-area
-          :area-list="areaList"
-          :columns-num="colNum"
-          @cancel="cancelFn"
-          @confirm="confirmFn"
-          title="请选择区域"
+        <van-field
+          readonly
+          clickable
+          label="选择区域："
+          :value="valueArea"
+          placeholder="请选择所在地区"
+          @click="showPopup"
         />
-      </van-popup>
+        <van-field v-model="adrress" type="text" label="详细地址：" />
+        <div class="but">
+          <button class="butts bgkhui" @click="returnModify">返回修改</button>
+          <button class="butts bgkblue" @click="postExhcangeData">确认提交</button>
+        </div>
+        <van-popup v-model="show1" :close-on-click-overlay="closeOnClickOverlay" position="bottom">
+          <van-area
+            :area-list="areaList"
+            :columns-num="colNum"
+            @cancel="cancelFn"
+            @confirm="confirmFn"
+            title="请选择区域"
+          />
+        </van-popup>
       </div>
     </van-overlay>
 
@@ -158,11 +222,12 @@
 
 <script>
 import AeraInfo from "../../utils/area";
-import {IndexInfo,Exhcange,GetExchangeRule} from "../../api/api";
+import { IndexInfo, Exhcange, GetExchangeRule } from "../../api/api";
 export default {
   name: "IndexInfo",
   data() {
     return {
+      test:false,
       show: false, // 进入活动弹框
       show1: false, // 显示地区上拉框
       show2: false, // 兑换规则弹框
@@ -175,15 +240,22 @@ export default {
       activityId: "", // 活动Id
       active: 0,
       stepValue: 0, // 条烟值
-      shareValue:0, // 份烟值
-      consignee:'', // 收货人
-      phone: '', // 手机号码
-      detailedAddress: '', // 详细地址
-      userInfoData:'', 
-      activityInfoData:'',
-      prohibitStep: true,
-      prohibitShare:true,
-      disabledinp:true,
+      shareValue: 0, // 份烟值
+      userInfoData: "",
+      activityInfoData: {
+        prize:0,
+        maxInvitees:0,
+         rank:0,
+      },
+      prohibitStep: true, // 隐藏加号按钮
+      prohibitShare: true, // 隐藏加号按钮
+      disabledinp: true,
+      everyBarNeedBoxCount: 0, // 每条所需的份数
+      exchangeNumForBar:0, //----兑换条数
+      exchangeNumForBox:0, //----兑换份数
+      name:"", // 收货人
+      phone:"", // 号码
+      adrress:"", // 地址
     };
   },
   mounted() {
@@ -194,78 +266,196 @@ export default {
   },
   methods: {
     // 计步器条值
-    onChangeStep: function(stepValue){
-        this.stepValue = stepValue;
+    onChangeStep: function(stepValue) {
+      this.stepValue = stepValue;
     },
     // 计步器份值
-    onChangeShare: function(shareValue){
-        this.shareValue = shareValue;
+    onChangeShare: function(shareValue) {
+      this.shareValue = shareValue;
+    },
+    // 条加按钮
+    stripPlus() {
+      this.activityInfoData.prize = this.activityInfoData.prize - this.everyBarNeedBoxCount;
+      if (this.activityInfoData.prize < this.everyBarNeedBoxCount || this.activityInfoData.prize < 5) {
+        this.prohibitStep = true;
+      }else{
+        this.prohibitStep = false;
+      }
+      if(this.activityInfoData.prize <= 0) {
+        this.prohibitShare = true;
+        } else {
+        this.prohibitShare = false;
+      }
+    },
+    //条减按钮
+    stripMinus(){
+      this.activityInfoData.prize = this.activityInfoData.prize + this.everyBarNeedBoxCount;
+      if (this.activityInfoData.prize < this.everyBarNeedBoxCount && this.activityInfoData.prize < 5) {
+        this.prohibitStep = true;
+      }else{
+        this.prohibitStep = false;
+      }
+      if(this.activityInfoData.prize <= 0) {
+        this.prohibitShare = true;
+        } else {
+        this.prohibitShare = false;
+      }
+    },
+    // 份加按钮
+    sharePlus() {
+       this.activityInfoData.prize = this.activityInfoData.prize - 1;
+      if(this.activityInfoData.prize <= 0) {
+        this.prohibitShare = true;
+        } else {
+        this.prohibitShare = false;
+      }
+      if (this.activityInfoData.prize < this.everyBarNeedBoxCount || this.activityInfoData.prize < 5) {
+        this.prohibitStep = true;
+      }else{
+        this.prohibitStep = false;
+      }
+    },
+    // 份减按钮
+    shareMinus(){
+      this.activityInfoData.prize = this.activityInfoData.prize + 1;
+      if(this.activityInfoData.prize <= 0) {
+        this.prohibitShare = true;
+        } else {
+        this.prohibitShare = false;
+      }
+      if (this.activityInfoData.prize < this.everyBarNeedBoxCount && this.activityInfoData.prize < 5) {
+        this.prohibitStep = true;
+      }else{
+        this.prohibitStep = false;
+      }
+    },
+    // 兑换
+    postExhcangeData() {
+      if(this.stepValue == 0 && this.shareValue == 0){
+      this.$toast('请选择条或份礼包');
+        return false
+      }
+      if(this.name == ''){
+      this.$toast('请输入收货人名称！');
+        return false
+      }
+      if(this.phone == ''){
+      this.$toast('请输入收货人号码！');
+        return false
+      }
+      if(this.valueArea == ''){
+      this.$toast('请选择您的区域！');
+        return false
+      }
+      if(this.adrress == ''){
+      this.$toast('请输入的的详细地址（例如：街道及门牌号）！');
+        return false
+      }
+      let params = {
+          activityId:this.activityId,
+          exchangeNumForBar: this.stepValue, // 条
+          exchangeNumForBox:this.shareValue, // 份
+          name:this.name,
+          phone:this.phone,
+          adrress:this.valueArea + this.adrress
+      }
+      this.$postRequest(Exhcange,params).then(res => {
+        console.log(res)
+        if(res.data.code === '0000') {
+          this.$toast.success('兑换成功！')
+          setTimeout(() => {
+            this.show3 = false
+          },1000)
+          this.stepValue = '', // 条
+          this.shareValue = '', // 份
+          this.name = '',
+          this.phone = '',
+          this.valueArea = '',
+          this.adrress = ''
+        }else{
+          this.$toast.fail('兑换失败！');
+        }
+      })
     },
     //计步器取消按钮
-    cancel:function(){
-       this.show2 = false
+    cancel: function() {
+      this.show2 = false;
     },
     //计步器确定按钮
-    determine:function(){
-       this.show2 = false,
-       this.show3 = true
+    determine: function() {
+      (this.show2 = false), (this.show3 = true);
     },
     // 计步器返回修改按钮
-    returnModify: function (){
-      this.show2 = true,
-      this.show3 = false
+    returnModify: function() {
+      (this.show2 = true), (this.show3 = false);
     },
     // 计步器确认提交按钮
-    submission: function (){
+    submission: function() {
       // this.show2 = true,
-      this.show3 = false
-    },
-    
-    // 首页数据
-    postIndexInfoData: function() {
-      this.$postRequest(IndexInfo, {activityId: this.activityId}).then(res => {
-          if (res.data.code === '0000') {
-            let userInfo = res.data.data.userInfo
-            let activityInfo = res.data.data.activityInfo
-            console.log(activityInfo)
-            this.userInfoData = {id:userInfo.id, headImg:userInfo.headImg,nickName:userInfo.nickName,recommender:userInfo.recommender}
-            this.activityInfoData = {
-              prize:activityInfo.prize,
-              rank:activityInfo.rank,
-              invitees:activityInfo.invitees,
-              maxInvitees:activityInfo.maxInvitees = 40,
-              everyAwardCount:activityInfo.everyAwardCount,
-              isComplete:activityInfo.isComplete
-              }
-              console.log(this.activityInfoData.maxInvitees)
-            // this.activityInfoData.prize = 1
-            if (this.activityInfoData.prize >= 5) {
-                 this.prohibitStep = false
-            } else {
-              this.prohibit = true
-            }
-            if (this.activityInfoData.prize > 0) {
-              this.prohibitShare = false
-            } else {
-              this.prohibitShare = true
-            }
-          }
-        });
+      this.show3 = false;
     },
 
-    getExchangeRuleData () {
-      this.$getRequest(GetExchangeRule,{activityId: this.activityId}).then(res => {
-        console.log(res)
-      })
+    // 首页数据
+    postIndexInfoData: function() {
+      this.$postRequest(IndexInfo, { activityId: this.activityId }).then(
+        res => {
+          console.log(res)
+          if (res.data.code === "0000") {
+            let userInfo = res.data.data.userInfo;
+            let activityInfo = res.data.data.activityInfo;
+            this.userInfoData = {
+              id: userInfo.id,
+              headImg: userInfo.headImg,
+              nickName: userInfo.nickName,
+              recommender: userInfo.recommender
+            };
+            this.activityInfoData = {
+              prize: activityInfo.prize ,
+              rank: activityInfo.rank,
+              invitees: activityInfo.invitees,
+              maxInvitees: activityInfo.maxInvitees,
+              everyAwardCount: activityInfo.everyAwardCount,
+              isComplete: activityInfo.isComplete
+            };
+            if (this.activityInfoData.prize < this.everyBarNeedBoxCount || this.activityInfoData.prize < 5) {
+              this.prohibitStep = true;
+            } else {
+              this.prohibitStep = false;
+            }
+            if (this.activityInfoData.prize <= 0) {
+              this.prohibitShare = true;
+            } else {
+              this.prohibitShare = false;
+            }
+          }
+        }
+      );
+    },
+
+    getExchangeRuleData() {
+      this.$getRequest(GetExchangeRule, { activityId: this.activityId }).then(
+        res => {
+          if (res.data.code === "0000") {
+            this.everyBarNeedBoxCount = res.data.data.rule.everyBarNeedBoxCount;
+          }
+        }
+      );
     },
 
     // 跳转我的团队
-    myTeam () {
-      this.$router.push({path:'/MyTeam',query:{activityId:this.activityId}})
+    myTeam() {
+      this.$router.push({
+        path: "/MyTeam",
+        query: { activityId: this.activityId }
+      });
     },
     // 跳转订单管理
-    orderManagement () {
-        this.$router.push({path:'/OrderAdmin'})
+    orderManagement() {
+      this.$router.push({ path: "/OrderAdmin" });
+    },
+    // 跳转我的推广码
+    myQrCode() {
+      this.$router.push({ path: "/MyQrCode",query: { activityId: this.activityId } });
     },
     // 进入活动弹框显示
     tankuan() {
