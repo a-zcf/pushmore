@@ -17,9 +17,9 @@ err => {
 
 axios.interceptors.response.use(response => {
   if (response.data.code === '0001') {
-    Toast.fail(error.response.data);
+    Toast.fail(response.data.message);
      let url = location.href
-     window.location.href = Api.base + Api.Login + '?redirect_url=' + url
+    //  window.location.href = Api.base + Api.Login + '?redirect_url=' + url
   }
   return response
 },

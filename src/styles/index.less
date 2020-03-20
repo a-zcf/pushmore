@@ -1,10 +1,14 @@
 @import "theme.less";
 // 首页
+.van-divider{
+  height: 50px !important;
+  margin: 0 10px !important;
+}
 .pushmore-index{
   width: 100%;
   height: 100%;
   overflow: hidden;
-  // overflow-x: hidden;
+  overflow-x: hidden;
   overflow-y: scroll;
   background-color: @backgroundLightGrey;
  .head{
@@ -86,44 +90,83 @@
     margin: auto;
     display: flex;
     flex-wrap: nowrap;
-    li{
-      .li-p{
+    align-items: center;
+    li {
+      color: @greyColor;
+      .horizontal-line{
+        display: block;
+        width: 30px;
+        height: 6px;
+        display: flex;
+        align-items: center;
+        background-color: @backgroundShallow;
+        box-sizing: border-box;
+        .line-ibgk{
+          display: block;
+          width: 100%;
+          height: 3px;
+          border-radius: 5px;
+          background-color: @orangeColor;
+          box-shadow: 0px 0px 1px 0.4px @greyColor;
+        }
+      }
+      .award-progress{
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
-        .buzhou-text{
-          color: @greyColor;
-          font-size: 30px;
-          display: block;
-          margin: 0px 10px;
+        margin-top: -20px;
+        overflow: hidden;
+        .progress{
+          width: 50px;
+          height: 50px;
+          padding-top: 3px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          box-sizing: border-box;
+          color: @whiteColor;
         }
-        .buzhou-text01{
-          color: @backgroundBlue;
-          font-size: 30px;
-          display: block;
-          margin: 0px 10px;
+      }
+      .bar-spancolor{
+        color: @orangeColor;
+      }
+      .bar-p{
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        .bar-span{
+          width: 28px;
+          height: 28px;
+          line-height: 29px;
+          text-align: center;
+          background-color: @backgroundShallow;
+          border-radius: 50px;
+          box-sizing: border-box;
+          z-index: 1;
         }
+        .bgk-bar{
+          box-shadow: 0px 0px 10px 1px #ff6600;
+          animation:bgkBar 1s ease infinite both ;
+        }
+        @keyframes bgkBar {
+          0% {transform: none;}
+          50% {transform: scale3d(0.8,0.8,0.8);}
+          100% {transform: none;}
       }
-      .zhengshi{
-        margin: 0px 10px;
-      }
-      .greyColor{
-        color: @greyColor;
-      }
-      .backgroundBlue{
-        color: @backgroundBlue;
+
       }
     }
     .details{
-      width: 65px;
-      height: 35px;
-      line-height: 35px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
       text-align: center;
       color: @whiteColor;
-      border-radius: 5px;
-      font-size: 16px;
-      background-color: @backgroundBlue;
-      margin:10px 0px 0px 30px;
+      border-radius: 50px;
+      // font-size: 16px;
+      background-color: @orangeColor;
+      margin:0px 0px 10px 13px;
+      box-shadow: 0px 0px 5px 1px @orangeColor;
     }
   }
  }
@@ -156,6 +199,19 @@
        width:75%;
        margin-left: 15px;
        font-size: 15px;
+       display: flex;
+       flex-wrap: nowrap;
+       align-items: center;
+       .remaining-time{
+          color: @orangeColor;
+          display: flex;
+       flex-wrap: nowrap;
+       margin-left: 5px;
+          .remaining-icon{
+            display: block;
+            margin-top: -5px;
+          }
+       }
      }
      .icon-more{
        color: @greyColor;
@@ -205,12 +261,20 @@
   }
  }
  .exchange-rules{
-   width: 95%;
+   width: 90%;
    padding-bottom: 15px;
-   margin: 40% auto auto auto;
+   margin: 30% auto auto auto;
    background-color: @backgroundWhite;
    border-radius: 8px;
    box-sizing: border-box;
+   position: relative;
+   .guanbi{
+        position: absolute;
+        bottom:-60px;
+        left: 45%;
+        font-size: 40px;
+        color: @whiteColor;
+   }
    .van-field__clear{
      font-size: 20px !important;
      margin-right: 10px;
@@ -309,7 +373,7 @@
    .but{
      display: flex;
      justify-content: space-around;
-     margin-top: 15px;
+     margin-top: 30px;
      .bgkhui{
        background-color: @greyColor;
      }
@@ -325,6 +389,18 @@
        font-size: 18px;
      }
    }
+ }
+ .van-dialog__header{
+   font-size: 20px !important;
+   color: @backgroundBlue;
+ }
+ .is-complete{
+   padding: 10px 15px;
+   box-sizing: border-box;
+   white-space: normal;
+   word-wrap: break-word;
+   word-break: break-all;
+   color: @greyColor;
  }
 }
 // IndexEr
@@ -482,6 +558,7 @@
 // 我的团队
 .my-team{
   background-color: @backgroundLightGrey;
+  height: 100%;
   .head-img{
     height: 100px;
     img{
@@ -489,6 +566,11 @@
       height: 100px;
     }
   }
+  // .van-tabs{
+  //   height: 100%;
+  //   overflow: hidden;
+  //   overflow-y: scroll;
+  // }
   .van-tabs__line{
     background-color: @orangeColor !important;
   }
@@ -496,6 +578,7 @@
     color: @orangeColor !important;
   }
   .van-tabs__content{
+    // height: 100%;
     margin-top: 10px !important;
     background-color: @backgroundWhite;
   }
@@ -564,6 +647,51 @@
 .my-qr-code{
   width: 100%;
   height: 100%;
-  background: url('../assets/img/head-1.png');
-  background-size: 100% 100%;
+  overflow: hidden;
+  position: relative;
+  .codeImg{
+    width: 100%;
+    height: 100%;
+  }
+  i{
+    position: absolute;
+    color: @backgroundBlue;
+  }
+  .circle{
+     bottom: 22%;
+     left: 69%;
+     font-size: 25px;
+     animation: circle 1s ease infinite both;
+  }
+  .finger{
+    bottom: 19%;
+    left: 69%;
+    font-size: 50px;
+    animation: finger 1s ease infinite both;
+  }
+  @keyframes finger{
+    0% {
+      transform: none;
+  }
+  70% {
+      transform: scale3d(.8, .8, .8);
+  }
+  100% {
+      transform: none;
+  }
+  }
+  @keyframes circle {
+    0% {
+      opacity: 0;
+      transform: scale3d(0, 0, 0);
+  }
+  70% {
+      opacity: 1;
+      transform: scale3d(1.2, 1.2, 1.2);
+  }
+  100% {
+      opacity: 0;
+      transform: scale3d(0, 0, 0);
+  }
+  }
 }

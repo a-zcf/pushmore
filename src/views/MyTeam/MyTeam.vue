@@ -8,31 +8,27 @@
       <van-tab title="发展客户">
         <h3 class="title">~~目前发展用户{{developCount}}人~~</h3>
         <div class="list">
-          <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-            <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
             <ul>
               <li v-for="(item,index) in developList" :key="index">
                 <img class="head-portrait" :src="item.headImg" />
                 <span class="name formal-name">{{item.nickName}}</span>
                 <span class="sweep-code"><p class="code">{{item.status==='0'?'未扫码':'已扫码'}}</p><p class="time">邀请时间：{{item.scanTime}}</p></span>
               </li>
+              <van-divider v-if="developList==''">暂无发展用户~~</van-divider>
             </ul>
-          </van-list>
         </div>
       </van-tab>
       <van-tab title="正式客户">
         <h3 class="title">~~目前正式用户{{formalCount}}人~~</h3>
         <div class="list">
-          <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-            <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
             <ul>
               <li v-for="(item,index) in formalList" :key="index">
                 <img class="head-portrait" :src="item.headImg" />
                 <span class="name formal-name">{{item.nickName}}</span>
                 <span class="sweep-code"><p class="code">{{item.status==='0'?'未扫码':'已扫码'}}</p><p class="time">扫码时间：{{item.scanTime}}</p></span>
               </li>
+              <van-divider v-if="formalList==''">暂无正式用户~~</van-divider>
             </ul>
-          </van-list>
         </div>
       </van-tab>
     </van-tabs>

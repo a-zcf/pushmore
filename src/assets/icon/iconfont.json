@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5501601",
+      "name": "圆圈",
+      "font_class": "AppIcon-copy",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "5611896",
+      "name": "手指",
+      "font_class": "shouzhixuanzhong-copy",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "6125834",
+      "name": "点",
+      "font_class": "dian-red",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
       "icon_id": "9111112",
       "name": "警告",
       "font_class": "jinggao",
@@ -18,13 +39,6 @@
       "font_class": "chenggong",
       "unicode": "e704",
       "unicode_decimal": 59140
-    },
-    {
-      "icon_id": "3392670",
-      "name": "横线",
-      "font_class": "hengxian1",
-      "unicode": "e602",
-      "unicode_decimal": 58882
     },
     {
       "icon_id": "752842",

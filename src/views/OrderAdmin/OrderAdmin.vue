@@ -1,7 +1,5 @@
 <template>
   <div class="order-admin">
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <!-- <van-cell v-for="item in list" :key="item" :title="item" /> -->
         <ul>
           <li v-for="(item,index) in exchangeList" :key="index">
             <img class="order-img" src="../../assets/img/head-1.png"/>
@@ -15,8 +13,8 @@
               <p class="shr-dhsj">兑换时间：{{item.exchangeTime}}</p>
             </div>
           </li>
+          <van-divider v-if="exchangeList==''">暂无订单数据~~</van-divider>
         </ul>
-    </van-list>
   </div>
 </template>
 

@@ -21,6 +21,8 @@ import {
   Step, 
   Steps,
   Stepper,
+  Dialog,
+  Divider,
  } from 'vant';
 Vue.use(Loading);
 Vue.use(List);
@@ -34,6 +36,8 @@ Vue.use(Toast);
 Vue.use(Step);
 Vue.use(Steps);
 Vue.use(Stepper);
+Vue.use(Dialog);
+Vue.use(Divider);
 
 Vue.config.productionTip = false
 Vue.prototype.$getRequest = getRequest // get请求

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { HadpartIn } from "../../api/api";
+import {HadpartIn} from "../../api/api";
 export default {
   name: "Transition",
   data() {
@@ -18,6 +18,7 @@ export default {
     // 是否参与活动
     getHadpartInData: function() {
       this.$getRequest(HadpartIn).then(res => {
+        console.log(res)
         if (res.data.code === "0000") {
           this.had = res.data.data.result.had;
          let activityId = res.data.data.result.activityId;
