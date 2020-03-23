@@ -21,7 +21,7 @@
     <div class="active-area">
       <div class="area">
         <i class="iconfont icon-jiangli icon-i"></i>
-        <span>目前可兑换礼品数</span>
+        <span>目前剩余可兑换礼品数</span>
         <span class="right-text">{{activityInfoData.prize}}</span>
       </div>
       <div class="duihuan" :style="activityInfoData.prize <= 0 ?'background-color: #999;':'background-color: #ff6600;'" @click="exchangeRules">去兑换</div>
@@ -268,13 +268,14 @@ export default {
       name: "", // 收货人
       phone: "", // 号码
       adrress: "", // 地址
-      docmHeight: document.documentElement.clientHeight ||document.body.clientHeight,
-      showHeight: document.documentElement.clientHeight ||document.body.clientHeight,
+      docmHeight: document.documentElement.clientHeight || document.body.clientHeight,
+      showHeight: document.documentElement.clientHeight || document.body.clientHeight,
       hideshow:true, //显示或者隐藏footer
       url:'', // 推荐码地址
       expiredTime: '',
       remainingTime:false,
       eachAward:0, // 进度
+      timeExpired: 24*60*60
     };
   },
   watch: {
@@ -469,7 +470,7 @@ export default {
               recommender: userInfo.recommender
             };
             this.activityInfoData = {
-              prize: activityInfo.prize =1,
+              prize: activityInfo.prize= 1,
               rank: activityInfo.rank,
               invitees: activityInfo.invitees,
               maxInvitees: activityInfo.maxInvitees,
@@ -513,7 +514,7 @@ export default {
            if (res.data.code == '0000') {
              this.url = res.data.data.code.url
              this.expiredTime = res.data.data.code.expiredTime
-             if (this.expiredTime < 86400) {
+             if (this.expiredTime < this.timeExpired) {
                this.remainingTime = true
              } else {
                 this.remainingTime = false
@@ -525,9 +526,9 @@ export default {
     postUpdateMyCard() {
        this.$postRequest(UpdateMyCard,{activityId:this.activityId}).then(res => {
         if (res.data.code == '0000') {
-           this.$toast.success('名片更新成功！')
+          this.$toast.success('名片更新成功！')
         } else {
-          this.$toast.fail('名片更新失败！')
+          this.$toast.fail(res.data.message)
         }
        })
     },
@@ -544,13 +545,13 @@ export default {
     },
     // 跳转我的推广码
     myQrCode() {
-      if(this.expiredTime < 86400) {
+      if(this.expiredTime < this.timeExpired) {
         this.postUpdateMyCard()
+        this.$router.push({path: "/MyQrCode",query: { url: this.url}});
+        return false
+      } else {
+        this.$router.push({path: "/MyQrCode",query: { url: this.url}});
       }
-       this.$router.push({
-        path: "/MyQrCode",
-        query: { url: this.url}
-      });
     },
     // 进入活动弹框显示
     tankuan() {
