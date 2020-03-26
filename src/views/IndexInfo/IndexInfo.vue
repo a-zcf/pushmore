@@ -91,8 +91,10 @@
       </div>
       <div class="list" @click="myQrCode">
         <i class="iconfont icon-two-dimensional-code icon icon-middle"></i>
+        <i class="iconfont icon-AppIcon-copy card-circle"></i>
+        <i class="iconfont icon-shouzhixuanzhong-copy card-finger"></i>
         <span class="middle-text">
-          <span>推广名片</span>
+          <span class="card">推广名片</span>
           <span v-show="remainingTime" class="remaining-time">(名片即将到期，请更新...)<i class="iconfont icon-dian-red remaining-icon"></i></span>
         </span>
         <i class="iconfont icon-gengduo icon-more"></i>
@@ -470,7 +472,7 @@ export default {
               recommender: userInfo.recommender
             };
             this.activityInfoData = {
-              prize: activityInfo.prize= 1,
+              prize: activityInfo.prize,
               rank: activityInfo.rank,
               invitees: activityInfo.invitees,
               maxInvitees: activityInfo.maxInvitees,
@@ -547,10 +549,16 @@ export default {
     myQrCode() {
       if(this.expiredTime < this.timeExpired) {
         this.postUpdateMyCard()
-        this.$router.push({path: "/MyQrCode",query: { url: this.url}});
+        this.$router.push(
+          {
+            path: "/MyQrCode",query: { url: this.url}
+          });
         return false
       } else {
-        this.$router.push({path: "/MyQrCode",query: { url: this.url}});
+        this.$router.push(
+          {
+            path: "/MyQrCode",query: { url: this.url}
+          });
       }
     },
     // 进入活动弹框显示

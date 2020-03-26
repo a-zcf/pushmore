@@ -2,7 +2,7 @@
   <div class="order-admin">
         <ul>
           <li v-for="(item,index) in exchangeList" :key="index">
-            <img class="order-img" src="../../assets/img/head-1.png"/>
+            <img class="order-img" src="../../assets/img/libao.png"/>
             <div class="order-right">
               <p class="exchange-number">兑换数量：{{item.exchangeNum}}/份</p>
               <p class="rece-address">

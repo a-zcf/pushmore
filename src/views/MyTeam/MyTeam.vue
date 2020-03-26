@@ -1,7 +1,7 @@
 <template>
   <div class="my-team">
     <div class="head-img">
-      <img src="../../assets/img/head-1.png" />
+      <img src="../../assets/img/headImg.png" />
     </div>
 
     <van-tabs v-model="active">

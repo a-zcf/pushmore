@@ -1,8 +1,8 @@
 <template>
   <div class="my-qr-code">
      <img class="codeImg" :src="url" />
-       <i class="iconfont icon-AppIcon-copy circle"></i>
-       <i class="iconfont icon-shouzhixuanzhong-copy finger"></i>
+     <i class="iconfont icon-AppIcon-copy circle"></i>
+     <i class="iconfont icon-shouzhixuanzhong-copy finger"></i>
   </div>
 </template>
 
