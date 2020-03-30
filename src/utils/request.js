@@ -19,7 +19,7 @@ axios.interceptors.response.use(response => {
   if (response.data.code === '0001') {
     Toast.fail(response.data.message);
      let url = location.href
-    //  window.location.href = Api.base + Api.Login + '?redirect_url=' + url
+     window.location.href = Api.base + Api.Login + '?redirect_url=' + url
   }
   return response
 },
@@ -46,7 +46,7 @@ export const getRequest = (url) => {
     method: 'get',
     url: `${base}${url}`,
     headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/json'
     }
   })
 }

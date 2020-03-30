@@ -36,54 +36,33 @@
    }
  }
 
- .active-area{
-   height: 55px;
-   display: flex;
-   flex-wrap: nowrap;
-   align-items: center;
-   box-sizing: border-box;
-   background-color: @backgroundWhite;
-   overflow: hidden;
-  //  border-bottom: 1px solid @backgroundLightGrey;
-   .area{
-     width: 50%;
-     padding: 0px 10px;
-     box-sizing: border-box;
-     font-size: 16px;
-     display: flex;
-     justify-content:center;
-     align-items: center;
-     .icon-i{
-       margin-right: 5px;
-       color: @orangeColor;
-       font-size: 25px;
-     }
-     .fontzise{
-      padding-bottom:2px;
-     }
-     .right-text{
-       max-width: 66px;
-       overflow: hidden;
-      color: @orangeColor;
-      font-size: 20px;
-      margin-left: 5px;
-     }
-   }
-   .border-r{
-    border-right:1px solid @borderColor;
-   }
- }
-
+.is-complete{
+  padding: 10px 15px;
+  box-sizing: border-box;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: @greyColor;
+}
  .progress-bar{
   background-color: @backgroundWhite;
-  padding-bottom: 15px;
+  // margin-top: 10px;
+  padding-bottom: 10px;
   box-sizing: border-box;
+  .van-dialog__header{
+    font-size: 20px !important;
+    color: @backgroundBlue;
+  }
+  
   .rank{
     width: 95%;
     margin: auto;
     text-align: center;
-    padding:10px 0px;
+    padding:5px 0px;
     color:@greyColor;
+  }
+  .bottom-text{
+
   }
   ul{
     width: 95%;
@@ -95,7 +74,7 @@
       color: @greyColor;
       .horizontal-line{
         display: block;
-        width: 30px;
+        width: 25px;
         height: 6px;
         display: flex;
         align-items: center;
@@ -135,9 +114,9 @@
         flex-wrap: nowrap;
         align-items: center;
         .bar-span{
-          width: 28px;
-          height: 28px;
-          line-height: 29px;
+          width: 26px;
+          height: 26px;
+          line-height: 26px;
           text-align: center;
           background-color: @backgroundShallow;
           border-radius: 50px;
@@ -156,17 +135,29 @@
 
       }
     }
-    .details{
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      color: @whiteColor;
-      border-radius: 50px;
-      // font-size: 16px;
-      background-color: @orangeColor;
-      margin:0px 0px 10px 13px;
-      box-shadow: 0px 0px 5px 1px @orangeColor;
+    .jindu-li{
+      width: 24%;
+      margin-left: 6px;
+      line-height: 30px;
+      .toTxchange{
+        width: 75%;
+        height: 30px;
+        line-height: 30px;
+        margin: auto;
+        display: block;
+        background-color: @greyColor;
+        color: @whiteColor;
+        text-align: center;
+        border-radius: 5px;
+      }
+      .numberGifts{
+        width: 100%;
+        display: block;
+         color: @redColor;
+         text-align: center;
+         overflow: hidden;
+         white-space: nowrap;
+      }
     }
   }
  }
@@ -414,15 +405,17 @@
  }
  .van-dialog__header{
    font-size: 20px !important;
-   color: @backgroundBlue;
+   color: @redColor;
  }
- .is-complete{
-   padding: 10px 15px;
-   box-sizing: border-box;
-   white-space: normal;
-   word-wrap: break-word;
-   word-break: break-all;
-   color: @greyColor;
+ .had{
+    padding: 10px 15px;
+    box-sizing: border-box;
+    text-align: center;
+    color: @greyColor;
+ }
+ .had-text{
+  padding: 0px 10px 15px;
+  text-align: center;
  }
 }
 // IndexEr
@@ -651,10 +644,15 @@
         line-height: 25px;
         padding-top: 15px;
         .code{
+          // width: 100%;
+          // display: block;
           color: @backgroundBlue;
           font-weight: 600;
           text-align: right;
-          padding-right: 10px;
+          padding-left: 10px;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
         }
         .time{
           color: @greyColor;

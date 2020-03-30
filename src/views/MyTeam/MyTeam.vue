@@ -12,7 +12,7 @@
               <li v-for="(item,index) in developList" :key="index">
                 <img class="head-portrait" :src="item.headImg" />
                 <span class="name formal-name">{{item.nickName}}</span>
-                <span class="sweep-code"><p class="code">{{item.status==='0'?'未扫码':'已扫码'}}</p><p class="time">邀请时间：{{item.scanTime}}</p></span>
+                <span class="sweep-code"><p class="code">{{item.status==='0'?'未扫码':'已扫码'}}{{item.brandName}}</p><p class="time">邀请时间：{{item.scanTime}}</p></span>
               </li>
               <van-divider v-if="developList==''">暂无发展用户~~</van-divider>
             </ul>
@@ -25,7 +25,7 @@
               <li v-for="(item,index) in formalList" :key="index">
                 <img class="head-portrait" :src="item.headImg" />
                 <span class="name formal-name">{{item.nickName}}</span>
-                <span class="sweep-code"><p class="code">{{item.status==='0'?'未扫码':'已扫码'}}</p><p class="time">扫码时间：{{item.scanTime}}</p></span>
+                <span class="sweep-code"><p class="code">{{item.status==='0'?'未扫码':'已扫码'}}{{item.brandName}}</p><p class="time">扫码时间：{{item.scanTime}}</p></span>
               </li>
               <van-divider v-if="formalList==''">暂无正式用户~~</van-divider>
             </ul>
@@ -60,7 +60,6 @@ export default {
   methods: {
     postMyTeamData() {
       this.$postRequest(MyTeam, {activityId:this.activityId}).then(res => {
-          console.log(res)
           if (res.data.code === '0000') {
               this.formalList = res.data.data.formal.list
               this.formalCount = res.data.data.formal.count

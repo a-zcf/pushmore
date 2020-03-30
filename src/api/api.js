@@ -1,6 +1,6 @@
 const urls = {
-  base: 'http://ld.haiyunzy.com/tdd',
-  origin: 'http://ld.haiyunzy.com/tdd',
+  base: 'http://ld.haiyunzy.com/tdd/',
+  origin: 'http://ld.haiyunzy.com/tdd/',
   // base: 'http://127.0.0.1:8083', // 测试环境域名前缀
   // origin: 'http://127.0.0.1:8083', // 测试环境域名前缀
   Login: '/user/login', // 登陆接口

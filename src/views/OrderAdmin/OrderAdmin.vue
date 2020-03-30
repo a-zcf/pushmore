@@ -36,7 +36,6 @@ export default {
   methods: {
     postExchangeListData(){
       this.$postRequest(ExchangeList).then(res => {
-            console.log(res);
             if (res.data.code === '0000') {
               this.exchangeList = res.data.data.list
             }

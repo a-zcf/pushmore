@@ -18,111 +18,77 @@
       </div>
     </div>
 
-    <div class="active-area">
-      <div class="area">
-        <i class="iconfont icon-jiangli icon-i"></i>
-        <span>目前剩余可兑换礼品数</span>
-        <span class="right-text">{{activityInfoData.prize}}</span>
-      </div>
-      <div class="duihuan" :style="activityInfoData.prize <= 0 ?'background-color: #999;':'background-color: #ff6600;'" @click="exchangeRules">去兑换</div>
-    </div>
-
-    <div class="progress-bar">
-      <p class="rank">发展人数{{activityInfoData.maxInvitees}}人</p>
+    <div class="progress-bar" v-for="(item,index) in activityInfo" :key="index">
+      <p class="rank">发展人数{{item.maxInvitees}}人</p>
       <ul>
         <li>
           <p class="award-progress">
             <span class="progress">领奖<br/>进度</span>
             <span class="horizontal-line" style="height:6px;">
-              <i :class="eachAward == 0.25 || eachAward > 0.25?'line-ibgk':''" style="height:2px;"></i>
+              <i :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees/item.everyAwardCount > 0.25?'line-ibgk':''" style="height:2px;"></i>
             </span>
           </p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="eachAward == 0.25 || eachAward < 0.5 && eachAward > 0.25?'bar-span bgk-bar':'bar-span'">
-              <i :class="eachAward == 0.25 || eachAward > 0.25?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
+            <span :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount < 0.5 && item.invitees / item.everyAwardCount > 0.25?'bar-span bgk-bar':'bar-span'">
+              <i :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount > 0.25?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
             </span>
             <span class="horizontal-line">
-              <i :class="eachAward == 0.5 || eachAward > 0.5?'line-ibgk':''"></i>
+              <i :class="item.invitees / item.everyAwardCount == 0.5 || item.invitees / item.everyAwardCount > 0.5?'line-ibgk':''"></i>
             </span>
           </p>
-          <p :class="eachAward == 0.25 || eachAward > 0.25?'bar-spancolor':''">正式1</p>
+          <p :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount > 0.25?'bar-spancolor':''">正式1</p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="eachAward == 0.5 || eachAward < 0.75 && eachAward > 0.5?'bar-span bgk-bar':'bar-span'">
-              <i :class="eachAward == 0.5 || eachAward > 0.5?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
+            <span :class="item.invitees / item.everyAwardCount == 0.5 || item.invitees / item.everyAwardCount < 0.75 && item.invitees / item.everyAwardCount > 0.5?'bar-span bgk-bar':'bar-span'">
+              <i :class="item.invitees / item.everyAwardCount == 0.5 || item.invitees / item.everyAwardCount > 0.5?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
             </span>
             <span class="horizontal-line">
-              <i :class="eachAward >= 0.75 || eachAward > 0.75 ?'line-ibgk':''"></i>
+              <i :class="item.invitees / item.everyAwardCount >= 0.75 || item.invitees / item.everyAwardCount > 0.75 ?'line-ibgk':''"></i>
             </span>
           </p>
-          <p :class="eachAward >= 0.5 || eachAward > 0.5?'bar-spancolor':''">正式2</p>
+          <p :class="item.invitees / item.everyAwardCount >= 0.5 || item.invitees / item.everyAwardCount > 0.5?'bar-spancolor':''">正式2</p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="eachAward == 0.75 || eachAward < 1 && eachAward > 0.75?'bar-span bgk-bar':'bar-span'">
-              <i :class="eachAward == 0.75 || eachAward >0.75?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
+            <span :class="item.invitees / item.everyAwardCount == 0.75 || item.invitees / item.everyAwardCount < 1 && item.invitees / item.everyAwardCount > 0.75?'bar-span bgk-bar':'bar-span'">
+              <i :class="item.invitees / item.everyAwardCount == 0.75 || item.invitees / item.everyAwardCount >0.75?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
             </span>
             <span class="horizontal-line">
-              <i :class="eachAward >= 1 || eachAward > 1?'line-ibgk':''"></i>
+              <i :class="item.invitees / item.everyAwardCount >= 1 || item.invitees / item.everyAwardCount > 1?'line-ibgk':''"></i>
             </span>
           </p>
-          <p :class="eachAward >= 0.75 || eachAward > 0.75?'bar-spancolor':''">正式3</p>
+          <p :class="item.invitees / item.everyAwardCount >= 0.75 || item.invitees / item.everyAwardCount > 0.75?'bar-spancolor':''">正式3</p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="eachAward == 1 || eachAward > 1?'bar-span bgk-bar':'bar-span'">
-              <i :class="eachAward == 1 || eachAward > 1?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
+            <span :class="item.invitees / item.everyAwardCount == 1 || item.invitees / item.everyAwardCount > 1?'bar-span bgk-bar':'bar-span'">
+              <i :class="item.invitees / item.everyAwardCount == 1 || item.invitees / item.everyAwardCount > 1?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
               </span>
           </p>
-          <p :class="eachAward >= 1 || eachAward > 1?'bar-spancolor':''">正式4</p>
+          <p :class="item.invitees / item.everyAwardCount >= 1 || item.invitees / item.everyAwardCount > 1?'bar-spancolor':''">正式4</p>
         </li>
-        <li class="details" @click="myTeam">查看</li>
+        <!-- <li class="details" @click="myTeam">查看</li> -->
+        <li class="jindu-li">
+          <p class="toTxchange" :style="item.prize <= 0 ?'background-color: #999;':'background-color: #ff6600;'" @click="exchangeRules(item.prize,item.activityId)">去兑换</p>
+          <p class="numberGifts">礼品数：<span>{{item.prize}}</span></p>
+        </li>
       </ul>
+      <p class="rank">~<span>{{item.brandName}}</span>领奖进度~</p>
     </div>
 
-    <div class="menu-list">
-      <div class="list" @click="myTeam">
-        <i class="iconfont icon-tuandui icon"></i>
-        <span class="middle-text">我的团队</span>
-        <i class="iconfont icon-gengduo icon-more"></i>
-      </div>
-      <div class="list" @click="myQrCode">
-        <i class="iconfont icon-two-dimensional-code icon icon-middle"></i>
-        <i class="iconfont icon-AppIcon-copy card-circle"></i>
-        <i class="iconfont icon-shouzhixuanzhong-copy card-finger"></i>
-        <span class="middle-text">
-          <span class="card">推广名片</span>
-          <span v-show="remainingTime" class="remaining-time">(名片即将到期，请更新...)<i class="iconfont icon-dian-red remaining-icon"></i></span>
-        </span>
-        <i class="iconfont icon-gengduo icon-more"></i>
-      </div>
-      <div class="list none-border" @click="orderManagement">
-        <i class="iconfont icon-dingdan icon icon-right"></i>
-        <span class="middle-text">订单管理</span>
-        <i class="iconfont icon-gengduo icon-more"></i>
-      </div>
-    </div>
-
-    <div class="reminder">
-      <i class="iconfont icon-jinggao reminder-icon"></i>
-      <span>温馨提示：本活动含有烟草内客，十八岁以下人士请勿扫码参与！</span>
-    </div>
-
-   <div class="activity-rules-desc" v-show="hideshow">
-      <h3>活动规则</h3>
-      <p>1、本活动含有烟草内客：十八岁以下人士请勿扫码参与本活动含有烟草内客，十八岁以下人士请勿扫码参与！本活动含有烟草内客，十八岁以下人士请勿扫码参与！</p>
-      <p>2、本活动含有烟草内客：十八岁以下人士请勿扫码参与本活动含有烟草内客，十八岁以下人士请勿扫码参与！本活动含有烟草内客，十八岁以下人士请勿扫码参与！</p>
-    </div>
+    <van-dialog  v-model="isCompleteShow" title="提示" show-confirm-button>
+      <p class="is-complete"><span>{{brandName1+'，'+brandName2}}</span>活动已完成，无需继续邀请，继续邀请不积累奖励!</p>
+    </van-dialog>
 
     <van-overlay :show="show2">
       <div class="exchange-rules">
         <h3 class="title">填写礼包数</h3>
         <p class="exchange-number">
           你当前可兑换礼包数：
-          <span>{{activityInfoData.prize}}</span>
+          <span>{{prize}}</span>
         </p>
         <div class="this-exchange">
           <span class="this-text">本次兑换：</span>
@@ -171,6 +137,40 @@
         </div>
       </div>
     </van-overlay>
+
+    <div class="menu-list">
+      <div class="list" @click="myTeam">
+        <i class="iconfont icon-tuandui icon"></i>
+        <span class="middle-text">我的团队</span>
+        <i class="iconfont icon-gengduo icon-more"></i>
+      </div>
+      <div class="list" @click="myQrCode">
+        <i class="iconfont icon-two-dimensional-code icon icon-middle"></i>
+        <i class="iconfont icon-AppIcon-copy card-circle"></i>
+        <i class="iconfont icon-shouzhixuanzhong-copy card-finger"></i>
+        <span class="middle-text">
+          <span class="card">推广名片</span>
+          <span v-show="remainingTime" class="remaining-time">(名片即将到期，请更新...)<i class="iconfont icon-dian-red remaining-icon"></i></span>
+        </span>
+        <i class="iconfont icon-gengduo icon-more"></i>
+      </div>
+      <div class="list none-border" @click="orderManagement">
+        <i class="iconfont icon-dingdan icon icon-right"></i>
+        <span class="middle-text">订单管理</span>
+        <i class="iconfont icon-gengduo icon-more"></i>
+      </div>
+    </div>
+
+    <div class="reminder">
+      <i class="iconfont icon-jinggao reminder-icon"></i>
+      <span>温馨提示：本活动含有烟草内客，十八岁以下人士请勿扫码参与！</span>
+    </div>
+
+   <div class="activity-rules-desc" v-show="hideshow">
+      <h3>活动规则</h3>
+      <p>1、本活动含有烟草内客：十八岁以下人士请勿扫码参与本活动含有烟草内客，十八岁以下人士请勿扫码参与！本活动含有烟草内客，十八岁以下人士请勿扫码参与！</p>
+      <p>2、本活动含有烟草内客：十八岁以下人士请勿扫码参与本活动含有烟草内客，十八岁以下人士请勿扫码参与！本活动含有烟草内客，十八岁以下人士请勿扫码参与！</p>
+    </div>
 
     <van-overlay :show="show3">
       <div class="exchange-rules">
@@ -226,41 +226,47 @@
         <span class="iconfont icon-guanbi" @click="show = false"></span>
       </div>
     </van-overlay>
-
-    <van-dialog v-model="show4" title="提示" show-confirm-button>
-        <p class="is-complete">活动已完成，无需继续邀请，继续邀请不积累奖励!</p>
+    
+    <van-dialog v-model="show4" title="对不起" show-confirm-button @confirm="conFirm">
+        <p class="had">您还没有资格参与本次活动</p>
+        <p class="had-text">赶快扫码相关真龙烟包参与》》</p>
     </van-dialog>
+    
   </div>
 </template>
 
 <script>
 import AeraInfo from "../../utils/area";
 import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard } from "../../api/api";
+import wx from 'weixin-js-sdk'
 export default {
   name: "IndexInfo",
   data() {
     return {
+      shw:1,
       clearable: false,
       show: false, // 进入活动弹框
       show1: false, // 显示地区上拉框
       show2: false, // 兑换规则弹框
       show3: false, // 信息确提弹框
-      show4: false, // 达到邀请数弹框
+      show4: false, // 是否参与活动弹框
+      brandName1:'',
+      brandName2:'',
+      isCompleteShow:false,
       colNum: 3, // 显示列数，3-省市区，2-省市，1-省
       closeOnClickOverlay: false, // 是否在点击遮罩层后关闭
       areaList: AeraInfo, //引用地区信息
       valueArea: "", //地区值
       arrArea: [], //存放地区数组
-      activityId: "", // 活动Id
+      activityId: [], // 活动Id
+      ayId:0,
+      had:false, // 是否参与活动
       active: 0,
       stepValue: 0, // 条烟值
       shareValue: 0, // 份烟值
       userInfoData: "",
-      activityInfoData:{
-        prize:0,
-        rank:0,
-        maxInvitees:0,
-      },
+      activityInfo:[],
+      prize:0, // 兑换礼包数
       prohibitStep: true, // 隐藏加号按钮
       prohibitShare: true, // 隐藏加号按钮
       disabledinp: true,
@@ -276,8 +282,7 @@ export default {
       url:'', // 推荐码地址
       expiredTime: '',
       remainingTime:false,
-      eachAward:0, // 进度
-      timeExpired: 24*60*60
+      timeExpired: 24*60*60 // 计算名片过期时间
     };
   },
   watch: {
@@ -299,13 +304,23 @@ export default {
        this.showHeight = document.documentElement.clientHeight || document.body.clientHeight;
    })()
    }
-    this.activityId = this.$route.query.activityId;
+    this.activityId = this.$route.query.activityIds;
+    this.had = this.$route.query.had;
+    if(this.had==true){
+      this.show4 = false
+      } else {
+      this.show4 = true
+    }
     this.postIndexInfoData();
     this.getExchangeRuleData();
     this.tankuan();
     this.postMyCardData();
   },
   methods: {
+    // 不符合活动条件点击关闭页面
+    conFirm() {
+      wx.closeWindow()
+    },
     // 计步器条值
     onChangeStep: function(stepValue) {
       this.stepValue = stepValue;
@@ -316,16 +331,16 @@ export default {
     },
     // 条加按钮
     stripPlus() {
-      this.activityInfoData.prize =this.activityInfoData.prize - this.everyBarNeedBoxCount;
+      this.prize = this.prize - this.everyBarNeedBoxCount;
       if (
-        this.activityInfoData.prize < this.everyBarNeedBoxCount ||
-        this.activityInfoData.prize < 5
+        this.prize < this.everyBarNeedBoxCount ||
+        this.prize < 5
       ) {
         this.prohibitStep = true;
       } else {
         this.prohibitStep = false;
       }
-      if (this.activityInfoData.prize <= 0) {
+      if (this.prize <= 0) {
         this.prohibitShare = true;
       } else {
         this.prohibitShare = false;
@@ -333,16 +348,16 @@ export default {
     },
     //条减按钮
     stripMinus() {
-      this.activityInfoData.prize = this.activityInfoData.prize + this.everyBarNeedBoxCount;
+      this.prize = this.prize + this.everyBarNeedBoxCount;
       if (
-        this.activityInfoData.prize < this.everyBarNeedBoxCount &&
-        this.activityInfoData.prize < 5
+        this.prize < this.everyBarNeedBoxCount &&
+        this.prize < 5
       ) {
         this.prohibitStep = true;
       } else {
         this.prohibitStep = false;
       }
-      if (this.activityInfoData.prize <= 0) {
+      if (this.prize <= 0) {
         this.prohibitShare = true;
       } else {
         this.prohibitShare = false;
@@ -350,15 +365,15 @@ export default {
     },
     // 份加按钮
     sharePlus() {
-      this.activityInfoData.prize = this.activityInfoData.prize - 1;
-      if (this.activityInfoData.prize <= 0) {
+      this.prize = this.prize - 1;
+      if (this.prize <= 0) {
         this.prohibitShare = true;
       } else {
         this.prohibitShare = false;
       }
       if (
-        this.activityInfoData.prize < this.everyBarNeedBoxCount ||
-        this.activityInfoData.prize < 5
+        this.prize < this.everyBarNeedBoxCount ||
+        this.prize < 5
       ) {
         this.prohibitStep = true;
       } else {
@@ -367,15 +382,15 @@ export default {
     },
     // 份减按钮
     shareMinus() {
-      this.activityInfoData.prize = this.activityInfoData.prize + 1;
-      if (this.activityInfoData.prize <= 0) {
+      this.prize = this.prize + 1;
+      if (this.prize <= 0) {
         this.prohibitShare = true;
       } else {
         this.prohibitShare = false;
       }
       if (
-        this.activityInfoData.prize < this.everyBarNeedBoxCount &&
-        this.activityInfoData.prize < 5
+        this.prize < this.everyBarNeedBoxCount &&
+        this.prize < 5
       ) {
         this.prohibitStep = true;
       } else {
@@ -416,7 +431,7 @@ export default {
         return false;
       }
       let params = {
-        activityId: this.activityId,
+        activityId: this.ayId,
         exchangeNumForBar: this.stepValue, // 条
         exchangeNumForBox: this.shareValue, // 份
         name: this.name,
@@ -428,6 +443,7 @@ export default {
           this.$toast.success(res.data.message);
           setTimeout(() => {
             this.show3 = false;
+            this.postIndexInfoData()
           }, 1000);
             this.stepValue = 0, // 条
             this.shareValue = 0, // 份
@@ -449,52 +465,40 @@ export default {
     },
     //计步器确定按钮
     determine: function() {
-      this.show2 = false, 
-      this.show3 = true;
+      if ((this.stepValue == 0||this.stepValue == '') && (this.shareValue ==0||this.shareValue =='')) {
+        this.show3 = false
+        this.$toast('您还未选择兑换条或份！');
+        } else {
+        this.show3 = true;
+        this.show2 = false
+      }
     },
     // 计步器返回修改按钮
     returnModify: function() {
       this.show2 = true, 
       this.show3 = false;
     },
-
+     
     // 首页数据
     postIndexInfoData: function() {
-      this.$postRequest(IndexInfo, { activityId: this.activityId }).then(
+      this.$postRequest(IndexInfo, {ids: this.activityId}).then(
         res => {
           if (res.data.code === "0000") {
             let userInfo = res.data.data.userInfo;
-            let activityInfo = res.data.data.activityInfo;
+            this.activityInfo = res.data.data.activityInfo;
             this.userInfoData = {
               id: userInfo.id,
               headImg: userInfo.headImg,
               nickName: userInfo.nickName,
               recommender: userInfo.recommender
             };
-            this.activityInfoData = {
-              prize: activityInfo.prize,
-              rank: activityInfo.rank,
-              invitees: activityInfo.invitees,
-              maxInvitees: activityInfo.maxInvitees,
-              everyAwardCount: activityInfo.everyAwardCount,
-              isComplete: activityInfo.isComplete
-            };
-            this.eachAward =  this.activityInfoData.invitees / this.activityInfoData.everyAwardCount
-            if(this.activityInfoData.isComplete == 1) {
-                this.show4 = true
+            for(let i =0;i<this.activityInfo.length;i++){
+              let isComplete = this.activityInfo[i].isComplete
+            if(isComplete == 1) {
+                this.isCompleteShow = true
+                this.brandName1 = this.activityInfo[0].brandName
+                this.brandName2 = this.activityInfo[1].brandName
             }
-            if (
-              this.activityInfoData.prize < this.everyBarNeedBoxCount ||
-              this.activityInfoData.prize < 5
-            ) {
-              this.prohibitStep = true;
-            } else {
-              this.prohibitStep = false;
-            }
-            if (this.activityInfoData.prize <= 0) {
-              this.prohibitShare = true;
-            } else {
-              this.prohibitShare = false;
             }
           }
         }
@@ -566,8 +570,20 @@ export default {
       this.show = false;
     },
     // 兑换规则提示框
-    exchangeRules() {
-      if(this.activityInfoData.prize <= 0) {
+    exchangeRules(prize,activityId) {
+      this.prize = prize
+      this.ayId = activityId
+      if (this.prize < this.everyBarNeedBoxCount || this.prize < 5) {
+              this.prohibitStep = true;
+            } else {
+              this.prohibitStep = false;
+            }
+      if (this.prize <= 0) {
+        this.prohibitShare = true;
+      } else {
+        this.prohibitShare = false;
+      }
+      if(prize <= 0) {
         this.show2 = false
       } else {
         this.show2 = true;
