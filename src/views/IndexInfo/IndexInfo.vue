@@ -306,10 +306,10 @@ export default {
    }
     this.activityId = this.$route.query.activityIds;
     this.had = this.$route.query.had;
-    if(this.had==true){
+    if(this.had == false){
+       this.show4 = true
+    }else{
       this.show4 = false
-      } else {
-      this.show4 = true
     }
     this.postIndexInfoData();
     this.getExchangeRuleData();
@@ -320,6 +320,7 @@ export default {
     // 不符合活动条件点击关闭页面
     conFirm() {
       wx.closeWindow()
+      this.show4 = false
     },
     // 计步器条值
     onChangeStep: function(stepValue) {
@@ -542,7 +543,7 @@ export default {
     myTeam() {
       this.$router.push({
         path: "/MyTeam",
-        query: { activityId: this.activityId }
+        query: { activityId: this.activityId}
       });
     },
     // 跳转订单管理

@@ -51,6 +51,7 @@ export default {
       developList:[],
       formalCount:0,
       developCount:0,
+      had:false
     };
   },
   mounted() {
@@ -65,7 +66,6 @@ export default {
               this.formalCount = res.data.data.formal.count
               this.developList = res.data.data.develop.list
               this.developCount = res.data.data.develop.count
-
           }
       })
     },

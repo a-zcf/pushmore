@@ -26,9 +26,9 @@ export default {
               forbidClick: true,
               loadingType: "spinner"
             });
-            setTimeout(() => {
+            // setTimeout(() => {
               this.$router.push({ path: "/IndexInfo", query:{activityIds:activityIds, had:this.had}});
-            }, 1000);
+            // }, 1000);
         }
       });
     }
