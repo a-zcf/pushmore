@@ -39,11 +39,16 @@ export default {
    },
    mounted() {
        this.giftId = this.$route.query.giftId
+       let status = this.$route.query.status
        if(this.giftId != 0){
         this.show = true
        }else{
         this.show = false
        }
+       if(status == '-1') {
+        canvas.style.display = 'none'
+        this.getScratchPrizeData()
+       }else{
        this.$nextTick(() => {
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
@@ -132,7 +137,7 @@ export default {
             }
             return get(obj);
         }
-       })
+       })}
         
 },
  methods:{

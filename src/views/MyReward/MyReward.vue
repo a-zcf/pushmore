@@ -7,10 +7,9 @@
               <p class="exchange-number">{{item.giftType==0?'获得'+item.name:item.name}}</p>
               <p class="rece-address">
                 <span class="address">抽奖时间：{{item.scratchTime}}</span>
-                <span class="state" v-if="item.status=='-2'" @click="noLottery(item.id)">未抽奖</span>
-                <span class="state" v-if="item.status=='-1'" @click="clickReceive(item.url)">未领取</span>
-                <span class="state" v-if="item.status=='0'">发放中</span>
-                <span class="state" v-if="item.status=='1'">发放成功</span>
+                <span class="state" @click="item.status=='-2' || item.status=='-1' ? noLottery(item.id,item.status):'' || item.status=='0' || item.status=='1'?releaseStatus(item.url,item.giftType,item.status):''">
+                  {{item.status=='-2'?'未抽奖':'' || item.status=='-1'?'未领取':'' || item.status=='0'?'发放中':'' || item.status=='1'?'发放成功':''}}
+                </span>
               </p>
            </div>
           </li>
@@ -34,16 +33,21 @@ export default {
      methods:{
        getMyGiftListData() {
          this.$postRequest(MyGiftList).then(res => {
+           console.log(res)
           if(res.data.code == '0000') {
             this.list = res.data.data.list
           }
          })
        },
-       clickReceive(url){
-          window.location.href = url
+       releaseStatus(url,giftType,status){
+         if(giftType=='0' && status=='0' || giftType=='0' && status=='1'){
+           this.$dialog.alert({title: '提示', message: '请到消息推送中心查看红包领取状态',confirmButtonText:'确定'});
+         }else{
+           window.location.href = url
+         }
        },
-       noLottery(id){
-          this.$router.push({path: '/ExchangeSuccess',query:{giftId:id}})
+       noLottery(id,status){
+          this.$router.push({path: '/ExchangeSuccess',query:{giftId:id,status:status}})
        }
      }
 }

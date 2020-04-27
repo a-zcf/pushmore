@@ -231,7 +231,6 @@
 </template>
 
 <script>
-import { Dialog } from 'vant';
 import AeraInfo from "../../utils/area";
 import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn } from "../../api/api";
 import wx from 'weixin-js-sdk'
@@ -284,7 +283,7 @@ export default {
     }
     this.had = this.$route.query.had;
     if(this.had == false){
-       Dialog.alert({title: '对不起', message: '目前仅限【广西百色】范围用户参与活动，赶快扫码“中支凌云”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+       this.$dialog.alert({title: '对不起', message: '目前仅限【广西百色】范围用户参与活动，赶快扫码“中支凌云”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
     }else{
     }
 
@@ -472,7 +471,7 @@ export default {
             for(let i =0;i<this.activityInfo.length;i++){
               let isComplete = this.activityInfo[i].isComplete
             if(isComplete == 1) {
-                Dialog.alert({title: '提示', message: this.activityInfo[0].brandName+'&nbsp;'+ this.activityInfo[1].brandName+'活动已完成，无需继续邀请，继续邀请不积累奖励!',confirmButtonText:'确定'});
+                this.$dialog.alert({title: '提示', message: this.activityInfo[0].brandName+'&nbsp;'+ this.activityInfo[1].brandName+'活动已完成，无需继续邀请，继续邀请不积累奖励!',confirmButtonText:'确定'});
             }else{
             }
             }
