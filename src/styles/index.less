@@ -1,0 +1,838 @@
+@import "theme.less";
+// 首页
+.van-divider{
+  height: 50px !important;
+  margin: 0 10px !important;
+}
+.pushmore-index{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: @backgroundLightGrey;
+ .head{
+   width: 100%;
+   height: 100px;
+   background-color: @backgroundBlue;
+   color: @whiteColor;
+   display: flex;
+   flex-wrap: nowrap;
+   align-items: center;
+   img{
+     width: 80px;
+     height: 80px;
+     border-radius: 50px;
+     margin: 0px 20px;
+   }
+   .head-text{
+     width: 62%;
+     height: 80px;
+     line-height: 27px;
+     overflow: hidden;
+     p{
+       white-space: nowrap;
+     }
+   }
+ }
+
+.is-complete{
+  padding: 10px 15px;
+  box-sizing: border-box;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: @greyColor;
+}
+.recommend-text{
+  height: 35px;
+  line-height: 37px;
+  text-align: center;
+  box-sizing: border-box;
+}
+ .progress-bar{
+  background-color: @backgroundWhite;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  .van-dialog__header{
+    font-size: 20px !important;
+    color: @backgroundBlue;
+  }
+  
+  .rank{
+    width: 95%;
+    margin: auto;
+    text-align: center;
+    padding:5px 0px;
+    color:@greyColor;
+  }
+  .bottom-text{
+
+  }
+  ul{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    li {
+      color: @greyColor;
+      .horizontal-line{
+        display: block;
+        width: 25px;
+        height: 6px;
+        display: flex;
+        align-items: center;
+        background-color: @backgroundShallow;
+        box-sizing: border-box;
+        .line-ibgk{
+          display: block;
+          width: 100%;
+          height: 3px;
+          border-radius: 5px;
+          background-color: @orangeColor;
+          box-shadow: 0px 0px 1px 0.4px @greyColor;
+        }
+      }
+      .award-progress{
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin-top: -20px;
+        overflow: hidden;
+        .progress{
+          width: 50px;
+          height: 50px;
+          padding-top: 3px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          box-sizing: border-box;
+          color: @whiteColor;
+        }
+      }
+      .bar-spancolor{
+        color: @orangeColor;
+      }
+      .bar-p{
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        .bar-span{
+          width: 26px;
+          height: 26px;
+          line-height: 27px;
+          text-align: center;
+          background-color: @backgroundShallow;
+          border-radius: 50px;
+          box-sizing: border-box;
+          z-index: 1;
+        }
+        .bgk-bar{
+          box-shadow: 0px 0px 10px 1px #ff6600;
+          animation:bgkBar 1s ease infinite both;
+        }
+        @keyframes bgkBar {
+          0% {transform: none;}
+          50% {transform: scale3d(0.8,0.8,0.8);}
+          100% {transform: none;}
+      }
+
+      }
+    }
+    .jindu-li{
+      width: 24%;
+      margin-left: 6px;
+      line-height: 30px;
+      .toTxchange{
+        width: 75%;
+        height: 30px;
+        line-height: 30px;
+        margin: auto;
+        display: block;
+        background-color: @greyColor;
+        color: @whiteColor;
+        text-align: center;
+        border-radius: 5px;
+      }
+      .numberGifts{
+        width: 100%;
+        display: block;
+         color: @redColor;
+         text-align: center;
+         overflow: hidden;
+         white-space: nowrap;
+         font-size: 12px;
+      }
+    }
+  }
+ }
+
+ .menu-list{
+   background-color: @backgroundWhite;
+   margin-top: 10px;
+   .list{
+     width: 95%;
+     height: 50px;
+     margin: auto;
+     display: flex;
+     flex-wrap: nowrap;
+     align-items: center;
+     box-sizing: border-box;
+     border-bottom: 1px solid @backgroundLightGrey;
+     position: relative;
+     .icon{
+       width: 10%;
+       text-align: center;
+       font-size: 28px;
+       color: @borderColor;
+     }
+     .icon-middle{
+      color: @purpleColor;
+     }
+      
+      .card-circle{
+        position: absolute;
+        left: 34%;
+        font-size: 18px;
+        animation: circle 1s ease infinite both;
+        color: @purpleColor;
+      }
+      .card-finger{
+        position: absolute;
+        top: 29%;
+        left: 35.3%;
+        font-size: 25px;
+        animation: finger 1s ease infinite both;
+        color: @purpleColor;
+      }
+     .icon-right{
+       color: @lightOrangeColor;
+     }
+     .middle-text{
+       width:75%;
+       margin-left: 15px;
+       font-size: 15px;
+       display: flex;
+       flex-wrap: nowrap;
+       align-items: center;
+       overflow: hidden;
+       white-space: nowrap;
+       .card{
+        color: @purpleColor;
+        font-size: 18px;
+         animation: finger 1s ease infinite both;
+       }
+       .remaining-time{
+          color: @orangeColor;
+          display: flex;
+          flex-wrap: nowrap;
+          font-size: 12px;
+          margin-left: 35px;
+          .remaining-icon{
+            display: block;
+            margin-top: -5px;
+          }
+       }
+     }
+     .icon-more{
+       color: @greyColor;
+     }
+     .none-border{
+       border: none;
+     }
+   }
+ }
+
+ .reminder{
+   width: 95%;
+   margin: 10px auto auto auto;
+   padding: 10px;
+   border-radius: 5px;
+  //  margin-top: 10px;
+   box-sizing: border-box;
+   display: flex;
+   flex-wrap: nowrap;
+   align-items: center;
+   background-color: @backgroundWhite;
+   .reminder-icon{
+     width: 12%;
+     text-align: center;
+     font-size: 20px;
+     color: @orangeColor;
+     margin-right: 5px;
+   }
+ }
+
+ .activity-rules-desc{
+   width: 95%;
+   margin: auto;
+   border-radius: 5px;
+   overflow: hidden;
+   margin-top: 10px;
+   box-sizing: border-box;
+   padding: 10px;
+  background-color: @backgroundWhite;
+  p{
+    text-align:left;
+    text-align: justify;
+    text-indent:2em;
+    box-sizing: border-box;
+    padding: 5px 0px;
+    line-height: 25px;
+  }
+ }
+ .exchange-rules{
+   width: 90%;
+   padding-bottom: 15px;
+   margin: 30% auto auto auto;
+   background-color: @backgroundWhite;
+   border-radius: 8px;
+   box-sizing: border-box;
+   position: relative;
+   .guanbi{
+        position: absolute;
+        bottom:-60px;
+        left: 45%;
+        font-size: 40px;
+        color: @whiteColor;
+   }
+   .van-field__clear{
+     font-size: 20px !important;
+     margin-right: 10px;
+   }
+   .van-cell{
+    width: 95% !important;
+    margin: auto !important;
+    padding: 0;
+    border-bottom: 1px solid @backgroundLightGrey;
+   }
+   .van-cell__title, .van-cell__value{
+    -webkit-box-flex: none !important; 
+    -webkit-flex: none !important; 
+    flex: none !important; 
+    // width: 25% !important;
+   }
+   .van-cell__title{
+     width: 25%;
+   }
+   .van-cell__value{
+     width: 75%;
+   }
+   .van-field__label{
+    height: 40px;
+    line-height: 40px;
+   }
+   .van-field__control{
+     height: 40px;
+   }
+   .van-cell:not(:last-child)::after{
+     border: none;
+   }
+   .title{
+     height: 50px;
+     line-height: 50px;
+     text-align: center;
+     background-color: @backgroundBlue;
+     color: @whiteColor;
+     font-size: 20px;
+     border-radius: 8px 8px 0px 0px;
+   }
+   .exchange-number{
+     width: 95%;
+     margin: auto;
+     padding:10px 0px;
+     box-sizing: border-box;
+     font-size: 18px;
+     white-space: nowrap;
+      overflow: hidden;
+     span{
+       color: @orangeColor;
+     }
+   }
+   .this-exchange{
+    padding: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    .this-text{
+      width: 30%;
+     font-size: 18px;
+    }
+    .stepper{
+      width: 70%;
+      .strip{
+        display: flex;
+        flex-wrap: nowrap;
+        border-bottom: 1px solid @backgroundLightGrey;
+        height: 40px;
+        box-sizing: border-box;
+        .step{
+          width: 85%;
+        }
+        .tuijian{
+          margin-top: -15px;
+        }
+        .tuijian,.bao{
+          width: 15%;
+          height: 40px;
+          text-align: center;
+          .tuijian-text{
+            padding: 2px 3px;
+            background-color: @orangeColor;
+            font-size: 12px;
+            color: @whiteColor;
+            border-radius: 5px;
+          }
+          .tiaoText{
+            font-size: 18px;
+          }
+        }
+        span{
+          font-size: 18px;
+          line-height: 35px;
+          text-align: center;
+        }
+      }
+      .marg-top{
+        margin-top: 10px;
+      }
+    }
+   }
+   .tips{
+     width: 95%;
+     margin: auto;
+     border: 1px dashed @greyColor;
+     display: flex;
+     flex-wrap: nowrap;
+     box-sizing: border-box;
+     padding: 10px;
+     font-size: 15px;
+     border-radius: 5px;
+     .tips-text{
+       width: 26%;
+       color: @backgroundBlue;
+     }
+     .explain{
+       width: 74%;
+       color: @redColor;
+       text-align:left;
+       text-align: justify;
+     }
+   }
+   .but{
+     display: flex;
+     justify-content: space-around;
+     margin-top: 30px;
+     .bgkhui{
+       background-color: @greyColor;
+     }
+     .bgkblue{
+      background-color: @backgroundBlue;
+     }
+     .butts{
+       width: 35%;
+       height: 50px;
+       border: none;
+       border-radius: 10px;
+       color: @whiteColor;
+       font-size: 18px;
+     }
+   }
+ }
+ .van-dialog__header{
+   font-size: 20px !important;
+   color: @redColor;
+ }
+ .had{
+    padding: 10px 15px;
+    box-sizing: border-box;
+    text-align: center;
+    color: @greyColor;
+ }
+ .had-text{
+  padding: 0px 10px 15px;
+  text-align: center;
+ }
+}
+// IndexEr
+.index-er{
+  .active-area{
+    .area{
+      width: 76% !important;
+      justify-content: left !important;
+      .right-text{
+        max-width: 99px !important;
+      }
+      .right-text{
+       font-size: 20px;
+       margin-left: 8px;
+      }
+    }
+    .duihuan{
+      width: 75px;
+      background-color: @orangeColor;
+      color: @whiteColor;
+      box-sizing: border-box;
+      padding: 5px;
+      border-radius: 5px;
+      text-align: center;
+    }
+  }
+ // 进入活动领取奖品提示框
+ .prize-guidance{
+   width: 80%;
+   height: 150px;
+   margin: 50% auto auto auto;
+   border-radius: 10px;
+   background-color: @backgroundWhite;
+   box-sizing: border-box;
+   overflow: hidden;
+   padding: 10px;
+   h3{
+     color: @redColor;
+     text-align: center;
+     box-sizing: border-box;
+     margin:12px 0px;
+     font-size: 20px;
+   }
+   .guidance-text{
+     text-align: center;
+     color: @greyColor;
+     margin:12px 0px;
+     font-size: 16px;
+   }
+   .jinruhuodong{
+     text-align: center;
+     color: @blueColor;
+     margin:12px 0px;
+     font-size: 16px;
+   }
+ }
+ // 关闭按钮
+ .close-but{
+  width: 80%;
+  margin: 20px auto auto auto;
+  text-align: center;
+  color: @whiteColor;
+  span{
+    font-size: 40px;
+  }
+ }
+}
+
+// 不符合页
+.non-conformity{
+  width: 100%;
+  height: 100%;
+  background-color: @backgroundBlue;
+  .nc-tips{
+    width: 100px;
+    height: 100px;
+    border-radius:50px;
+    background-color: @backgroundWhite;
+    color: @orangeColor;
+    text-align: center;
+    line-height: 100px;
+    font-size: 40px;
+    margin: 150px auto auto auto;
+  }
+  .nc-text{
+    color: @whiteColor;
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+// 订单管理
+.order-admin{
+  ul li{
+    width: 100%;
+    height: 100px;
+    background-color: @backgroundLightGrey;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    overflow: hidden;
+    .order-img{
+      width: 24%;
+      height: 80px;
+      margin-right: 10px;
+      box-sizing: border-box;
+    }
+    .order-right{
+      width: 77%;
+      line-height: 22px;
+      box-sizing: border-box;
+      overflow: hidden;
+      .exchange-number{
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .rece-address{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+        .address{
+          width: 78%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          color: @greyColor;
+        }
+        .state{
+          width: 22%;
+          color: @orangeColor;
+          text-align: right;
+          font-weight: 800;
+        }
+        .state-lan{
+          color: @blueColor;
+        }
+      }
+      .shr-dhsj{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        color: @greyColor;
+      }
+
+    }
+  }
+}
+
+// 我的团队
+.my-team{
+  background-color: @backgroundLightGrey;
+  height: 100%;
+  .head-img{
+    height: 100px;
+    img{
+      width: 100%;
+      height: 100px;
+    }
+  }
+  // .van-tabs{
+  //   height: 100%;
+  //   overflow: hidden;
+  //   overflow-y: scroll;
+  // }
+  .van-tabs__line{
+    background-color: @orangeColor !important;
+  }
+  .van-tab--active{
+    color: @orangeColor !important;
+  }
+  .van-tabs__content{
+    // height: 100%;
+    margin-top: 10px !important;
+    background-color: @backgroundWhite;
+  }
+
+  .title{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  .list{
+    ul li{
+      width: 95%;
+      height: 90px;
+      margin: auto;
+      border-bottom: 1px solid @backgroundLightGrey;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      overflow: hidden;
+      box-sizing: border-box;
+      .head-portrait{
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      .name{
+        width: 33%;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .non-sweep-code{
+        width: 16%;
+        text-align: right;
+        color: @backgroundBlue;
+      }
+      .sweep-code{
+        width: 62%;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 25px;
+        padding-top: 15px;
+        .code{
+          color: @backgroundBlue;
+          font-weight: 600;
+          text-align: right;
+          padding-left: 10px;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
+        }
+        .time{
+          color: @greyColor;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+//我的推荐二维码
+.my-qr-code{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  .codeImg{
+    width: 100%;
+    height: 100%;
+  }
+  
+}
+
+@keyframes finger{
+  0% {
+    transform: none;
+}
+70% {
+    transform: scale3d(.8, .8, .8);
+}
+100% {
+    transform: none;
+}
+}
+
+@keyframes circle {
+  0% {
+    opacity: 0;
+    transform: scale3d(0, 0, 0);
+}
+70% {
+    opacity: 1;
+    transform: scale3d(1.2, 1.2, 1.2);
+}
+100% {
+    opacity: 0;
+    transform: scale3d(0, 0, 0);
+}
+}
+ // 兑换礼品成功页
+ .exchange-success{
+   width: 100%;
+   overflow: hidden;
+   .success{
+     width: 100%;
+     margin-top: 30px;
+    .icon-success{
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 120px;
+      color: @greenColor;
+    }
+    p{
+      margin-top: 10px;
+      padding: 0px 10px;
+      text-align: center;
+      font-size: 20px;
+      color: @greenColor;
+    }
+   }
+   .chance-to-draw{
+     width: 100%;
+     margin-top: 30px;
+     p{
+       color: @redColor;
+       text-align: center;
+       font-size: 16px;
+     }
+     .scraping-card{
+      width: 100%;
+      margin-top: 10px;
+      padding: 20px 0;
+      background-color: red;
+      .canvas-box{
+        position: relative;
+        overflow: hidden;
+        width: 85%;
+        height: 120px;
+        border-radius: 10px;
+        background-color: #FFF;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        .winning-results{
+          width: 100%;
+          height:85%;
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          .winres-text{
+            width: 76%;
+            text-align: center;
+          }
+          .winres-but{
+            width: 20%;
+            height: 110px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: 600;
+            border: none;
+            color: @redColor;
+            background-color: @backgroundShallow;
+          }
+        }
+      }
+      #canvas{
+        width: 96%;
+        height:90%;
+        position: absolute;
+        left: 2%;
+        top: 5%;
+        background-color: transparent;
+      }
+     }
+   }
+   .exchange-tips{
+     width: 95%;
+     margin: auto;
+     border: 1px dashed @greyColor;
+     border-radius: 5px;
+     box-sizing: border-box;
+     margin-top: 20px;
+     padding: 10px;
+     display: flex;
+     flex-wrap: nowrap;
+     .tips-text{
+       width: 25%;
+       color: @redColor;
+     }
+     .describe-text{
+      width: 88%;
+      color: @greyColor;
+      line-height: 22px;
+      text-align:left;
+      text-align: justify;
+     }
+   }
+ }
