@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+ <div></div>
 </template>
 
 <script>
@@ -19,16 +19,16 @@ export default {
     getHadpartInData () {
       this.$getRequest(HadpartIn).then(res => {
         if (res.data.code === "0000") {
-         this.had = res.data.data.result.had;
-         let activityIds = res.data.data.result.activityIds;
+          let result = res.data.data.result
+         this.had = result.had;
+         let activityIds = result.activityIds;
+         let needLocationCheck = result.needLocationCheck
             this.$toast.loading({
               message: "请稍等...",
               forbidClick: true,
               loadingType: "spinner"
             });
-            // setTimeout(() => {
-              this.$router.push({ path: "/IndexInfo", query:{activityIds:activityIds, had:this.had}});
-            // }, 1000);
+              this.$router.push({ path: "/IndexInfo", query:{activityIds:activityIds, had:this.had,needLocationCheck:needLocationCheck}});
         }
       });
     }

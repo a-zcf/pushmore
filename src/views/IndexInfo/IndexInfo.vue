@@ -19,7 +19,7 @@
     </div>
     <div><p class="recommend-text">成条兑换可得额外抽奖机会</p></div>
     <div class="progress-bar" v-for="(item,index) in activityInfo" :key="index">
-      <p class="rank">正式人数{{item.maxInvitees}}人</p>
+      <p class="rank rank_tb">正式人数{{item.maxInvitees}}人<span class="complete" v-if="item.isComplete==1">（本规格推荐已达上限，活动结束）</span></p>
       <ul>
         <li>
           <p class="award-progress">
@@ -77,7 +77,7 @@
       </ul>
       <p class="rank">~<span>{{item.brandName}}</span>领奖进度~</p>
     </div>
-
+    
     <van-overlay :show="show2">
       <div class="exchange-rules">
         <h3 class="title">填写礼包数</h3>
@@ -121,8 +121,8 @@
         <div class="tips">
           <span class="tips-text">温馨提示：</span>
           <div class="explain">
-            <p>1.成条（五份）兑换可得额外抽奖机会（礼品收到后抽取）；</p>
-            <p>2、一份礼品为两包品吸机会。</p>
+            <p>1、成条（五份）兑换可获得额外抽奖；</p>
+            <p>2、1份礼品为两包品吸机会。</p>
           </div>
         </div>
         <div class="but">
@@ -168,9 +168,9 @@
    <div class="activity-rules-desc" id="rules">
       <h3>活动规则</h3>
       <p>1、加入推多多团队：扫码好友推多多二维码名片，加入推多多活动；扫描活动规格二维码，激活推广资格，系统生成推多多名片，可将名片发放给好友邀请参与活动，参与越多，奖励越多。</p>
-      <p>2、推多多奖励标准：将推荐人推广名片发放给好友扫描，邀请好友进入推多多活动系统。进入活动系统后，好友扫描活动规格“中支凌云”二维码，推荐人可获得一个正式成员，推荐人每发展四个正式成员，可获得精美礼品一份。</p>
+      <p>2、推多多奖励标准：将推荐人推广名片发放给好友扫描，邀请好友进入推多多活动系统。进入活动系统后，好友扫描活动规格“中支凌云、刘三姐”二维码，推荐人可获得一个正式成员，推荐人每发展四个正式成员，可获得精美礼品一份。</p>
       <p>3、推荐人仅能发展进入系统后，还没未扫描活动规格二维码的好友做为正式成员；每个成员有且仅有一个上级推荐人，成员绑定上级推荐人后不可更改；加入推多多活动系统后，扫描活动规格二维码成为正式成员，正式成员可自行发展自己团队获得相应奖励。</p>
-      <p>4、进入推多多活动后，推荐人发展满40个正式成员，则自动结束活动。</p>
+      <p>4、进入推多多活动后，单规格推荐满40个正式成员，则该规格推多多活动结束。</p>
       <p>5、如系统有疑问，可微信留言或拨打4008792099客服热线垂询。</p>
     </div>
     <van-overlay :show="show3">
@@ -217,30 +217,18 @@
       </div>
     </van-overlay>
 
-    <van-overlay :show="show">
-      <div class="prize-guidance">
-        <h3>恭喜您！</h3>
-        <p class="guidance-text">获得推多多活动资格</p>
-        <p class="jinruhuodong">赶快《点击》进入活动领取奖品吧！</p>
-      </div>
-      <div class="close-but">
-        <span class="iconfont icon-guanbi" @click="show = false"></span>
-      </div>
-    </van-overlay>
   </div>
 </template>
 
 <script>
 import AeraInfo from "../../utils/area";
-import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn } from "../../api/api";
+import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn,GetJssdkConfig,CheckByLocation } from "../../api/api";
 import wx from 'weixin-js-sdk'
 export default {
   name: "IndexInfo",
   data() {
     return {
-      shw:1,
       clearable: false,
-      show: false, // 进入活动弹框
       show1: false, // 显示地区上拉框
       show2: false, // 兑换规则弹框
       show3: false, // 信息确提弹框
@@ -260,8 +248,8 @@ export default {
       userInfoData: "",
       activityInfo:[],
       prize:0, // 兑换礼包数
-      prohibitStep: true, // 隐藏加号按钮
-      prohibitShare: true, // 隐藏加号按钮
+      prohibitStep: true, // 隐藏条加号按钮
+      prohibitShare: true, // 隐藏份加号按钮
       disabledinp: true,
       everyBarNeedBoxCount: 0, // 每条所需的份数
       exchangeNumForBar: 0, //----兑换条数
@@ -272,26 +260,27 @@ export default {
       url:'', // 推荐码地址
       expiredTime: '',
       remainingTime:false,
-      timeExpired: 24*60*60 // 计算名片过期时间
+      timeExpired: 24*60*60, // 计算名片过期时间
+      isDisable:true, // 防止重复提交
     };
   },
   mounted() {
-    if(typeof(this.$route.query.activityIds) == 'string') {
-      this.activityId.push(this.$route.query.activityIds)
+    let that = this
+    if(typeof(that.$route.query.activityIds) == 'string') {
+      that.activityId.push(that.$route.query.activityIds)
     }else{
-      this.activityId = this.$route.query.activityIds
+      that.activityId = that.$route.query.activityIds
     }
-    this.had = this.$route.query.had;
-    if(this.had == false){
-       this.$dialog.alert({title: '对不起', message: '目前仅限【广西百色】范围用户参与活动，赶快扫码“中支凌云”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+    that.had = that.$route.query.had;
+    let needLocationCheck = that.$route.query.needLocationCheck
+    if(needLocationCheck == '1'){
+      that.getJssdkConfig();
     }else{
+      that.postIndexInfoData();
+      that.getExchangeRuleData();
+      that.tankuan();
+      that.postMyCardData();
     }
-
-    this.postIndexInfoData();
-    this.getExchangeRuleData();
-    this.tankuan();
-    this.postMyCardData();
- 
      // 解决input呼出键盘页面被顶起和压缩问题
     var hrt = document.documentElement.clientHeight; 
       this.$nextTick(() => {
@@ -299,6 +288,65 @@ export default {
     })
   },
   methods: {
+    // 获取jssdk配置
+    getJssdkConfig(){
+      let that = this
+      let url = window.location.href.split('#')[0]
+       that.$postRequest(GetJssdkConfig,{url:url}).then(res => {
+          if(res.data.code=='0000'){
+            let config = res.data.data.config
+            wx.config({
+              debug: false, 
+              appId: config.appid,
+              timestamp: config.timestamp,
+              nonceStr: config.nonceStr,
+              signature: config.signature,
+              jsApiList: ['getLocation']
+            });
+            wx.ready(function () {
+              wx.getLocation({
+              type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+              success: function (res) {
+                let latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                let longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                that.checkByLocation(latitude,longitude)
+              },
+              fail: function(err) {
+                alert("获取定位位置信息失败！")
+              },
+              cancel: function (res) {
+                alert('您拒绝了授权获取地理位置信息！');
+              }
+              });
+              
+          })
+          wx.error(function (res) {
+            console.log('失败')
+          })
+          }
+       })
+    },
+    // 位置信息
+    checkByLocation(latitude,longitude){
+      this.$postRequest(CheckByLocation,{latitude:latitude,longitude:longitude}).then(res => {
+                if(res.data.code=='0000') {
+                  let had = res.data.data.result.had
+                  if(had == false){
+                    this.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+                  }else{
+                    if(typeof(res.data.data.result.activityIds) == 'string') {
+                        this.activityId.push(res.data.data.result.activityIds)
+                      }else{
+                        this.activityId = res.data.data.result.activityIds
+                      }
+                      this.postIndexInfoData();
+                      this.getExchangeRuleData();
+                      this.tankuan();
+                      this.postMyCardData();
+                  }
+                }
+       })
+    },
     // 计步器条值
     onChangeStep: function(stepValue) {
       this.stepValue = stepValue;
@@ -309,70 +357,74 @@ export default {
     },
     // 条加按钮
     stripPlus() {
-      this.prize = this.prize - this.everyBarNeedBoxCount;
-      if (
-        this.prize < this.everyBarNeedBoxCount ||
-        this.prize < 5
-      ) {
-        this.prohibitStep = true;
-      } else {
-        this.prohibitStep = false;
+      this.prize = this.prize - this.everyBarNeedBoxCount
+      if(this.prize < this.everyBarNeedBoxCount){
+       this.prohibitStep = true
+      }else{
+        this.prohibitStep = false
       }
-      if (this.prize <= 0) {
-        this.prohibitShare = true;
-      } else {
-        this.prohibitShare = false;
+
+      if(this.prize <= 0) {
+        this.prohibitShare = true
+      }else{
+        this.prohibitShare = false
       }
+      if(this.stepValue > 1){
+        this.stepValue = 1
+        this.$toast("抱歉！一次只能兑换一条！");
+        this.prohibitStep = true
+        this.prize = this.prize + this.everyBarNeedBoxCount
+      }
+
     },
     //条减按钮
     stripMinus() {
-      this.prize = this.prize + this.everyBarNeedBoxCount;
-      if (
-        this.prize < this.everyBarNeedBoxCount &&
-        this.prize < 5
-      ) {
-        this.prohibitStep = true;
-      } else {
-        this.prohibitStep = false;
+      this.prize = this.prize + this.everyBarNeedBoxCount
+      if(this.prize < this.everyBarNeedBoxCount){
+       this.prohibitStep = true
+      }else{
+        this.prohibitStep = false
       }
-      if (this.prize <= 0) {
-        this.prohibitShare = true;
-      } else {
-        this.prohibitShare = false;
+
+      if(this.prize <= 0) {
+        this.prohibitShare = true
+      }else{
+        this.prohibitShare = false
       }
     },
     // 份加按钮
     sharePlus() {
       this.prize = this.prize - 1;
-      if (this.prize <= 0) {
-        this.prohibitShare = true;
-      } else {
-        this.prohibitShare = false;
+      if(this.prize <= 0) {
+        this.prohibitShare = true
+      }else{
+        this.prohibitShare = false
       }
-      if (
-        this.prize < this.everyBarNeedBoxCount ||
-        this.prize < 5
-      ) {
-        this.prohibitStep = true;
-      } else {
-        this.prohibitStep = false;
+      if(this.prize < this.everyBarNeedBoxCount){
+       this.prohibitStep = true
+      }else{
+        this.prohibitStep = false
+      }
+      if(this.shareValue > 4) {
+        this.shareValue = 4
+        this.$toast("抱歉！一次只能兑换4份！");
+        this.prohibitShare = true
+        this.prize = this.prize + 1;
       }
     },
     // 份减按钮
     shareMinus() {
-      this.prize = this.prize + 1;
-      if (this.prize <= 0) {
-        this.prohibitShare = true;
-      } else {
-        this.prohibitShare = false;
+       this.prize = this.prize + 1;
+       if(this.prize <= 0) {
+        this.prohibitShare = true
+      }else{
+        this.prohibitShare = false
       }
-      if (
-        this.prize < this.everyBarNeedBoxCount &&
-        this.prize < 5
-      ) {
-        this.prohibitStep = true;
-      } else {
-        this.prohibitStep = false;
+
+      if(this.prize < this.everyBarNeedBoxCount){
+       this.prohibitStep = true
+      }else{
+        this.prohibitStep = false
       }
     },
     // 关闭兑换弹框
@@ -386,6 +438,7 @@ export default {
         this.adrress = "",
         this.postIndexInfoData();
     },
+    
     // 兑换
     postExhcangeData() {
       if (this.stepValue == 0 && this.shareValue == 0 || this.stepValue == '' && this.shareValue == '') {
@@ -408,6 +461,10 @@ export default {
         this.$toast("请输入的的详细地址（例如：街道及门牌号）！");
         return false;
       }
+      if(this.isDisable == false){
+            return
+        }
+        this.isDisable = false
       let params = {
         activityId: this.ayId,
         exchangeNumForBar: this.stepValue, // 条
@@ -417,6 +474,7 @@ export default {
         adrress: this.valueArea + this.adrress
       };
       this.$postRequest(Exhcange, params).then(res => {
+        this.isDisable = true
         if (res.data.code === "0000") {
             this.show3 = false;
             this.postIndexInfoData()
@@ -441,7 +499,7 @@ export default {
     },
     //计步器确定按钮
     determine: function() {
-      if ((this.stepValue == 0||this.stepValue == '') && (this.shareValue ==0||this.shareValue =='')) {
+      if ((this.stepValue == 0 || this.stepValue == '') && (this.shareValue ==0 || this.shareValue =='')) {
         this.show3 = false
         this.$toast('您还未选择兑换条或份！');
         } else {
@@ -468,10 +526,12 @@ export default {
               nickName: userInfo.nickName,
               recommender: userInfo.recommender
             };
+            
             for(let i =0;i<this.activityInfo.length;i++){
               let isComplete = this.activityInfo[i].isComplete
+              let brandName = this.activityInfo[i].brandName
             if(isComplete == 1) {
-                this.$dialog.alert({title: '提示', message: this.activityInfo[0].brandName+'&nbsp;'+ this.activityInfo[1].brandName+'活动已完成，无需继续邀请，继续邀请不积累奖励!',confirmButtonText:'确定'});
+                this.$dialog.alert({title: '提示', message: '（'+brandName+'&nbsp'+'）'+'推荐名额已达上限，该规格推多多活动结束，邀请新用户不再累积奖励。',confirmButtonText:'知道了'});
             }else{
             }
             }
@@ -552,7 +612,7 @@ export default {
     exchangeRules(prize,activityId) {
       this.prize = prize
       this.ayId = activityId
-      if (this.prize < this.everyBarNeedBoxCount || this.prize < 5) {
+      if (this.prize < this.everyBarNeedBoxCount) {
               this.prohibitStep = true;
             } else {
               this.prohibitStep = false;

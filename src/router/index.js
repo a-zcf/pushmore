@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+const Transition = () => import ('@/views/Transition/Transition')
 const IndexInfo = () => import ('@/views/IndexInfo/IndexInfo')
 const OrderAdmin = () => import ('@/views/OrderAdmin/OrderAdmin')
 const MyReward = () => import ('@/views/MyReward/MyReward')
 const MyTeam = () => import ('@/views/MyTeam/MyTeam')
-const Transition = () => import ('@/views/Transition/Transition')
 const MyQrCode = () => import ('@/views/MyQrCode/MyQrCode')
 const ExchangeSuccess = () => import ('@/views/ExchangeSuccess/ExchangeSuccess')
 
@@ -18,6 +18,6 @@ export default new Router({
     {path: '/MyTeam', name: 'MyTeam', component: MyTeam, meta: {title: '我的团队'}},
     {path: '/MyQrCode', name: 'MyQrCode', component: MyQrCode, meta: {title: '我的推广码'}},
     {path: '/MyReward', name: 'MyReward', component: MyReward, meta: {title: '我的奖励'}},
-    {path: '/ExchangeSuccess', name: 'ExchangeSuccess', component: ExchangeSuccess, meta: {title: '兑换礼品成功'}},
+    {path: '/ExchangeSuccess', name: 'ExchangeSuccess', component: ExchangeSuccess, meta: {title: ''}},
   ]
 })
