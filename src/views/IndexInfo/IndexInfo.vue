@@ -38,7 +38,7 @@
               <i :class="item.invitees / item.everyAwardCount == 0.5 || item.invitees / item.everyAwardCount > 0.5?'line-ibgk':''"></i>
             </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount > 0.25?'bar-spancolor':''">正式1</p>
+          <p :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount > 0.25?'zs-text bar-spancolor':'zs-text'">正式1</p>
         </li>
         <li>
           <p class="bar-p">
@@ -49,7 +49,7 @@
               <i :class="item.invitees / item.everyAwardCount >= 0.75 || item.invitees / item.everyAwardCount > 0.75 ?'line-ibgk':''"></i>
             </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount >= 0.5 || item.invitees / item.everyAwardCount > 0.5?'bar-spancolor':''">正式2</p>
+          <p :class="item.invitees / item.everyAwardCount >= 0.5 || item.invitees / item.everyAwardCount > 0.5?'zs-text bar-spancolor':'zs-text'">正式2</p>
         </li>
         <li>
           <p class="bar-p">
@@ -60,7 +60,7 @@
               <i :class="item.invitees / item.everyAwardCount >= 1 || item.invitees / item.everyAwardCount > 1?'line-ibgk':''"></i>
             </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount >= 0.75 || item.invitees / item.everyAwardCount > 0.75?'bar-spancolor':''">正式3</p>
+          <p :class="item.invitees / item.everyAwardCount >= 0.75 || item.invitees / item.everyAwardCount > 0.75?'zs-text bar-spancolor':'zs-text'">正式3</p>
         </li>
         <li>
           <p class="bar-p">
@@ -68,7 +68,7 @@
               <i :class="item.invitees / item.everyAwardCount == 1 || item.invitees / item.everyAwardCount > 1?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
               </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount >= 1 || item.invitees / item.everyAwardCount > 1?'bar-spancolor':''">正式4</p>
+          <p :class="item.invitees / item.everyAwardCount >= 1 || item.invitees / item.everyAwardCount > 1?'zs-text bar-spancolor':'zs-text'">正式4</p>
         </li>
         <li class="jindu-li">
           <p class="toTxchange" :style="item.prize <= 0 ?'background-color: #999;':'background-color: #ff6600;'" @click="exchangeRules(item.prize,item.activityId)">去兑换</p>
