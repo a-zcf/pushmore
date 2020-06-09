@@ -56,7 +56,7 @@ export default {
        }
        if(this.status=='-2' || this.status == '-1'){
          document.title = '领奖';
-          this.show1 = false
+         this.show1 = false
        }else{
          document.title = '兑换成功';
          this.show1 = true

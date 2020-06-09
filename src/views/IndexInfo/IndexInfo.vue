@@ -162,7 +162,7 @@
 
     <div class="reminder">
       <i class="iconfont icon-jinggao reminder-icon"></i>
-      <span>温馨提示：本活动含有烟草内客，十八岁以下人士请勿扫码参与！</span>
+      <span>温馨提示：本活动含有烟草内容，十八岁以下人士请勿扫码参与！</span>
     </div>
 
    <div class="activity-rules-desc" id="rules">
