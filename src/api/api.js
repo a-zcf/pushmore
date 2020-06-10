@@ -12,7 +12,7 @@ const urls = {
   UpdateMyCard:'/api/updateMyCard', // 更新我的名片接口
   ScratchPrize:'/api/scratchPrize', // 刮奖接口
   AcceptAward:'/api/acceptAward', // 领奖接口
-  MyGiftList:'/api/myGiftList', // 领奖接口
+  MyGiftList:'/api/myGiftList', // 我的抽奖列表接口
   GetJssdkConfig:'/api/getJssdkConfig', // 获取jssdk配置接口
   CheckByLocation:'/api/checkByLocation', // 通过地址检查用户是否已经获得权限接口
 }

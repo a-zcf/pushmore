@@ -276,6 +276,9 @@ export default {
     if(needLocationCheck == '1'){
       that.getJssdkConfig();
     }else{
+      if(that.activityId.length == 0){
+        that.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+      }
       that.postIndexInfoData();
       that.getExchangeRuleData();
       that.tankuan();
