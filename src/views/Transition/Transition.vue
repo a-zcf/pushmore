@@ -28,7 +28,7 @@ export default {
               forbidClick: true,
               loadingType: "spinner"
             });
-              this.$router.push({ path: "/IndexInfo", query:{activityIds:activityIds, had:this.had,needLocationCheck:needLocationCheck}});
+              this.$router.push({ path: "/IndexInfo", query:{activityIds:activityIds,needLocationCheck:needLocationCheck}});
         }
       });
     }

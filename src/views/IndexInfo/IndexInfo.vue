@@ -241,7 +241,7 @@ export default {
       arrArea: [], //存放地区数组
       activityId: [], // 活动Id
       ayId:0,
-      had:false, // 是否参与活动
+      // had:false, // 是否参与活动
       active: 0,
       stepValue: 0, // 条烟值
       shareValue: 0, // 份烟值
@@ -271,13 +271,13 @@ export default {
     }else{
       that.activityId = that.$route.query.activityIds
     }
-    that.had = that.$route.query.had;
     let needLocationCheck = that.$route.query.needLocationCheck
     if(needLocationCheck == '1'){
       that.getJssdkConfig();
     }else{
-      if(that.activityId.length == 0){
+      if(that.activityId.length == 0 || that.activityId == ''){
         that.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+        return
       }
       that.postIndexInfoData();
       that.getExchangeRuleData();
@@ -285,7 +285,7 @@ export default {
       that.postMyCardData();
     }
      // 解决input呼出键盘页面被顶起和压缩问题
-    var hrt = document.documentElement.clientHeight; 
+    var hrt = document.documentElement.clientHeight;
       this.$nextTick(() => {
       document.getElementById('app').style.height= hrt+'px'
     })
@@ -331,6 +331,10 @@ export default {
     },
     // 位置信息
     checkByLocation(latitude,longitude){
+      if(latitude == '' || longitude == ''){
+        this.getJssdkConfig()
+        return
+      }
       this.$postRequest(CheckByLocation,{latitude:latitude,longitude:longitude}).then(res => {
                 if(res.data.code=='0000') {
                   let had = res.data.data.result.had
@@ -347,6 +351,8 @@ export default {
                       this.tankuan();
                       this.postMyCardData();
                   }
+                }else{
+                 alert("获取定位位置信息失败！请刷新页面重新定位！")
                 }
        })
     },
@@ -534,7 +540,10 @@ export default {
               let isComplete = this.activityInfo[i].isComplete
               let brandName = this.activityInfo[i].brandName
             if(isComplete == 1) {
+              if(!window.sessionStorage.getItem('storge')){
                 this.$dialog.alert({title: '提示', message: '（'+brandName+'&nbsp'+'）'+'推荐名额已达上限，该规格推多多活动结束，邀请新用户不再累积奖励。',confirmButtonText:'知道了'});
+                window.sessionStorage.setItem('storge','true')
+              }
             }else{
             }
             }
