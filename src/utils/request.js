@@ -3,6 +3,7 @@ import Api from '../api/api'
 import Vue from 'vue'
 import { Toast } from 'vant'
 Vue.use(Toast);
+
 axios.defaults.withCredentials = false
 axios.interceptors.request.use(config => {
   config.data = JSON.stringify(config.data)

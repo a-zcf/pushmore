@@ -241,7 +241,6 @@ export default {
       arrArea: [], //存放地区数组
       activityId: [], // 活动Id
       ayId:0,
-      // had:false, // 是否参与活动
       active: 0,
       stepValue: 0, // 条烟值
       shareValue: 0, // 份烟值
@@ -312,7 +311,7 @@ export default {
               success: function (res) {
                 let latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 let longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                that.checkByLocation(latitude,longitude)
+                that.checkByLocation(latitude,longitude,0)
               },
               fail: function(err) {
                 alert("获取定位位置信息失败！")
@@ -321,7 +320,6 @@ export default {
                 alert('您拒绝了授权获取地理位置信息！');
               }
               });
-              
           })
           wx.error(function (res) {
             console.log('失败')
@@ -330,13 +328,24 @@ export default {
        })
     },
     // 位置信息
-    checkByLocation(latitude,longitude){
+    checkByLocation(latitude,longitude,locationType){
+      let that = this
       if(latitude == '' || longitude == ''){
-        this.getJssdkConfig()
-        return
+        if(!window.sessionStorage.getItem('storges')){
+          var geolocation = new BMap.Geolocation();
+          geolocation.getCurrentPosition(function(r){
+          if(this.getStatus() == BMAP_STATUS_SUCCESS){
+             window.sessionStorage.setItem('storges','true')
+             that.checkByLocation(r.point.lat, r.point.lng, 1)
+          }else {
+            alert('定位失败!请新刷新页面重新定位！');
+          }        
+        });
+        }
       }
-      this.$postRequest(CheckByLocation,{latitude:latitude,longitude:longitude}).then(res => {
+      this.$postRequest(CheckByLocation,{latitude:latitude,longitude:longitude,locationType:locationType}).then(res => {
                 if(res.data.code=='0000') {
+                  window.sessionStorage.removeItem('storges');
                   let had = res.data.data.result.had
                   if(had == false){
                     this.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
