@@ -18,6 +18,7 @@
       </div>
     </div>
     <div><p class="recommend-text">成条兑换可得额外抽奖机会</p></div>
+    <div class="switch-but" v-if="otherHad == true" @click="qwPushmore">切换区内活动</div>
     <div class="progress-bar" v-for="(item,index) in activityInfo" :key="index">
       <p class="rank rank_tb">正式人数{{item.maxInvitees}}人<span class="complete" v-if="item.isComplete==1">（本规格推荐已达上限，活动结束）</span></p>
       <ul>
@@ -88,7 +89,7 @@
         <div class="this-exchange">
           <span class="this-text">本次兑换：</span>
           <div class="stepper">
-            <div class="strip">
+            <div class="strip" v-show="false">
               <van-stepper
                 class="step"
                 min="0"
@@ -121,8 +122,7 @@
         <div class="tips">
           <span class="tips-text">温馨提示：</span>
           <div class="explain">
-            <p>1、成条（五份）兑换可获得额外抽奖；</p>
-            <p>2、1份礼品为两包品吸机会。</p>
+            <p>1份礼品为两包品吸机会。</p>
           </div>
         </div>
         <div class="but">
@@ -153,7 +153,7 @@
         <span class="middle-text">订单管理</span>
         <i class="iconfont icon-gengduo icon-more"></i>
       </div>
-      <div class="list none-border" @click="myReward">
+      <div class="list none-border" @click="myReward" v-show="false">
         <i class="iconfont icon-jiangli icon icon-right"></i>
         <span class="middle-text">我的抽奖</span>
         <i class="iconfont icon-gengduo icon-more"></i>
@@ -179,7 +179,7 @@
         <h3 class="title">信息确认</h3>
         <p class="exchange-number">
           你本次兑换明细：
-          <span>{{stepValue}}条+{{shareValue}}份礼包</span>
+          <span>{{shareValue}}份礼包</span>
         </p>
         <p class="exchange-number">填写邮寄信息：</p>
         <van-field v-model="name" type="text" label="收货人：" clearable placeholder="请输入收货人姓名" />
@@ -222,7 +222,7 @@
 
 <script>
 import AeraInfo from "../../utils/area";
-import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn,GetJssdkConfig,CheckByLocation } from "../../api/api";
+import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn,GetJssdkConfig,CheckByLocation,CheckPartIn } from "../../api/api";
 import wx from 'weixin-js-sdk'
 export default {
   name: "IndexInfo",
@@ -261,6 +261,7 @@ export default {
       remainingTime:false,
       timeExpired: 24*60*60, // 计算名片过期时间
       isDisable:true, // 防止重复提交
+      otherHad:false, // 显示切换区外按钮
     };
   },
   mounted() {
@@ -282,6 +283,7 @@ export default {
       that.getExchangeRuleData();
       that.tankuan();
       that.postMyCardData();
+      that.getCheckPartIn();
     }
      // 解决input呼出键盘页面被顶起和压缩问题
     var hrt = document.documentElement.clientHeight;
@@ -359,6 +361,7 @@ export default {
                       this.getExchangeRuleData();
                       this.tankuan();
                       this.postMyCardData();
+                      this.getCheckPartIn();
                   }
                 }else{
                  alert("获取定位位置信息失败！请刷新页面重新定位！")
@@ -559,6 +562,18 @@ export default {
           }
         }
       );
+    },
+    // 切换区外按钮
+    getCheckPartIn(){
+      let that = this
+      this.$postRequest(CheckPartIn).then(res => {
+         if(res.data.code === "0000"){
+           that.otherHad = res.data.data.result.otherHad
+         }
+      })
+    },
+    qwPushmore(){
+       window.location.href = 'http://ld.haiyunzy.com/tdd/static/page/index.html'
     },
    // 兑换规则
     getExchangeRuleData() {

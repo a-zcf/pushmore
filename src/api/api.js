@@ -1,6 +1,6 @@
 const urls = {
-  base: 'http://ld.thewm.cn/tdd/',
-  origin: 'http://ld.thewm.cn/tdd/',
+  base: 'http://ld.haiyunzy.com/tdd_qw/',
+  origin: 'http://ld.haiyunzy.com/tdd_qw/',
   Login: '/user/login', // 登陆接口
   HadpartIn: '/api/hadpartIn', // 检查用户是否已经参与活动接口
   IndexInfo: '/api/indexInfo', // 获取首页信息接口
@@ -15,5 +15,6 @@ const urls = {
   MyGiftList:'/api/myGiftList', // 我的抽奖列表接口
   GetJssdkConfig:'/api/getJssdkConfig', // 获取jssdk配置接口
   CheckByLocation:'/api/checkByLocation', // 通过地址检查用户是否已经获得权限接口
+  CheckPartIn:'/api/checkPartIn', // 切换区内外接口
 }
 module.exports = urls

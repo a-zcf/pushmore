@@ -55,6 +55,8 @@ export default {
 }
 html,
 body {
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -98,6 +100,9 @@ body {
       #iphonex-helper-body {
         height: 100%;
         box-sizing: border-box !important;
+        .switch-but{
+          padding: 5px !important;
+        }
         .index{
           .list{
              padding-bottom: 90px;
@@ -112,6 +117,9 @@ body {
       #iphonex-helper-body {
         /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
+        .switch-but{
+          padding: 5px !important;
+        }
         .index{
           .list{
              padding-bottom: 90px;
@@ -126,6 +134,9 @@ body {
       #iphonex-helper-body {
         /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
+        .switch-but{
+          padding: 5px !important;
+        }
         .index{
           .list{
              padding-bottom: 90px;
@@ -141,6 +152,9 @@ body {
       #iphonex-helper-body {
         /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
+        .switch-but{
+          padding: 5px !important;
+        }
       }
     }
   }
@@ -151,6 +165,9 @@ body {
       #iphonex-helper-body {
         /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
+        .switch-but{
+          padding: 5px !important;
+        }
       }
     }
   }
@@ -161,6 +178,9 @@ body {
       #iphonex-helper-body {
         /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
+        .switch-but{
+          padding: 5px !important;
+        }
       }
     }
   }
