@@ -18,6 +18,7 @@
       </div>
     </div>
     <div><p class="recommend-text">成条兑换可得额外抽奖机会</p></div>
+    <div class="switch-but" v-if="otherHad == true" @click="qwPushmore">切换区外活动</div>
     <div class="progress-bar" v-for="(item,index) in activityInfo" :key="index">
       <p class="rank rank_tb">正式人数{{item.maxInvitees}}人<span class="complete" v-if="item.isComplete==1">（本规格推荐已达上限，活动结束）</span></p>
       <ul>
@@ -222,7 +223,7 @@
 
 <script>
 import AeraInfo from "../../utils/area";
-import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn,GetJssdkConfig,CheckByLocation } from "../../api/api";
+import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn,GetJssdkConfig,CheckByLocation,CheckPartIn } from "../../api/api";
 import wx from 'weixin-js-sdk'
 export default {
   name: "IndexInfo",
@@ -261,6 +262,7 @@ export default {
       remainingTime:false,
       timeExpired: 24*60*60, // 计算名片过期时间
       isDisable:true, // 防止重复提交
+      otherHad:false, // 显示切换区外按钮
     };
   },
   mounted() {
@@ -282,6 +284,7 @@ export default {
       that.getExchangeRuleData();
       that.tankuan();
       that.postMyCardData();
+      that.getCheckPartIn();
     }
      // 解决input呼出键盘页面被顶起和压缩问题
     var hrt = document.documentElement.clientHeight;
@@ -359,6 +362,7 @@ export default {
                       this.getExchangeRuleData();
                       this.tankuan();
                       this.postMyCardData();
+                      this.getCheckPartIn();
                   }
                 }else{
                  alert("获取定位位置信息失败！请刷新页面重新定位！")
@@ -559,6 +563,18 @@ export default {
           }
         }
       );
+    },
+    // 切换区外按钮
+    getCheckPartIn(){
+      let that = this
+      this.$postRequest(CheckPartIn).then(res => {
+         if(res.data.code === "0000"){
+           that.otherHad = res.data.data.result.otherHad
+         }
+      })
+    },
+    qwPushmore(){
+       window.location.href = 'http://ld.haiyunzy.com/tdd_qw/static/page/index.html'
     },
    // 兑换规则
     getExchangeRuleData() {
