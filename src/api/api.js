@@ -1,6 +1,6 @@
 const urls = {
-  base: 'http://ld.haiyunzy.com/tdd_qw/',
-  origin: 'http://ld.haiyunzy.com/tdd_qw/',
+  base: 'http://ld.thewm.cn/tdd_qw/',
+  origin: 'http://ld.thewm.cn/tdd_qw/',
   Login: '/user/login', // 登陆接口
   HadpartIn: '/api/hadpartIn', // 检查用户是否已经参与活动接口
   IndexInfo: '/api/indexInfo', // 获取首页信息接口
@@ -16,5 +16,6 @@ const urls = {
   GetJssdkConfig:'/api/getJssdkConfig', // 获取jssdk配置接口
   CheckByLocation:'/api/checkByLocation', // 通过地址检查用户是否已经获得权限接口
   CheckPartIn:'/api/checkPartIn', // 切换区内外接口
+  CheckFirstTimeRedPacket: '/api/checkFirstTimeRedPacket', // 检查是否有首次红包
 }
 module.exports = urls

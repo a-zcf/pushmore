@@ -9,7 +9,7 @@
               </p>
               <p class="rece-address">
                 <span class="address">抽奖时间：{{item.scratchTime}}</span>
-                <span class="state" @click="item.status=='-2' || item.status=='-1' ? noLottery(item.id,item.status):'' || item.status=='0' || item.status=='1'?releaseStatus(item.url,item.giftType,item.status):''">
+                <span class="state" @click="item.status=='-2' || item.status=='-1' ? noLottery(item.id,item.status):'' || item.status=='0' || item.status=='1'?releaseStatus(item.url):''">
                   {{item.status=='-2'?'未抽奖':'' || item.status=='-1'?'未领取':'' || item.status=='0'?'发放中':'' || item.status=='1'?'发放成功':''}}
                 </span>
               </p>
@@ -40,12 +40,8 @@ export default {
           }
          })
        },
-       releaseStatus(url,giftType,status){
-         if(giftType=='0' && status=='0' || giftType=='0' && status=='1'){
-           this.$dialog.alert({title: '提示', message: '请到微信服务通知查看红包领取状态',confirmButtonText:'确定'});
-         }else{
-           window.location.href = url
-         }
+       releaseStatus(url){
+         window.location.href = url
        },
        noLottery(id,status){
           this.$router.push({path: '/ExchangeSuccess',query:{giftId:id,status:status}})

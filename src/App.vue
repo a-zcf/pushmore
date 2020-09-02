@@ -62,7 +62,6 @@ body {
   overflow-x: hidden;
   font-weight: 400;
   font-size: 14px;
-  // color: #2c3e50;
   font-family: Helvetica, sans-serif;
   position: relative;
   a {
@@ -103,6 +102,21 @@ body {
         .switch-but{
           padding: 5px !important;
         }
+        .progress{
+          width: 45px;
+          height: 45px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          color: @whiteColor;
+          display: flex;
+          flex-wrap:wrap;
+          padding: 3px;
+          i{
+            width: 100%;
+            font-style:normal;
+          }
+        }
         .index{
           .list{
              padding-bottom: 90px;
@@ -115,10 +129,24 @@ body {
   @media only screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) {
     #app {
       #iphonex-helper-body {
-        /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
         .switch-but{
           padding: 5px !important;
+        }
+        .progress{
+          width: 45px;
+          height: 45px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          color: @whiteColor;
+          display: flex;
+          flex-wrap:wrap;
+          padding: 3px;
+          i{
+            width: 100%;
+            font-style:normal;
+          }
         }
         .index{
           .list{
@@ -132,10 +160,24 @@ body {
   @media only screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
     #app {
       #iphonex-helper-body {
-        /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
         .switch-but{
           padding: 5px !important;
+        }
+        .progress{
+          width: 45px;
+          height: 45px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          color: @whiteColor;
+          display: flex;
+          flex-wrap:wrap;
+          padding: 3px;
+          i{
+            width: 100%;
+            font-style:normal;
+          }
         }
         .index{
           .list{
@@ -150,10 +192,24 @@ body {
   @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
     #app {
       #iphonex-helper-body {
-        /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
         .switch-but{
           padding: 5px !important;
+        }
+        .progress{
+          width: 45px;
+          height: 45px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          color: @whiteColor;
+          display: flex;
+          flex-wrap:wrap;
+          padding: 3px;
+          i{
+            width: 100%;
+            font-style:normal;
+          }
         }
       }
     }
@@ -163,10 +219,24 @@ body {
   @media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
     #app {
       #iphonex-helper-body {
-        /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
         .switch-but{
           padding: 5px !important;
+        }
+        .progress{
+          width: 45px;
+          height: 45px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          color: @whiteColor;
+          display: flex;
+          flex-wrap:wrap;
+          padding: 3px;
+          i{
+            width: 100%;
+            font-style:normal;
+          }
         }
       }
     }
@@ -176,10 +246,24 @@ body {
   @media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
     #app {
       #iphonex-helper-body {
-        /*padding: 0 0 28PX 0 !important;*/
         box-sizing: border-box !important;
         .switch-but{
           padding: 5px !important;
+        }
+        .progress{
+          width: 45px;
+          height: 45px;
+          text-align: center;
+          background-color: @orangeColor;
+          border-radius: 50px;
+          color: @whiteColor;
+          display: flex;
+          flex-wrap:wrap;
+          padding: 3px;
+          i{
+            width: 100%;
+            font-style:normal;
+          }
         }
       }
     }

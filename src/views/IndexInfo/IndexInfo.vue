@@ -17,14 +17,15 @@
         </p>
       </div>
     </div>
-    <div><p class="recommend-text">成条兑换可得额外抽奖机会</p></div>
     <div class="switch-but" v-if="otherHad == true" @click="qwPushmore">切换区内活动</div>
     <div class="progress-bar" v-for="(item,index) in activityInfo" :key="index">
       <p class="rank rank_tb">正式人数{{item.maxInvitees}}人<span class="complete" v-if="item.isComplete==1">（本规格推荐已达上限，活动结束）</span></p>
       <ul>
         <li>
           <p class="award-progress">
-            <span class="progress">领奖<br/>进度</span>
+            <span class="progress">
+              <i>领奖</i> <i>进度</i>
+            </span>
             <span class="horizontal-line" style="height:6px;">
               <i :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees/item.everyAwardCount > 0.25?'line-ibgk':''" style="height:2px;"></i>
             </span>
@@ -153,7 +154,7 @@
         <span class="middle-text">订单管理</span>
         <i class="iconfont icon-gengduo icon-more"></i>
       </div>
-      <div class="list none-border" @click="myReward" v-show="false">
+      <div class="list none-border" @click="myReward">
         <i class="iconfont icon-jiangli icon icon-right"></i>
         <span class="middle-text">我的抽奖</span>
         <i class="iconfont icon-gengduo icon-more"></i>
@@ -168,9 +169,9 @@
    <div class="activity-rules-desc" id="rules">
       <h3>活动规则</h3>
       <p>1、加入推多多团队：扫码好友推多多二维码名片，加入推多多活动；扫描活动规格二维码，激活推广资格，系统生成推多多名片，可将名片发放给好友邀请参与活动，参与越多，奖励越多。</p>
-      <p>2、推多多奖励标准：将推荐人推广名片发放给好友扫描，邀请好友进入推多多活动系统。进入活动系统后，好友扫描活动规格“中支凌云、刘三姐”二维码，推荐人可获得一个正式成员，推荐人每发展四个正式成员，可获得精美礼品一份。</p>
+      <p>2、推多多奖励标准：将推荐人推广名片发放给好友扫描，邀请好友进入推多多活动系统。进入活动系统后，好友扫描活动规格“中支凌云”二维码，推荐人可获得一个正式成员，推荐人每发展四个正式成员，可获得精美礼品一份。</p>
       <p>3、推荐人仅能发展进入系统后，还没未扫描活动规格二维码的好友做为正式成员；每个成员有且仅有一个上级推荐人，成员绑定上级推荐人后不可更改；加入推多多活动系统后，扫描活动规格二维码成为正式成员，正式成员可自行发展自己团队获得相应奖励。</p>
-      <p>4、进入推多多活动后，单规格推荐满40个正式成员，则该规格推多多活动结束。</p>
+      <p>4、进入推多多活动后，单规格推荐满12个正式成员，则该规格推多多活动结束。</p>
       <p>5、如系统有疑问，可微信留言或拨打4008792099客服热线垂询。</p>
     </div>
     <van-overlay :show="show3">
@@ -216,13 +217,38 @@
         </van-popup>
       </div>
     </van-overlay>
-
+    <van-popup v-for="(item,index) in redList" :key="index" v-model="show4" :style="{ width: '100%' }" class="pop" :close-on-click-overlay='false'>
+      <div class="red_envelopes" @touchmove.prevent>
+        <img :src="redImg" />
+        <div class="red_cont">
+           <h3>恭喜您获得红包</h3>
+           <p class="red_pack">{{'获得'+item.name}}</p>
+           <div class="red_but">
+             <button class="back_home" @click="backHome">返回首页</button>
+             <button class="get_now" @click="collarRedPackage(item.id)">立即领取</button>
+           </div>
+        </div>
+      </div>
+      <div class="icongunbi_but">
+        <i class="iconfont icon-guanbi guanbi_but" @click="backHome"></i>
+      </div>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import AeraInfo from "../../utils/area";
-import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn,GetJssdkConfig,CheckByLocation,CheckPartIn } from "../../api/api";
+import { IndexInfo, 
+Exhcange, 
+GetExchangeRule,
+MyCard, 
+UpdateMyCard,
+HadpartIn,
+GetJssdkConfig,
+CheckByLocation,
+CheckPartIn,
+AcceptAward,
+CheckFirstTimeRedPacket } from "../../api/api";
 import wx from 'weixin-js-sdk'
 export default {
   name: "IndexInfo",
@@ -232,6 +258,7 @@ export default {
       show1: false, // 显示地区上拉框
       show2: false, // 兑换规则弹框
       show3: false, // 信息确提弹框
+      show4:false, // 红包弹框
       brandName1:'',
       brandName2:'',
       colNum: 3, // 显示列数，3-省市区，2-省市，1-省
@@ -262,29 +289,58 @@ export default {
       timeExpired: 24*60*60, // 计算名片过期时间
       isDisable:true, // 防止重复提交
       otherHad:false, // 显示切换区外按钮
+      redImg:require('../../assets/img/redenvelopes.png'),
+      redList:[],
+      setTimeoutName:null, // 定时器名称
     };
   },
   mounted() {
     let that = this
-    if(typeof(that.$route.query.activityIds) == 'string') {
-      that.activityId.push(that.$route.query.activityIds)
-    }else{
-      that.activityId = that.$route.query.activityIds
-    }
-    let needLocationCheck = that.$route.query.needLocationCheck
-    if(needLocationCheck == '1'){
-      that.getJssdkConfig();
-    }else{
-      if(that.activityId.length == 0 || that.activityId == ''){
-        that.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
-        return
-      }
-      that.postIndexInfoData();
-      that.getExchangeRuleData();
-      that.tankuan();
-      that.postMyCardData();
-      that.getCheckPartIn();
-    }
+       that.$getRequest(HadpartIn).then(res => {
+        if (res.data.code === "0000") {
+          let result = res.data.data.result
+          that.activityId = result.activityIds;
+          let needLocationCheck = result.needLocationCheck
+          if(needLocationCheck == '1'){
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+              that.$postRequest(CheckByLocation,{latitude:r.point.lat,longitude:r.point.lng,locationType:1}).then(res => {
+                if(res.data.code=='0000') {
+                  let had = res.data.data.result.had
+                  if(had == false){
+                    that.$dialog.alert({title: '对不起暂无活动资格', message: '参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+                  }else{
+                      that.postIndexInfoData();
+                      that.getExchangeRuleData();
+                      that.tankuan();
+                      that.postMyCardData();
+                      that.getCheckPartIn();
+                      that.getCheckFirstTimeRedPacket();
+                  }
+                }else{
+                 alert("获取定位位置信息失败！请刷新页面重新定位！")
+                }
+       })
+            }else {
+              alert('定位失败!请新刷新页面重新定位！');
+            }        
+          });
+          }else{
+            if(that.activityId.length == 0 || that.activityId == ''){
+              that.$dialog.alert({title: '对不起暂无活动资格', message: '参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+              return
+            }
+            that.postIndexInfoData();
+            that.getExchangeRuleData();
+            that.tankuan();
+            that.postMyCardData();
+            that.getCheckPartIn();
+            that.getCheckFirstTimeRedPacket();
+          }
+        }
+      });
+
      // 解决input呼出键盘页面被顶起和压缩问题
     var hrt = document.documentElement.clientHeight;
       this.$nextTick(() => {
@@ -292,82 +348,38 @@ export default {
     })
   },
   methods: {
-    // 获取jssdk配置
-    getJssdkConfig(){
-      let that = this
-      let url = window.location.href.split('#')[0]
-       that.$postRequest(GetJssdkConfig,{url:url}).then(res => {
-          if(res.data.code=='0000'){
-            let config = res.data.data.config
-            wx.config({
-              debug: false, 
-              appId: config.appid,
-              timestamp: config.timestamp,
-              nonceStr: config.nonceStr,
-              signature: config.signature,
-              jsApiList: ['getLocation']
-            });
-            wx.ready(function () {
-              wx.getLocation({
-              type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-              success: function (res) {
-                let latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                let longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                that.checkByLocation(latitude,longitude,0)
-              },
-              fail: function(err) {
-                alert("获取定位位置信息失败！")
-              },
-              cancel: function (res) {
-                alert('您拒绝了授权获取地理位置信息！');
-              }
-              });
-          })
-          wx.error(function (res) {
-            console.log('失败')
-          })
+    // 检查是否有首次红包
+    getCheckFirstTimeRedPacket(){
+      this.$postRequest(CheckFirstTimeRedPacket, {ids:this.activityId}).then(res => {
+          if(res.data.code =='0000'){
+            this.redList = res.data.data.list
+            if(this.redList.length == '0'){
+              this.show4 = false;
+            }else{
+              this.show4 = true;
+            }
+          }else{
           }
-       })
+      })
     },
-    // 位置信息
-    checkByLocation(latitude,longitude,locationType){
-      let that = this
-      if(latitude == '' || longitude == ''){
-        if(!window.sessionStorage.getItem('storges')){
-          var geolocation = new BMap.Geolocation();
-          geolocation.getCurrentPosition(function(r){
-          if(this.getStatus() == BMAP_STATUS_SUCCESS){
-             window.sessionStorage.setItem('storges','true')
-             that.checkByLocation(r.point.lat, r.point.lng, 1)
-          }else {
-            alert('定位失败!请新刷新页面重新定位！');
-          }        
-        });
+   // 首次参与领红包
+   collarRedPackage(id){
+    if(this.isDisable == false){
+            return
         }
-      }
-      this.$postRequest(CheckByLocation,{latitude:latitude,longitude:longitude,locationType:locationType}).then(res => {
-                if(res.data.code=='0000') {
-                  window.sessionStorage.removeItem('storges');
-                  let had = res.data.data.result.had
-                  if(had == false){
-                    this.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
-                  }else{
-                    if(typeof(res.data.data.result.activityIds) == 'string') {
-                        this.activityId.push(res.data.data.result.activityIds)
-                      }else{
-                        this.activityId = res.data.data.result.activityIds
-                      }
-                      this.postIndexInfoData();
-                      this.getExchangeRuleData();
-                      this.tankuan();
-                      this.postMyCardData();
-                      this.getCheckPartIn();
-                  }
-                }else{
-                 alert("获取定位位置信息失败！请刷新页面重新定位！")
-                }
-       })
-    },
+        this.isDisable = false
+        this.$postRequest(AcceptAward,{giftId:id}).then(res => {
+            this.isDisable = true
+         if(res.data.code == '0000'){
+          this.$toast('恭喜您领取成功！');
+          window.location.href = res.data.data.gift.url
+         }
+     })
+   },
+   // 点击返回首页
+     backHome(){
+      this.show4 = false
+     },
     // 计步器条值
     onChangeStep: function(stepValue) {
       this.stepValue = stepValue;
@@ -548,7 +560,7 @@ export default {
               recommender: userInfo.recommender
             };
             
-            for(let i =0;i<this.activityInfo.length;i++){
+            for(let i = 0;i<this.activityInfo.length;i++){
               let isComplete = this.activityInfo[i].isComplete
               let brandName = this.activityInfo[i].brandName
             if(isComplete == 1) {
@@ -573,7 +585,7 @@ export default {
       })
     },
     qwPushmore(){
-       window.location.href = 'http://ld.haiyunzy.com/tdd/static/page/index.html'
+      window.location.href = 'http://ld.thewm.cn/tdd/static/page/index.html'
     },
    // 兑换规则
     getExchangeRuleData() {
