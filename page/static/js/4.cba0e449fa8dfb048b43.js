@@ -1,0 +1,2 @@
+webpackJsonp([4],{"5dpL":function(t,e,r){"use strict";Object.defineProperty(e,"__esModule",{value:!0});r("P9l9");var n={render:function(){var t=this.$createElement,e=this._self._c||t;return e("div",{staticClass:"my-qr-code"},[e("img",{staticClass:"codeImg",attrs:{src:this.url}})])},staticRenderFns:[]};var s=r("VU/8")({name:"MyQrCode",data:function(){return{activityId:0,url:""}},mounted:function(){this.url=this.$route.query.url},methods:{}},n,!1,function(t){r("J++g")},null,null);e.default=s.exports},"J++g":function(t,e){}});
+//# sourceMappingURL=4.cba0e449fa8dfb048b43.js.map

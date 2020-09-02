@@ -24,7 +24,9 @@
       <ul>
         <li>
           <p class="award-progress">
-            <span class="progress">领奖<br/>进度</span>
+            <span class="progress">
+              <i>领奖</i> <i>进度</i>
+            </span>
             <span class="horizontal-line" style="height:6px;">
               <i :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees/item.everyAwardCount > 0.25?'line-ibgk':''" style="height:2px;"></i>
             </span>
@@ -217,15 +219,42 @@
         </van-popup>
       </div>
     </van-overlay>
-
+    <van-popup v-for="(item,index) in redList" :key="index" v-model="show4" :style="{ width: '100%' }" class="pop" :close-on-click-overlay='false'>
+      <div class="red_envelopes" @touchmove.prevent>
+        <img :src="redImg" />
+        <div class="red_cont">
+           <h3>恭喜您获得红包</h3>
+           <p class="red_pack">{{'获得'+item.name}}</p>
+           <div class="red_but">
+             <button class="back_home" @click="backHome">返回首页</button>
+             <button class="get_now" @click="collarRedPackage(item.id)">立即领取</button>
+           </div>
+        </div>
+      </div>
+      <div class="icongunbi_but">
+        <i class="iconfont icon-guanbi guanbi_but" @click="backHome"></i>
+      </div>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import AeraInfo from "../../utils/area";
-import { IndexInfo, Exhcange, GetExchangeRule,MyCard, UpdateMyCard,HadpartIn,GetJssdkConfig,CheckByLocation,CheckPartIn } from "../../api/api";
+import { 
+  IndexInfo, 
+  Exhcange, 
+  GetExchangeRule,
+  MyCard, 
+  UpdateMyCard,
+  HadpartIn,
+  GetJssdkConfig,
+  CheckByLocation,
+  CheckPartIn,
+  AcceptAward,
+  CheckFirstTimeRedPacket } from "../../api/api";
 import wx from 'weixin-js-sdk'
 export default {
+  inject: ['reload'], // 引入方法
   name: "IndexInfo",
   data() {
     return {
@@ -233,6 +262,7 @@ export default {
       show1: false, // 显示地区上拉框
       show2: false, // 兑换规则弹框
       show3: false, // 信息确提弹框
+      show4:false, // 红包弹框
       brandName1:'',
       brandName2:'',
       colNum: 3, // 显示列数，3-省市区，2-省市，1-省
@@ -263,21 +293,58 @@ export default {
       timeExpired: 24*60*60, // 计算名片过期时间
       isDisable:true, // 防止重复提交
       otherHad:false, // 显示切换区外按钮
+      redImg:require('../../assets/img/redenvelopes.png'),
+      redList:[],
+      redId: '', // 奖励id
+      redGiftType: '', // 0为红包，1是物料
+      redName: '', // 礼品名称
+      redStatus: '', // -2未抽奖，-1 已抽奖未领取，0已领取发放中，1发放成功
+      setTimeoutName:null, // 定时器名称
     };
   },
   mounted() {
     let that = this
-    if(typeof(that.$route.query.activityIds) == 'string') {
-      that.activityId.push(that.$route.query.activityIds)
-    }else{
-      that.activityId = that.$route.query.activityIds
-    }
-    let needLocationCheck = that.$route.query.needLocationCheck
-    if(needLocationCheck == '1'){
-      that.getJssdkConfig();
+      that.$getRequest(HadpartIn).then(res => {
+        if (res.data.code === "0000") {
+          let result = res.data.data.result
+         that.activityId = result.activityIds
+         let needLocationCheck = result.needLocationCheck
+         if(needLocationCheck == '1'){
+         var geolocation = new BMap.Geolocation();
+          geolocation.getCurrentPosition(function(r){
+          if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            that.$postRequest(CheckByLocation,{latitude:r.point.lat,longitude:r.point.lng,locationType:1}).then(res => {
+                if(res.data.code=='0000') {
+                  let had = res.data.data.result.had
+                  if(had == false){
+                    that.$postRequest(CheckPartIn).then(res => {
+                      if(res.data.code === "0000"){
+                        if(res.data.data.result.otherHad == true){
+                          window.location.href = 'http://ld.thewm.cn/tdd_qw/static/page/index.html'
+                        }else{
+                          that.$dialog.alert({title: '对不起暂无活动资格', message: '参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+                        }
+                      }
+                    })
+                  }else{
+                      that.postIndexInfoData();
+                      that.getExchangeRuleData();
+                      that.tankuan();
+                      that.postMyCardData();
+                      that.getCheckPartIn();
+                      that.getCheckFirstTimeRedPacket();
+                  }
+                }else{
+                 alert("获取定位位置信息失败！请刷新页面重新定位！")
+                }
+       })
+          }else {
+            alert('定位失败!请新刷新页面重新定位！');
+          }        
+        });
     }else{
       if(that.activityId.length == 0 || that.activityId == ''){
-        that.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
+        that.$dialog.alert({title: '对不起暂无活动资格', message: '参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
         return
       }
       that.postIndexInfoData();
@@ -285,7 +352,11 @@ export default {
       that.tankuan();
       that.postMyCardData();
       that.getCheckPartIn();
+      that.getCheckFirstTimeRedPacket();
     }
+        }
+      });
+    
      // 解决input呼出键盘页面被顶起和压缩问题
     var hrt = document.documentElement.clientHeight;
       this.$nextTick(() => {
@@ -293,82 +364,37 @@ export default {
     })
   },
   methods: {
-    // 获取jssdk配置
-    getJssdkConfig(){
-      let that = this
-      let url = window.location.href.split('#')[0]
-       that.$postRequest(GetJssdkConfig,{url:url}).then(res => {
-          if(res.data.code=='0000'){
-            let config = res.data.data.config
-            wx.config({
-              debug: false, 
-              appId: config.appid,
-              timestamp: config.timestamp,
-              nonceStr: config.nonceStr,
-              signature: config.signature,
-              jsApiList: ['getLocation']
-            });
-            wx.ready(function () {
-              wx.getLocation({
-              type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-              success: function (res) {
-                let latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                let longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                that.checkByLocation(latitude,longitude,0)
-              },
-              fail: function(err) {
-                alert("获取定位位置信息失败！")
-              },
-              cancel: function (res) {
-                alert('您拒绝了授权获取地理位置信息！');
-              }
-              });
-          })
-          wx.error(function (res) {
-            console.log('失败')
-          })
+    // 检查是否有首次红包
+    getCheckFirstTimeRedPacket(){
+      this.$postRequest(CheckFirstTimeRedPacket, {ids:this.activityId}).then(res => {
+          if(res.data.code =='0000'){
+            this.redList = res.data.data.list
+            if(this.redList.length == '0'){
+              this.show4 = false;
+            }else{
+              this.show4 = true;
+            }
           }
-       })
+      })
     },
-    // 位置信息
-    checkByLocation(latitude,longitude,locationType){
-      let that = this
-      if(latitude == '' || longitude == ''){
-        if(!window.sessionStorage.getItem('storges')){
-          var geolocation = new BMap.Geolocation();
-          geolocation.getCurrentPosition(function(r){
-          if(this.getStatus() == BMAP_STATUS_SUCCESS){
-             window.sessionStorage.setItem('storges','true')
-             that.checkByLocation(r.point.lat, r.point.lng, 1)
-          }else {
-            alert('定位失败!请新刷新页面重新定位！');
-          }        
-        });
+   // 首次参与领红包
+   collarRedPackage(id){
+    if(this.isDisable == false){
+            return
         }
-      }
-      this.$postRequest(CheckByLocation,{latitude:latitude,longitude:longitude,locationType:locationType}).then(res => {
-                if(res.data.code=='0000') {
-                  window.sessionStorage.removeItem('storges');
-                  let had = res.data.data.result.had
-                  if(had == false){
-                    this.$dialog.alert({title: '扫码活动规格二维码参与活动', message: '目前仅限【广西】范围用户参与活动，赶快扫码“中支凌云、刘三姐”二维码参与',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
-                  }else{
-                    if(typeof(res.data.data.result.activityIds) == 'string') {
-                        this.activityId.push(res.data.data.result.activityIds)
-                      }else{
-                        this.activityId = res.data.data.result.activityIds
-                      }
-                      this.postIndexInfoData();
-                      this.getExchangeRuleData();
-                      this.tankuan();
-                      this.postMyCardData();
-                      this.getCheckPartIn();
-                  }
-                }else{
-                 alert("获取定位位置信息失败！请刷新页面重新定位！")
-                }
-       })
-    },
+        this.isDisable = false
+        this.$postRequest(AcceptAward,{giftId:id}).then(res => {
+            this.isDisable = true
+         if(res.data.code == '0000'){
+          this.$toast('恭喜您领取成功！');
+          window.location.href = res.data.data.gift.url
+         }
+     })
+   },
+   // 点击返回首页
+     backHome(){
+      this.show4 = false
+     },
     // 计步器条值
     onChangeStep: function(stepValue) {
       this.stepValue = stepValue;
@@ -574,7 +600,7 @@ export default {
       })
     },
     qwPushmore(){
-       window.location.href = 'http://ld.haiyunzy.com/tdd_qw/static/page/index.html'
+       window.location.href = 'http://ld.thewm.cn/tdd_qw/static/page/index.html'
     },
    // 兑换规则
     getExchangeRuleData() {
@@ -680,6 +706,10 @@ export default {
       let addrInfo = event[0].name + "-" + event[1].name + "-" + event[2].name;
       this.valueArea = addrInfo;
     }
+  },
+  beforeDestroy(){
+    // 关闭窗口清除定时器
+    clearInterval(this.setTimeoutName)
   }
 };
 </script>

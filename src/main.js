@@ -23,7 +23,7 @@ import {
   Stepper,
   Dialog,
   Divider,
-  Button
+  Button,
  } from 'vant';
 Vue.use(Loading);
 Vue.use(List);

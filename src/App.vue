@@ -3,7 +3,7 @@
     <!-- <router-view></router-view> -->
     <div id="iphonex-helper-body">
       <transition :name="transitionName">
-          <router-view class="child-view"></router-view>
+          <router-view class="child-view" v-if="isRouterAlive"></router-view>
       </transition>
       <!-- <router-view /> -->
     </div>
@@ -13,9 +13,23 @@
 <script>
 export default {
   name: "App",
+  provide() { // 注册一个方法
+    return {
+      reload: this.reload
+    }
+  },
   data () {
     return {
-      transitionName: ''
+      transitionName: '',
+      isRouterAlive: true
+    }
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false
+      this.$nextTick(function() {
+        this.isRouterAlive = true
+      })
     }
   },
   watch: {

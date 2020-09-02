@@ -41,11 +41,7 @@ export default {
          })
        },
        releaseStatus(url,giftType,status){
-         if(giftType=='0' && status=='0' || giftType=='0' && status=='1'){
-           this.$dialog.alert({title: '提示', message: '请到微信服务通知查看红包领取状态',confirmButtonText:'确定'});
-         }else{
-           window.location.href = url
-         }
+         window.location.href = url
        },
        noLottery(id,status){
           this.$router.push({path: '/ExchangeSuccess',query:{giftId:id,status:status}})
