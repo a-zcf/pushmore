@@ -23,7 +23,9 @@ import {
   Stepper,
   Dialog,
   Divider,
-  Button
+  Button,
+  Swipe, 
+  SwipeItem,
  } from 'vant';
 Vue.use(Loading);
 Vue.use(List);
@@ -40,6 +42,8 @@ Vue.use(Stepper);
 Vue.use(Dialog);
 Vue.use(Divider);
 Vue.use(Button);
+Vue.use(Swipe);
+Vue.use(SwipeItem);
 
 Vue.config.productionTip = false
 Vue.prototype.$getRequest = getRequest // get请求

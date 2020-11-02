@@ -5,87 +5,236 @@
       <div class="head-text">
         <p>
           <label>昵称：</label>
-          <span>{{userInfoData.nickName}}</span>
+          <span>{{ userInfoData.nickName }}</span>
         </p>
         <p>
           <label>ID：</label>
-          <span>{{userInfoData.id}}</span>
+          <span>{{ userInfoData.id }}</span>
         </p>
         <p>
           <label>推荐人：</label>
-          <span>{{userInfoData.recommender}}</span>
+          <span>{{ userInfoData.recommender }}</span>
         </p>
       </div>
     </div>
-    <div class="switch-but" v-if="otherHad == true" @click="qwPushmore">切换区内活动</div>
-    <div class="progress-bar" v-for="(item,index) in activityInfo" :key="index">
-      <p class="rank rank_tb">正式人数{{item.maxInvitees}}人<span class="complete" v-if="item.isComplete==1">（本规格推荐已达上限，活动结束）</span></p>
+    <div class="switch-but" v-if="otherHad == true" @click="qwPushmore">
+      切换区内活动
+    </div>
+    <div
+      class="progress-bar"
+      v-for="(item, index) in activityInfo"
+      :key="index"
+    >
+      <p class="rank rank_tb">
+        正式人数{{ item.maxInvitees }}人<span
+          class="complete"
+          v-if="item.isComplete == 1"
+          >（本规格推荐已达上限，活动结束）</span
+        >
+      </p>
       <ul>
         <li>
           <p class="award-progress">
-            <span class="progress">
-              <i>领奖</i> <i>进度</i>
-            </span>
-            <span class="horizontal-line" style="height:6px;">
-              <i :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees/item.everyAwardCount > 0.25?'line-ibgk':''" style="height:2px;"></i>
+            <span class="progress"> <i>领奖</i> <i>进度</i> </span>
+            <span class="horizontal-line" style="height: 6px">
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount == 0.25 ||
+                  item.invitees / item.everyAwardCount > 0.25
+                    ? 'line-ibgk'
+                    : ''
+                "
+                style="height: 2px"
+              ></i>
             </span>
           </p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount < 0.5 && item.invitees / item.everyAwardCount > 0.25?'bar-span bgk-bar':'bar-span'">
-              <i :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount > 0.25?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
+            <span
+              :class="
+                item.invitees / item.everyAwardCount == 0.25 ||
+                (item.invitees / item.everyAwardCount < 0.5 &&
+                  item.invitees / item.everyAwardCount > 0.25)
+                  ? 'bar-span bgk-bar'
+                  : 'bar-span'
+              "
+            >
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount == 0.25 ||
+                  item.invitees / item.everyAwardCount > 0.25
+                    ? 'iconfont icon-chenggong bar-spancolor'
+                    : 'iconfont icon-chenggong'
+                "
+              ></i>
             </span>
             <span class="horizontal-line">
-              <i :class="item.invitees / item.everyAwardCount == 0.5 || item.invitees / item.everyAwardCount > 0.5?'line-ibgk':''"></i>
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount == 0.5 ||
+                  item.invitees / item.everyAwardCount > 0.5
+                    ? 'line-ibgk'
+                    : ''
+                "
+              ></i>
             </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount == 0.25 || item.invitees / item.everyAwardCount > 0.25?'zs-text bar-spancolor':'zs-text'">正式1</p>
+          <p
+            :class="
+              item.invitees / item.everyAwardCount == 0.25 ||
+              item.invitees / item.everyAwardCount > 0.25
+                ? 'zs-text bar-spancolor'
+                : 'zs-text'
+            "
+          >
+            正式1
+          </p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="item.invitees / item.everyAwardCount == 0.5 || item.invitees / item.everyAwardCount < 0.75 && item.invitees / item.everyAwardCount > 0.5?'bar-span bgk-bar':'bar-span'">
-              <i :class="item.invitees / item.everyAwardCount == 0.5 || item.invitees / item.everyAwardCount > 0.5?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
+            <span
+              :class="
+                item.invitees / item.everyAwardCount == 0.5 ||
+                (item.invitees / item.everyAwardCount < 0.75 &&
+                  item.invitees / item.everyAwardCount > 0.5)
+                  ? 'bar-span bgk-bar'
+                  : 'bar-span'
+              "
+            >
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount == 0.5 ||
+                  item.invitees / item.everyAwardCount > 0.5
+                    ? 'iconfont icon-chenggong bar-spancolor'
+                    : 'iconfont icon-chenggong'
+                "
+              ></i>
             </span>
             <span class="horizontal-line">
-              <i :class="item.invitees / item.everyAwardCount >= 0.75 || item.invitees / item.everyAwardCount > 0.75 ?'line-ibgk':''"></i>
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount >= 0.75 ||
+                  item.invitees / item.everyAwardCount > 0.75
+                    ? 'line-ibgk'
+                    : ''
+                "
+              ></i>
             </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount >= 0.5 || item.invitees / item.everyAwardCount > 0.5?'zs-text bar-spancolor':'zs-text'">正式2</p>
+          <p
+            :class="
+              item.invitees / item.everyAwardCount >= 0.5 ||
+              item.invitees / item.everyAwardCount > 0.5
+                ? 'zs-text bar-spancolor'
+                : 'zs-text'
+            "
+          >
+            正式2
+          </p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="item.invitees / item.everyAwardCount == 0.75 || item.invitees / item.everyAwardCount < 1 && item.invitees / item.everyAwardCount > 0.75?'bar-span bgk-bar':'bar-span'">
-              <i :class="item.invitees / item.everyAwardCount == 0.75 || item.invitees / item.everyAwardCount >0.75?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
+            <span
+              :class="
+                item.invitees / item.everyAwardCount == 0.75 ||
+                (item.invitees / item.everyAwardCount < 1 &&
+                  item.invitees / item.everyAwardCount > 0.75)
+                  ? 'bar-span bgk-bar'
+                  : 'bar-span'
+              "
+            >
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount == 0.75 ||
+                  item.invitees / item.everyAwardCount > 0.75
+                    ? 'iconfont icon-chenggong bar-spancolor'
+                    : 'iconfont icon-chenggong'
+                "
+              ></i>
             </span>
             <span class="horizontal-line">
-              <i :class="item.invitees / item.everyAwardCount >= 1 || item.invitees / item.everyAwardCount > 1?'line-ibgk':''"></i>
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount >= 1 ||
+                  item.invitees / item.everyAwardCount > 1
+                    ? 'line-ibgk'
+                    : ''
+                "
+              ></i>
             </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount >= 0.75 || item.invitees / item.everyAwardCount > 0.75?'zs-text bar-spancolor':'zs-text'">正式3</p>
+          <p
+            :class="
+              item.invitees / item.everyAwardCount >= 0.75 ||
+              item.invitees / item.everyAwardCount > 0.75
+                ? 'zs-text bar-spancolor'
+                : 'zs-text'
+            "
+          >
+            正式3
+          </p>
         </li>
         <li>
           <p class="bar-p">
-            <span :class="item.invitees / item.everyAwardCount == 1 || item.invitees / item.everyAwardCount > 1?'bar-span bgk-bar':'bar-span'">
-              <i :class="item.invitees / item.everyAwardCount == 1 || item.invitees / item.everyAwardCount > 1?'iconfont icon-chenggong bar-spancolor':'iconfont icon-chenggong'"></i>
-              </span>
+            <span
+              :class="
+                item.invitees / item.everyAwardCount == 1 ||
+                item.invitees / item.everyAwardCount > 1
+                  ? 'bar-span bgk-bar'
+                  : 'bar-span'
+              "
+            >
+              <i
+                :class="
+                  item.invitees / item.everyAwardCount == 1 ||
+                  item.invitees / item.everyAwardCount > 1
+                    ? 'iconfont icon-chenggong bar-spancolor'
+                    : 'iconfont icon-chenggong'
+                "
+              ></i>
+            </span>
           </p>
-          <p :class="item.invitees / item.everyAwardCount >= 1 || item.invitees / item.everyAwardCount > 1?'zs-text bar-spancolor':'zs-text'">正式4</p>
+          <p
+            :class="
+              item.invitees / item.everyAwardCount >= 1 ||
+              item.invitees / item.everyAwardCount > 1
+                ? 'zs-text bar-spancolor'
+                : 'zs-text'
+            "
+          >
+            正式4
+          </p>
         </li>
         <li class="jindu-li">
-          <p class="toTxchange" :style="item.prize <= 0 ?'background-color: #999;':'background-color: #ff6600;'" @click="exchangeRules(item.prize,item.activityId)">去兑换</p>
-          <p class="numberGifts">礼品份数：<span>{{item.prize}}</span></p>
+          <p
+            class="toTxchange"
+            :style="
+              item.prize <= 0
+                ? 'background-color: #999;'
+                : 'background-color: #ff6600;'
+            "
+            @click="exchangeRules(item.prize, item.activityId)"
+          >
+            去兑换
+          </p>
+          <p class="numberGifts">
+            礼品份数：<span>{{ item.prize }}</span>
+          </p>
         </li>
       </ul>
-      <p class="rank">~<span>{{item.brandName}}</span>领奖进度~</p>
+      <p class="rank">
+        ~<span>{{ item.brandName }}</span
+        >领奖进度~
+      </p>
     </div>
-    
+
     <van-overlay :show="show2">
       <div class="exchange-rules">
         <h3 class="title">填写礼包数</h3>
         <p class="exchange-number">
           当前可兑换礼品份数：
-          <span>{{prize}}</span>
+          <span>{{ prize }}</span>
         </p>
         <div class="this-exchange">
           <span class="this-text">本次兑换：</span>
@@ -102,7 +251,10 @@
                 @plus="stripPlus"
                 @minus="stripMinus"
               />
-              <div class="tuijian"><p class="tuijian-text">推荐</p><p class="tiaoText">条</p></div>
+              <div class="tuijian">
+                <p class="tuijian-text">推荐</p>
+                <p class="tiaoText">条</p>
+              </div>
             </div>
             <div class="strip marg-top">
               <van-stepper
@@ -145,7 +297,11 @@
         <i class="iconfont icon-shouzhixuanzhong-copy card-finger"></i>
         <span class="middle-text">
           <span class="card">推广名片</span>
-          <span v-show="remainingTime" class="remaining-time">(名片即将到期，请更新...)<i class="iconfont icon-dian-red remaining-icon"></i></span>
+          <span v-show="remainingTime" class="remaining-time"
+            >(名片即将到期，请更新...)<i
+              class="iconfont icon-dian-red remaining-icon"
+            ></i
+          ></span>
         </span>
         <i class="iconfont icon-gengduo icon-more"></i>
       </div>
@@ -166,12 +322,20 @@
       <span>温馨提示：本活动含有烟草内容，十八岁以下人士请勿扫码参与！</span>
     </div>
 
-   <div class="activity-rules-desc" id="rules">
+    <div class="activity-rules-desc" id="rules">
       <h3>活动规则</h3>
-      <p>1、加入推多多团队：扫码好友推多多二维码名片，加入推多多活动；扫描活动规格二维码，激活推广资格，系统生成推多多名片，可将名片发放给好友邀请参与活动，参与越多，奖励越多。</p>
-      <p>2、推多多奖励标准：将推荐人推广名片发放给好友扫描，邀请好友进入推多多活动系统。进入活动系统后，好友扫描活动规格“中支凌云”二维码，推荐人可获得一个正式成员，推荐人每发展四个正式成员，可获得精美礼品一份。</p>
-      <p>3、推荐人仅能发展进入系统后，还没未扫描活动规格二维码的好友做为正式成员；每个成员有且仅有一个上级推荐人，成员绑定上级推荐人后不可更改；加入推多多活动系统后，扫描活动规格二维码成为正式成员，正式成员可自行发展自己团队获得相应奖励。</p>
-      <p>4、进入推多多活动后，单规格推荐满12个正式成员，则该规格推多多活动结束。</p>
+      <p>
+        1、加入推多多团队：扫码好友推多多二维码名片，加入推多多活动；扫描活动规格二维码，激活推广资格，系统生成推多多名片，可将名片发放给好友邀请参与活动，参与越多，奖励越多。
+      </p>
+      <p>
+        2、推多多奖励标准：将推荐人推广名片发放给好友扫描，邀请好友进入推多多活动系统。进入活动系统后，好友扫描活动规格“中支凌云”二维码，推荐人可获得一个正式成员，推荐人每发展四个正式成员，可获得精美礼品一份。
+      </p>
+      <p>
+        3、推荐人仅能发展进入系统后，还没未扫描活动规格二维码的好友做为正式成员；每个成员有且仅有一个上级推荐人，成员绑定上级推荐人后不可更改；加入推多多活动系统后，扫描活动规格二维码成为正式成员，正式成员可自行发展自己团队获得相应奖励。
+      </p>
+      <p>
+        4、进入推多多活动后，单规格推荐满12个正式成员，则该规格推多多活动结束。
+      </p>
       <p>5、如系统有疑问，可微信留言或拨打4008792099客服热线垂询。</p>
     </div>
     <van-overlay :show="show3">
@@ -180,11 +344,23 @@
         <h3 class="title">信息确认</h3>
         <p class="exchange-number">
           你本次兑换明细：
-          <span>{{shareValue}}份礼包</span>
+          <span>{{ shareValue }}份礼包</span>
         </p>
         <p class="exchange-number">填写邮寄信息：</p>
-        <van-field v-model="name" type="text" label="收货人：" clearable placeholder="请输入收货人姓名" />
-        <van-field v-model="phone" type="tel" label="号码：" clearable placeholder="请输入收货人号码" />
+        <van-field
+          v-model="name"
+          type="text"
+          label="收货人："
+          clearable
+          placeholder="请输入收货人姓名"
+        />
+        <van-field
+          v-model="phone"
+          type="tel"
+          label="号码："
+          clearable
+          placeholder="请输入收货人号码"
+        />
         <!-- <van-cell is-link>展示弹出层</van-cell> -->
         <van-field
           readonly
@@ -203,7 +379,9 @@
         />
         <div class="but">
           <button class="butts bgkhui" @click="returnModify">返回修改</button>
-          <button class="butts bgkblue" @click="postExhcangeData">确认提交</button>
+          <button class="butts bgkblue" @click="postExhcangeData">
+            确认提交
+          </button>
         </div>
         <van-popup v-model="show1" position="bottom" close-on-click-overlay>
           <van-area
@@ -217,39 +395,83 @@
         </van-popup>
       </div>
     </van-overlay>
-    <van-popup v-for="(item,index) in redList" :key="index" v-model="show4" :style="{ width: '100%' }" class="pop" :close-on-click-overlay='false'>
+    <van-popup
+      v-for="(item, index) in redList"
+      :key="index"
+      v-model="show4"
+      :style="{ width: '100%' }"
+      class="pop"
+      :close-on-click-overlay="false"
+    >
       <div class="red_envelopes" @touchmove.prevent>
         <img :src="redImg" />
         <div class="red_cont">
-           <h3>恭喜您获得红包</h3>
-           <p class="red_pack">{{'获得'+item.name}}</p>
-           <div class="red_but">
-             <button class="back_home" @click="backHome">返回首页</button>
-             <button class="get_now" @click="collarRedPackage(item.id)">立即领取</button>
-           </div>
+          <h3>恭喜您获得红包</h3>
+          <p class="red_pack">{{ "获得" + item.name }}</p>
+          <div class="red_but">
+            <button class="back_home" @click="backHome">返回首页</button>
+            <button class="get_now" @click="collarRedPackage(item.id)">
+              立即领取
+            </button>
+          </div>
         </div>
       </div>
       <div class="icongunbi_but">
         <i class="iconfont icon-guanbi guanbi_but" @click="backHome"></i>
       </div>
     </van-popup>
+    <van-overlay :show="show5">
+      <div class="end-event">
+        <h3>活动已结束通知</h3>
+        <p>尊敬的龙粉：</p>
+        <div v-if="isState === 0" class="isState">
+          <p class="text">
+           您好，感谢您一直以来对“推多多”活动的支持与参与！本期“推多多”活动已于2020年10月31日截止，请获得奖励的龙粉门尽快完成礼品兑换，超时未兑换视为自动放弃奖品，再次感谢您对活动的关注支持！
+          </p>
+        </div>
+        <div v-if="isState === 1" class="isState">
+          <p class="text">
+            对不起，该区域活动已暂停，感谢您的支持关注，让我们一起期待下期活动！
+          </p>
+        </div>
+        <p class="bottom-text">广西中烟</p>
+        <p class="bottom-text">2020年10月31日</p>
+        <div class="ok-but" @click="clickOk">好的</div>
+      </div>
+    </van-overlay>
+    <van-overlay :show="show6">
+      <div class="end-event">
+        <h3>活动已结束通知</h3>
+        <p>尊敬的龙粉：</p>
+        <div class="isState">
+          <p class="text">
+            您好，感谢您一直以来对“推多多”活动的支持与参与！本期“推多多”活动已于2020年10月31日截止，请获得奖励的龙粉门尽快完成礼品兑换，超时未兑换视为自动放弃奖品，再次感谢您对活动的关注支持！
+          </p>
+        </div>
+        <p class="bottom-text">广西中烟</p>
+        <p class="bottom-text">2020年10月31日</p>
+        <div class="ok-but" @click="clickShowOk">好的</div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
 import AeraInfo from "../../utils/area";
-import { IndexInfo, 
-Exhcange, 
-GetExchangeRule,
-MyCard, 
-UpdateMyCard,
-HadpartIn,
-GetJssdkConfig,
-CheckByLocation,
-CheckPartIn,
-AcceptAward,
-CheckFirstTimeRedPacket } from "../../api/api";
-import wx from 'weixin-js-sdk'
+import {
+  IndexInfo,
+  Exhcange,
+  GetExchangeRule,
+  MyCard,
+  UpdateMyCard,
+  HadpartIn,
+  GetJssdkConfig,
+  CheckByLocation,
+  CheckPartIn,
+  AcceptAward,
+  CheckFirstTimeRedPacket,
+} from "../../api/api";
+import wx from "weixin-js-sdk";
 export default {
   name: "IndexInfo",
   data() {
@@ -258,22 +480,24 @@ export default {
       show1: false, // 显示地区上拉框
       show2: false, // 兑换规则弹框
       show3: false, // 信息确提弹框
-      show4:false, // 红包弹框
-      brandName1:'',
-      brandName2:'',
+      show4: false, // 红包弹框
+      show5: false, // 部分区域活动结束框
+      show6: false,
+      brandName1: "",
+      brandName2: "",
       colNum: 3, // 显示列数，3-省市区，2-省市，1-省
       closeOnClickOverlay: false, // 是否在点击遮罩层后关闭
       areaList: AeraInfo, //引用地区信息
       valueArea: "", //地区值
       arrArea: [], //存放地区数组
       activityId: [], // 活动Id
-      ayId:0,
+      ayId: 0,
       active: 0,
       stepValue: 0, // 条烟值
       shareValue: 0, // 份烟值
       userInfoData: "",
-      activityInfo:[],
-      prize:0, // 兑换礼包数
+      activityInfo: [],
+      prize: 0, // 兑换礼包数
       prohibitStep: true, // 隐藏条加号按钮
       prohibitShare: true, // 隐藏份加号按钮
       disabledinp: true,
@@ -283,198 +507,225 @@ export default {
       name: "", // 收货人
       phone: "", // 号码
       adrress: "", // 地址
-      url:'', // 推荐码地址
-      expiredTime: '',
-      remainingTime:false,
-      timeExpired: 24*60*60, // 计算名片过期时间
-      isDisable:true, // 防止重复提交
-      otherHad:false, // 显示切换区外按钮
-      redImg:require('../../assets/img/redenvelopes.png'),
-      redList:[],
-      setTimeoutName:null, // 定时器名称
+      url: "", // 推荐码地址
+      expiredTime: "",
+      remainingTime: false,
+      timeExpired: 24 * 60 * 60, // 计算名片过期时间
+      isDisable: true, // 防止重复提交
+      otherHad: false, // 显示切换区外按钮
+      redImg: require("../../assets/img/redenvelopes.png"),
+      redList: [],
+      setTimeoutName: null, // 定时器名称
+      isOpen: "0",
+      isState: 0,
     };
   },
   mounted() {
-    let that = this
-       that.$getRequest(HadpartIn).then(res => {
-        if (res.data.code === "0000") {
-          let result = res.data.data.result
-          that.activityId = result.activityIds;
-          let needLocationCheck = result.needLocationCheck
-          if(needLocationCheck == '1'){
-            var geolocation = new BMap.Geolocation();
-            geolocation.getCurrentPosition(function(r){
-            if(this.getStatus() == BMAP_STATUS_SUCCESS){
-              that.$postRequest(CheckByLocation,{latitude:r.point.lat,longitude:r.point.lng,locationType:1}).then(res => {
-                if(res.data.code=='0000') {
-                  let had = res.data.data.result.had
-                  if(had == false){
-                    that.$dialog.alert({title: '对不起暂无活动资格', message: '参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
-                  }else{
+    let that = this;
+    that.$getRequest(HadpartIn).then((res) => {
+      if (res.data.code === "0000") {
+        let result = res.data.data.result;
+        that.activityId = result.activityIds;
+        let needLocationCheck = result.needLocationCheck;
+        if (needLocationCheck == "1") {
+          var geolocation = new BMap.Geolocation();
+          geolocation.getCurrentPosition(function (r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+              that.$postRequest(CheckByLocation, {
+                  latitude: r.point.lat,
+                  longitude: r.point.lng,
+                  locationType: 1,
+                })
+                .then((res) => {
+                  if (res.data.code == "0000") {
+                    let had = res.data.data.result.had;
+                    if (had == false) {
+                      that.$dialog.alert({
+                        title: "对不起暂无活动资格",
+                        message:
+                          "参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。",
+                        confirmButtonText: "关闭",
+                        beforeClose() {
+                          wx.closeWindow();
+                        },
+                      });
+                    } else {
                       that.postIndexInfoData();
                       that.getExchangeRuleData();
                       that.tankuan();
                       that.postMyCardData();
                       that.getCheckPartIn();
                       that.getCheckFirstTimeRedPacket();
+                    }
+                  } else {
+                    alert("获取定位位置信息失败！请刷新页面重新定位！");
                   }
-                }else{
-                 alert("获取定位位置信息失败！请刷新页面重新定位！")
-                }
-       })
-            }else {
-              alert('定位失败!请新刷新页面重新定位！');
-            }        
-          });
-          }else{
-            if(that.activityId.length == 0 || that.activityId == ''){
-              that.$dialog.alert({title: '对不起暂无活动资格', message: '参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。',confirmButtonText:'关闭',beforeClose(){wx.closeWindow()}});
-              return
+                });
+            } else {
+              alert("定位失败!请新刷新页面重新定位！");
             }
-            that.postIndexInfoData();
-            that.getExchangeRuleData();
-            that.tankuan();
-            that.postMyCardData();
-            that.getCheckPartIn();
-            that.getCheckFirstTimeRedPacket();
+          });
+        } else {
+          if (that.activityId.length == 0 || that.activityId == "") {
+            that.$dialog.alert({
+              title: "对不起暂无活动资格",
+              message:
+                "参与推多多活动，扫码活动指定规格，赢取精美好礼！详情请咨询当地客户经理。",
+              confirmButtonText: "关闭",
+              beforeClose() {
+                wx.closeWindow();
+              },
+            });
+            return;
           }
+          that.postIndexInfoData();
+          that.getExchangeRuleData();
+          that.tankuan();
+          that.postMyCardData();
+          that.getCheckPartIn();
+          that.getCheckFirstTimeRedPacket();
         }
-      });
+      }
+    });
 
-     // 解决input呼出键盘页面被顶起和压缩问题
+    // 解决input呼出键盘页面被顶起和压缩问题
     var hrt = document.documentElement.clientHeight;
-      this.$nextTick(() => {
-      document.getElementById('app').style.height= hrt+'px'
-    })
+    this.$nextTick(() => {
+      document.getElementById("app").style.height = hrt + "px";
+    });
   },
   methods: {
     // 检查是否有首次红包
-    getCheckFirstTimeRedPacket(){
-      this.$postRequest(CheckFirstTimeRedPacket, {ids:this.activityId}).then(res => {
-          if(res.data.code =='0000'){
-            this.redList = res.data.data.list
-            if(this.redList.length == '0'){
+    getCheckFirstTimeRedPacket() {
+      this.$postRequest(CheckFirstTimeRedPacket, { ids: this.activityId }).then(
+        (res) => {
+          if (res.data.code == "0000") {
+            this.redList = res.data.data.list;
+            if (this.redList.length == "0") {
               this.show4 = false;
-            }else{
+            } else {
               this.show4 = true;
             }
-          }else{
+          } else {
           }
-      })
-    },
-   // 首次参与领红包
-   collarRedPackage(id){
-    if(this.isDisable == false){
-            return
         }
-        this.isDisable = false
-        this.$postRequest(AcceptAward,{giftId:id}).then(res => {
-            this.isDisable = true
-         if(res.data.code == '0000'){
-          this.$toast('恭喜您领取成功！');
-          window.location.href = res.data.data.gift.url
-         }
-     })
-   },
-   // 点击返回首页
-     backHome(){
-      this.show4 = false
-     },
+      );
+    },
+    // 首次参与领红包
+    collarRedPackage(id) {
+      if (this.isDisable == false) {
+        return;
+      }
+      this.isDisable = false;
+      this.$postRequest(AcceptAward, { giftId: id }).then((res) => {
+        this.isDisable = true;
+        if (res.data.code == "0000") {
+          this.$toast("恭喜您领取成功！");
+          window.location.href = res.data.data.gift.url;
+        }
+      });
+    },
+    // 点击返回首页
+    backHome() {
+      this.show4 = false;
+    },
     // 计步器条值
-    onChangeStep: function(stepValue) {
+    onChangeStep: function (stepValue) {
       this.stepValue = stepValue;
     },
     // 计步器份值
-    onChangeShare: function(shareValue) {
+    onChangeShare: function (shareValue) {
       this.shareValue = shareValue;
     },
     // 条加按钮
     stripPlus() {
-      this.prize = this.prize - this.everyBarNeedBoxCount
-      if(this.prize < this.everyBarNeedBoxCount){
-       this.prohibitStep = true
-      }else{
-        this.prohibitStep = false
+      this.prize = this.prize - this.everyBarNeedBoxCount;
+      if (this.prize < this.everyBarNeedBoxCount) {
+        this.prohibitStep = true;
+      } else {
+        this.prohibitStep = false;
       }
 
-      if(this.prize <= 0) {
-        this.prohibitShare = true
-      }else{
-        this.prohibitShare = false
+      if (this.prize <= 0) {
+        this.prohibitShare = true;
+      } else {
+        this.prohibitShare = false;
       }
-      if(this.stepValue > 1){
-        this.stepValue = 1
+      if (this.stepValue > 1) {
+        this.stepValue = 1;
         this.$toast("抱歉！一次只能兑换一条！");
-        this.prohibitStep = true
-        this.prize = this.prize + this.everyBarNeedBoxCount
+        this.prohibitStep = true;
+        this.prize = this.prize + this.everyBarNeedBoxCount;
       }
-
     },
     //条减按钮
     stripMinus() {
-      this.prize = this.prize + this.everyBarNeedBoxCount
-      if(this.prize < this.everyBarNeedBoxCount){
-       this.prohibitStep = true
-      }else{
-        this.prohibitStep = false
+      this.prize = this.prize + this.everyBarNeedBoxCount;
+      if (this.prize < this.everyBarNeedBoxCount) {
+        this.prohibitStep = true;
+      } else {
+        this.prohibitStep = false;
       }
 
-      if(this.prize <= 0) {
-        this.prohibitShare = true
-      }else{
-        this.prohibitShare = false
+      if (this.prize <= 0) {
+        this.prohibitShare = true;
+      } else {
+        this.prohibitShare = false;
       }
     },
     // 份加按钮
     sharePlus() {
       this.prize = this.prize - 1;
-      if(this.prize <= 0) {
-        this.prohibitShare = true
-      }else{
-        this.prohibitShare = false
+      if (this.prize <= 0) {
+        this.prohibitShare = true;
+      } else {
+        this.prohibitShare = false;
       }
-      if(this.prize < this.everyBarNeedBoxCount){
-       this.prohibitStep = true
-      }else{
-        this.prohibitStep = false
+      if (this.prize < this.everyBarNeedBoxCount) {
+        this.prohibitStep = true;
+      } else {
+        this.prohibitStep = false;
       }
-      if(this.shareValue > 4) {
-        this.shareValue = 4
+      if (this.shareValue > 4) {
+        this.shareValue = 4;
         this.$toast("抱歉！一次只能兑换4份！");
-        this.prohibitShare = true
+        this.prohibitShare = true;
         this.prize = this.prize + 1;
       }
     },
     // 份减按钮
     shareMinus() {
-       this.prize = this.prize + 1;
-       if(this.prize <= 0) {
-        this.prohibitShare = true
-      }else{
-        this.prohibitShare = false
+      this.prize = this.prize + 1;
+      if (this.prize <= 0) {
+        this.prohibitShare = true;
+      } else {
+        this.prohibitShare = false;
       }
 
-      if(this.prize < this.everyBarNeedBoxCount){
-       this.prohibitStep = true
-      }else{
-        this.prohibitStep = false
+      if (this.prize < this.everyBarNeedBoxCount) {
+        this.prohibitStep = true;
+      } else {
+        this.prohibitStep = false;
       }
     },
     // 关闭兑换弹框
     guanbiBut() {
-      this.show3 = false,
-        this.stepValue = 0, // 条
-        this.shareValue = 0, // 份
-        this.name = "",
-        this.phone = "",
-        this.valueArea = "",
-        this.adrress = "",
+      (this.show3 = false),
+        (this.stepValue = 0), // 条
+        (this.shareValue = 0), // 份
+        (this.name = ""),
+        (this.phone = ""),
+        (this.valueArea = ""),
+        (this.adrress = ""),
         this.postIndexInfoData();
     },
-    
+
     // 兑换
     postExhcangeData() {
-      if (this.stepValue == 0 && this.shareValue == 0 || this.stepValue == '' && this.shareValue == '') {
+      if (
+        (this.stepValue == 0 && this.shareValue == 0) ||
+        (this.stepValue == "" && this.shareValue == "")
+      ) {
         this.$toast("请选择兑换条数或份礼包数");
         return false;
       }
@@ -494,103 +745,138 @@ export default {
         this.$toast("请输入的的详细地址（例如：街道及门牌号）！");
         return false;
       }
-      if(this.isDisable == false){
-            return
-        }
-        this.isDisable = false
+      if (this.isDisable == false) {
+        return;
+      }
+      this.isDisable = false;
       let params = {
         activityId: this.ayId,
         exchangeNumForBar: this.stepValue, // 条
         exchangeNumForBox: this.shareValue, // 份
         name: this.name,
         phone: this.phone,
-        adrress: this.valueArea + this.adrress
+        adrress: this.valueArea + this.adrress,
       };
-      this.$postRequest(Exhcange, params).then(res => {
-        this.isDisable = true
+      this.$postRequest(Exhcange, params).then((res) => {
+        this.isDisable = true;
         if (res.data.code === "0000") {
-            this.show3 = false;
-            this.postIndexInfoData()
-            this.$router.push({path:'/ExchangeSuccess',query:{giftId:res.data.data.gift.id}})
-            this.stepValue = 0, // 条
-            this.shareValue = 0, // 份
-            this.name = "",
-            this.phone = "",
-            this.valueArea = "",
-            this.adrress = ""
+          this.show3 = false;
+          this.postIndexInfoData();
+          this.$router.push({
+            path: "/ExchangeSuccess",
+            query: { giftId: res.data.data.gift.id },
+          });
+          (this.stepValue = 0), // 条
+            (this.shareValue = 0), // 份
+            (this.name = ""),
+            (this.phone = ""),
+            (this.valueArea = ""),
+            (this.adrress = "");
         } else {
           this.$toast.fail(res.data.message);
         }
       });
     },
     //计步器取消按钮
-    cancel: function() {
+    cancel: function () {
       this.show2 = false;
-      this.stepValue = 0, // 条
-      this.shareValue = 0, // 份
-      this.postIndexInfoData();
+      (this.stepValue = 0), // 条
+        (this.shareValue = 0), // 份
+        this.postIndexInfoData();
     },
     //计步器确定按钮
-    determine: function() {
-      if ((this.stepValue == 0 || this.stepValue == '') && (this.shareValue ==0 || this.shareValue =='')) {
-        this.show3 = false
-        this.$toast('您还未选择兑换条或份！');
-        } else {
+    determine: function () {
+      if (
+        (this.stepValue == 0 || this.stepValue == "") &&
+        (this.shareValue == 0 || this.shareValue == "")
+      ) {
+        this.show3 = false;
+        this.$toast("您还未选择兑换条或份！");
+      } else {
         this.show3 = true;
-        this.show2 = false
+        this.show2 = false;
       }
     },
     // 计步器返回修改按钮
-    returnModify: function() {
-      this.show2 = true, 
-      this.show3 = false;
+    returnModify: function () {
+      (this.show2 = true), (this.show3 = false);
     },
-     
+  
     // 首页数据
-    postIndexInfoData: function() {
-      this.$postRequest(IndexInfo, {ids:this.activityId}).then(
-        res => {
-          if (res.data.code === "0000") {
-            let userInfo = res.data.data.userInfo;
-            this.activityInfo = res.data.data.activityInfo;
-            this.userInfoData = {
-              id: userInfo.id,
-              headImg: userInfo.headImg,
-              nickName: userInfo.nickName,
-              recommender: userInfo.recommender
-            };
-            
-            for(let i = 0;i<this.activityInfo.length;i++){
-              let isComplete = this.activityInfo[i].isComplete
-              let brandName = this.activityInfo[i].brandName
-            if(isComplete == 1) {
-              if(!window.sessionStorage.getItem('storge')){
-                this.$dialog.alert({title: '提示', message: '（'+brandName+'&nbsp'+'）'+'推荐名额已达上限，该规格推多多活动结束，邀请新用户不再累积奖励。',confirmButtonText:'知道了'});
-                window.sessionStorage.setItem('storge','true')
-              }
+    postIndexInfoData: function () {
+      let that = this;
+      this.$postRequest(IndexInfo, { ids: this.activityId }).then((res) => {
+        if (res.data.code === "0000") {
+          that.isOpen = res.data.data.isOpen;
+          if (that.isOpen === "0") {
+            that.show5 = true;
+            that.isState = 0;
+          } else {
+            let date = new Date()
+            let year = date.getFullYear(); 
+            let month = date.getMonth()+1; 
+            let day = date.getDate(); 
+            let newDate = year+'-'+month+'-'+day
+            let getDate = window.localStorage.getItem("setDate");
+            if(getDate != '' && typeof(getDate) != undefined && getDate != null){
+               if(getDate != newDate){
+                 that.show6 = true
+                 window.localStorage.setItem("setDate", newDate);
+               }
             }else{
+               that.show6 = true
+               window.localStorage.setItem("setDate", newDate);
             }
+          }
+          let userInfo = res.data.data.userInfo;
+          this.activityInfo = res.data.data.activityInfo;
+          this.userInfoData = {
+            id: userInfo.id,
+            headImg: userInfo.headImg,
+            nickName: userInfo.nickName,
+            recommender: userInfo.recommender,
+          };
+
+          for (let i = 0; i < this.activityInfo.length; i++) {
+            let isComplete = this.activityInfo[i].isComplete;
+            let brandName = this.activityInfo[i].brandName;
+            if (isComplete == 1) {
+              if (!window.sessionStorage.getItem("storge")) {
+                this.$dialog.alert({
+                  title: "提示",
+                  message:
+                    "（" +
+                    brandName +
+                    "&nbsp" +
+                    "）" +
+                    "推荐名额已达上限，该规格推多多活动结束，邀请新用户不再累积奖励。",
+                  confirmButtonText: "知道了",
+                });
+                window.sessionStorage.setItem("storge", "true");
+              }
+            } else {
             }
           }
         }
-      );
+      });
     },
     // 切换区外按钮
-    getCheckPartIn(){
-      let that = this
-      this.$postRequest(CheckPartIn).then(res => {
-         if(res.data.code === "0000"){
-           that.otherHad = res.data.data.result.otherHad
-         }
-      })
+    getCheckPartIn() {
+      let that = this;
+      this.$postRequest(CheckPartIn).then((res) => {
+        if (res.data.code === "0000") {
+          that.otherHad = res.data.data.result.otherHad;
+        }
+      });
     },
-    qwPushmore(){
-      window.location.href = 'http://ld.thewm.cn/tdd/static/page/index.html'
+    qwPushmore() {
+      window.location.href =
+        "http://ld.thewm.cn/tdd/static/page/index.html";
     },
-   // 兑换规则
+    // 兑换规则
     getExchangeRuleData() {
       this.$getRequest(GetExchangeRule, { activityId: this.activityId }).then(
-        res => {
+        (res) => {
           if (res.data.code === "0000") {
             this.everyBarNeedBoxCount = res.data.data.rule.everyBarNeedBoxCount;
           }
@@ -599,27 +885,29 @@ export default {
     },
     // 我的推荐码
     postMyCardData() {
-         this.$postRequest(MyCard,{activityId:this.activityId}).then(res => {
-           if (res.data.code == '0000') {
-             this.url = res.data.data.code.url
-             this.expiredTime = res.data.data.code.expiredTime
-             if (this.expiredTime < this.timeExpired) {
-               this.remainingTime = true
-             } else {
-                this.remainingTime = false
-             }
-           }
-         })
-       },
+      this.$postRequest(MyCard, { activityId: this.activityId }).then((res) => {
+        if (res.data.code == "0000") {
+          this.url = res.data.data.code.url;
+          this.expiredTime = res.data.data.code.expiredTime;
+          if (this.expiredTime < this.timeExpired) {
+            this.remainingTime = true;
+          } else {
+            this.remainingTime = false;
+          }
+        }
+      });
+    },
     // 更新名片
     postUpdateMyCard() {
-       this.$postRequest(UpdateMyCard,{activityId:this.activityId}).then(res => {
-        if (res.data.code == '0000') {
-          this.$toast.success('名片更新成功！')
-        } else {
-          this.$toast.fail(res.data.message)
+      this.$postRequest(UpdateMyCard, { activityId: this.activityId }).then(
+        (res) => {
+          if (res.data.code == "0000") {
+            this.$toast.success("名片更新成功！");
+          } else {
+            this.$toast.fail(res.data.message);
+          }
         }
-       })
+      );
     },
     // 跳转我的奖励
     myReward() {
@@ -629,7 +917,7 @@ export default {
     myTeam() {
       this.$router.push({
         path: "/MyTeam",
-        query: { activityId: this.activityId}
+        query: { activityId: this.activityId },
       });
     },
     // 跳转订单管理
@@ -638,40 +926,51 @@ export default {
     },
     // 跳转我的推广码
     myQrCode() {
-      if(this.expiredTime < this.timeExpired) {
-        this.postUpdateMyCard()
-        this.$router.push(
-          {
-            path: "/MyQrCode",query: { url: this.url}
-          });
-        return false
+      if (this.isOpen === "0") {
+        this.show5 = true;
       } else {
-        this.$router.push(
-          {
-            path: "/MyQrCode",query: { url: this.url}
+        if (this.expiredTime < this.timeExpired) {
+          this.postUpdateMyCard();
+          this.$router.push({
+            path: "/MyQrCode",
+            query: { url: this.url },
           });
+          return false;
+        } else {
+          this.$router.push({
+            path: "/MyQrCode",
+            query: { url: this.url },
+          });
+        }
       }
+    },
+    clickOk() {
+      this.show5 = false;
+      this.isState = 1;
+    },
+    clickShowOk() {
+      this.show6 = false;
     },
     // 进入活动弹框显示
     tankuan() {
       this.show = false;
     },
     // 兑换规则提示框
-    exchangeRules(prize,activityId) {
-      this.prize = prize
-      this.ayId = activityId
+    exchangeRules(prize, activityId) {
+      this.prize = prize;
+      this.ayId = activityId;
       if (this.prize < this.everyBarNeedBoxCount) {
-              this.prohibitStep = true;
-            } else {
-              this.prohibitStep = false;
-            }
+        this.prohibitStep = true;
+      } else {
+        this.prohibitStep = false;
+      }
       if (this.prize <= 0) {
         this.prohibitShare = true;
       } else {
         this.prohibitShare = false;
       }
-      if(prize <= 0) {
-        this.show2 = false
+      if (prize <= 0) {
+        this.show2 = false;
       } else {
         this.show2 = true;
       }
@@ -690,8 +989,8 @@ export default {
       this.arrArea = event;
       let addrInfo = event[0].name + "-" + event[1].name + "-" + event[2].name;
       this.valueArea = addrInfo;
-    }
-  }
+    },
+  },
 };
 </script>
 
