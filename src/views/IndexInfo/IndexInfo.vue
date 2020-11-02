@@ -235,13 +235,27 @@
         <i class="iconfont icon-guanbi guanbi_but" @click="backHome"></i>
       </div>
     </van-popup>
+    <van-overlay :show="show5">
+      <div class="end-event">
+        <h3>活动已结束通知</h3>
+        <p>尊敬的龙粉：</p>
+        <div class="isState">
+        <p class="text">
+          感谢您一直以来对推多多活动的支持和参与。本期真龙（中支凌云）推多多活动将于2020年10月31日结束，真龙（刘三姐）推多多活动延期至2020年12月31日，敬请告知。
+        </p>
+        </div>
+        <p class="bottom-text">广西中烟</p>
+        <p class="bottom-text">2020年10月28日</p>
+        <div class="ok-but" @click="clickOk">好的</div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
 import AeraInfo from "../../utils/area";
-import { 
-  IndexInfo, 
+import {
+  IndexInfo,
   Exhcange, 
   GetExchangeRule,
   MyCard, 
@@ -263,6 +277,8 @@ export default {
       show2: false, // 兑换规则弹框
       show3: false, // 信息确提弹框
       show4:false, // 红包弹框
+      show5:false,
+      isState:0,
       brandName1:'',
       brandName2:'',
       colNum: 3, // 显示列数，3-省市区，2-省市，1-省
@@ -303,7 +319,23 @@ export default {
     };
   },
   mounted() {
-    let that = this
+      let that = this
+      let date = new Date()
+      let year = date.getFullYear(); 
+      let month = date.getMonth()+1; 
+      let day = date.getDate(); 
+      let newDate = year+'-'+month+'-'+day
+      let getDate = window.localStorage.getItem("setDate");
+      if(getDate != '' && typeof(getDate) != undefined && getDate != null){
+          if(getDate != newDate){
+            that.show5 = true
+            window.localStorage.setItem("setDate", newDate);
+          }
+      }else{
+          that.show5 = true
+          window.localStorage.setItem("setDate", newDate);
+      }
+
       that.$getRequest(HadpartIn).then(res => {
         if (res.data.code === "0000") {
           let result = res.data.data.result
@@ -636,6 +668,10 @@ export default {
         }
        })
     },
+    clickOk(){
+      let that = this;
+      that.show5 = false
+    },
     // 跳转我的奖励
     myReward() {
       this.$router.push({ path: "/MyReward" });
@@ -653,6 +689,7 @@ export default {
     },
     // 跳转我的推广码
     myQrCode() {
+      let that = this;
       if(this.expiredTime < this.timeExpired) {
         this.postUpdateMyCard()
         this.$router.push(

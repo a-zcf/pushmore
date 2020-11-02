@@ -195,7 +195,7 @@ body {
           padding: 5px !important;
         }
       }
-    }
+    } 
   }
 
 </style>
