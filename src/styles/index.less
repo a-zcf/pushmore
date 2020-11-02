@@ -1,0 +1,541 @@
+@import "theme.less";
+// 首页
+.van-divider{
+  height: 50px !important;
+  margin: 0 10px !important;
+}
+.pushmore-index{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: @backgroundLightGrey;
+ .head{
+   width: 100%;
+   height: 100px;
+   background-color: @backgroundBlue;
+   color: @whiteColor;
+   display: flex;
+   flex-wrap: nowrap;
+   align-items: center;
+   img{
+     width: 80px;
+     height: 80px;
+     border-radius: 50px;
+     margin: 0px 20px;
+   }
+   .head-text{
+     width: 62%;
+     height: 80px;
+     line-height: 27px;
+     overflow: hidden;
+     p{
+       white-space: nowrap;
+     }
+   }
+ }
+
+.is-complete{
+  padding: 10px 15px;
+  box-sizing: border-box;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: @greyColor;
+}
+
+ .menu-list{
+   background-color: @backgroundWhite;
+   margin-top: 10px;
+   .list{
+     width: 95%;
+     height: 50px;
+     margin: auto;
+     display: flex;
+     flex-wrap: nowrap;
+     align-items: center;
+     box-sizing: border-box;
+     border-bottom: 1px solid @backgroundLightGrey;
+     position: relative;
+     .icon{
+       width: 10%;
+       text-align: center;
+       font-size: 28px;
+       color: @borderColor;
+     }
+     .icon-middle{
+      color: @purpleColor;
+     }
+      
+      .card-circle{
+        position: absolute;
+        left: 34%;
+        font-size: 18px;
+        animation: circle 1s ease infinite both;
+        color: @purpleColor;
+      }
+      .card-finger{
+        position: absolute;
+        top: 29%;
+        left: 35.3%;
+        font-size: 25px;
+        animation: finger 1s ease infinite both;
+        color: @purpleColor;
+      }
+     .icon-right{
+       color: @lightOrangeColor;
+     }
+     .middle-text{
+       width:75%;
+       margin-left: 15px;
+       font-size: 15px;
+       display: flex;
+       flex-wrap: nowrap;
+       align-items: center;
+       overflow: hidden;
+       white-space: nowrap;
+       .card{
+        color: @purpleColor;
+        font-size: 18px;
+         animation: finger 1s ease infinite both;
+       }
+       .remaining-time{
+          color: @orangeColor;
+          display: flex;
+          flex-wrap: nowrap;
+          font-size: 12px;
+          margin-left: 35px;
+          .remaining-icon{
+            display: block;
+            margin-top: -5px;
+          }
+       }
+     }
+     .icon-more{
+       color: @greyColor;
+     }
+     .none-border{
+       border: none;
+     }
+   }
+ }
+
+ .reminder{
+   width: 95%;
+   margin: 10px auto auto auto;
+   padding: 10px;
+   border-radius: 5px;
+  //  margin-top: 10px;
+   box-sizing: border-box;
+   display: flex;
+   flex-wrap: nowrap;
+   align-items: center;
+   background-color: @backgroundWhite;
+   .reminder-icon{
+     width: 12%;
+     text-align: center;
+     font-size: 20px;
+     color: @orangeColor;
+     margin-right: 5px;
+   }
+ }
+
+ .activity-rules-desc{
+   width: 95%;
+   margin: auto;
+   border-radius: 5px;
+   overflow: hidden;
+   margin-top: 10px;
+   box-sizing: border-box;
+   padding: 10px;
+  background-color: @backgroundWhite;
+  p{
+    text-align:left;
+    text-align: justify;
+    text-indent:2em;
+    box-sizing: border-box;
+    padding: 5px 0px;
+    line-height: 25px;
+  }
+ }
+ .van-dialog__header{
+   font-size: 20px !important;
+   color: @redColor;
+ }
+ .had{
+    padding: 10px 15px;
+    box-sizing: border-box;
+    text-align: center;
+    color: @greyColor;
+ }
+ .had-text{
+  padding: 0px 10px 15px;
+  text-align: center;
+ }
+}
+// IndexEr
+.index-er{
+  .active-area{
+    .area{
+      width: 76% !important;
+      justify-content: left !important;
+      .right-text{
+        max-width: 99px !important;
+      }
+      .right-text{
+       font-size: 20px;
+       margin-left: 8px;
+      }
+    }
+    .duihuan{
+      width: 75px;
+      background-color: @orangeColor;
+      color: @whiteColor;
+      box-sizing: border-box;
+      padding: 5px;
+      border-radius: 5px;
+      text-align: center;
+    }
+  }
+ // 进入活动领取奖品提示框
+ .prize-guidance{
+   width: 80%;
+   height: 150px;
+   margin: 50% auto auto auto;
+   border-radius: 10px;
+   background-color: @backgroundWhite;
+   box-sizing: border-box;
+   overflow: hidden;
+   padding: 10px;
+   h3{
+     color: @redColor;
+     text-align: center;
+     box-sizing: border-box;
+     margin:12px 0px;
+     font-size: 20px;
+   }
+   .guidance-text{
+     text-align: center;
+     color: @greyColor;
+     margin:12px 0px;
+     font-size: 16px;
+   }
+   .jinruhuodong{
+     text-align: center;
+     color: @blueColor;
+     margin:12px 0px;
+     font-size: 16px;
+   }
+ }
+ // 关闭按钮
+ .close-but{
+  width: 80%;
+  margin: 20px auto auto auto;
+  text-align: center;
+  color: @whiteColor;
+  span{
+    font-size: 40px;
+  }
+ }
+}
+
+// 不符合页
+.non-conformity{
+  width: 100%;
+  height: 100%;
+  background-color: @backgroundBlue;
+  .nc-tips{
+    width: 100px;
+    height: 100px;
+    border-radius:50px;
+    background-color: @backgroundWhite;
+    color: @orangeColor;
+    text-align: center;
+    line-height: 100px;
+    font-size: 40px;
+    margin: 150px auto auto auto;
+  }
+  .nc-text{
+    color: @whiteColor;
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+// 订单管理
+.order-admin{
+  ul li{
+    width: 100%;
+    height: 100px;
+    background-color: @backgroundLightGrey;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    margin-top: 15px;
+    overflow: hidden;
+    .order-img{
+      width: 24%;
+      height: 80px;
+      margin-right: 10px;
+      box-sizing: border-box;
+    }
+    .order-right{
+      width: 77%;
+      line-height: 22px;
+      box-sizing: border-box;
+      overflow: hidden;
+      .exchange-number{
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .rece-address{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+        .address{
+          width: 78%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          color: @greyColor;
+        }
+        .state{
+          width: 22%;
+          color: @orangeColor;
+          text-align: right;
+          font-weight: 800;
+        }
+        .state-lan{
+          color: @blueColor;
+        }
+      }
+      .shr-dhsj{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        color: @greyColor;
+      }
+
+    }
+  }
+}
+
+// 我的团队
+.my-team{
+  background-color: @backgroundLightGrey;
+  height: 100%;
+  .head-img{
+    height: 100px;
+    img{
+      width: 100%;
+      height: 100px;
+    }
+  }
+
+  .title{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  .list{
+    ul li{
+      width: 95%;
+      height: 90px;
+      margin: auto;
+      border-bottom: 1px solid @backgroundLightGrey;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      overflow: hidden;
+      .head-portrait{
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      .name{
+        width: 33%;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .non-sweep-code{
+        width: 16%;
+        text-align: right;
+        color: @backgroundBlue;
+      }
+      .sweep-code{
+        width: 62%;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 25px;
+        padding-top: 15px;
+        .code{
+          color: @backgroundBlue;
+          font-weight: 600;
+          text-align: right;
+          padding-left: 10px;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;
+        }
+        .time{
+          color: @greyColor;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+//我的推荐二维码
+.my-qr-code{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  .codeImg{
+    width: 100%;
+    height: 100%;
+  }
+  
+}
+
+@keyframes finger{
+  0% {
+    transform: none;
+}
+70% {
+    transform: scale3d(.8, .8, .8);
+}
+100% {
+    transform: none;
+}
+}
+
+@keyframes circle {
+  0% {
+    opacity: 0;
+    transform: scale3d(0, 0, 0);
+}
+70% {
+    opacity: 1;
+    transform: scale3d(1.2, 1.2, 1.2);
+}
+100% {
+    opacity: 0;
+    transform: scale3d(0, 0, 0);
+}
+}
+ // 兑换礼品成功页
+ .exchange-success{
+   width: 100%;
+   overflow: hidden;
+   .success{
+     width: 100%;
+     margin-top: 45px;
+    .icon-success{
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 100px;
+      color: @greenColor;
+    }
+    p{
+      margin-top: 10px;
+      padding: 0px 10px;
+      text-align: center;
+      font-size: 20px;
+      color: @greenColor;
+    }
+   }
+   .chance-to-draw{
+     width: 100%;
+     margin-top: 30px;
+     p{
+       color: @redColor;
+       text-align: center;
+       font-size: 16px;
+     }
+     .scraping-card{
+      width: 100%;
+      margin-top: 10px;
+      padding: 20px 0;
+      background-color: red;
+      .canvas-box{
+        position: relative;
+        overflow: hidden;
+        width: 85%;
+        height: 120px;
+        border-radius: 10px;
+        background-color: #FFF;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        .winning-results{
+          width: 100%;
+          height:85%;
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          .winres-text{
+            width: 76%;
+            text-align: center;
+          }
+          .winres-but{
+            width: 20%;
+            height: 105px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: 600;
+            border: none;
+            color: @whiteColor;
+            background-color: @greenColor;
+          }
+        }
+      }
+      #canvas{
+        width: 96%;
+        height:90%;
+        position: absolute;
+        left: 2%;
+        top: 5%;
+        background-color: transparent;
+      }
+     }
+   }
+   .exchange-tips{
+     width: 95%;
+     margin: auto;
+     border: 1px dashed @greyColor;
+     border-radius: 5px;
+     box-sizing: border-box;
+     margin-top: 20px;
+     padding: 10px;
+     display: flex;
+     flex-wrap: nowrap;
+     .tips-text{
+       width: 25%;
+       color: @redColor;
+     }
+     .describe-text{
+      width: 88%;
+      color: @greyColor;
+      line-height: 22px;
+      text-align:left;
+      text-align: justify;
+     }
+   }
+ }
