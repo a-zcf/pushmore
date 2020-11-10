@@ -1,9 +1,5 @@
 @import "theme.less";
 // 首页
-.van-divider{
-  height: 50px !important;
-  margin: 0 10px !important;
-}
 .pushmore-index{
   width: 100%;
   height: 100%;
@@ -19,6 +15,7 @@
    display: flex;
    flex-wrap: nowrap;
    align-items: center;
+   background-image: linear-gradient(to left, #19D5FD, #1D62F0);
    img{
      width: 80px;
      height: 80px;
@@ -122,11 +119,9 @@
  }
 
  .reminder{
-   width: 95%;
+   width: 100%;
    margin: 10px auto auto auto;
    padding: 10px;
-   border-radius: 5px;
-  //  margin-top: 10px;
    box-sizing: border-box;
    display: flex;
    flex-wrap: nowrap;
@@ -142,14 +137,16 @@
  }
 
  .activity-rules-desc{
-   width: 95%;
+   width: 100%;
    margin: auto;
-   border-radius: 5px;
    overflow: hidden;
    margin-top: 10px;
    box-sizing: border-box;
-   padding: 10px;
-  background-color: @backgroundWhite;
+   padding: 10px 15px;
+   background-color: @backgroundWhite;
+  h3{
+    margin: 10px 0px;
+  }
   p{
     text-align:left;
     text-align: justify;
@@ -173,6 +170,84 @@
   padding: 0px 10px 15px;
   text-align: center;
  }
+ .show{
+   width: 80%;
+   margin: 50% auto auto auto;
+   background-color: @whiteColor;
+   box-sizing: border-box;
+   border-radius: 10px;
+   h3{
+     height: 40px;
+     line-height: 40px;
+     text-align: center;
+     border-radius: 10px 10px 0px 0px;
+     background-image: linear-gradient(to left, #19D5FD, #1D62F0);
+   }
+   .field{
+     padding: 25px 0px;
+   }
+   .show-but{
+     width: 100%;
+     padding-bottom: 25px;
+     display: flex;
+     flex-wrap: nowrap;
+     justify-content: space-around;
+     .but{
+       width: 38%;
+       height: 35px;
+       border: none;
+       border-radius: 50px;
+       color: @whiteColor;
+       font-size: 16px;
+       background-image: linear-gradient(to left, #19D5FD, #1D62F0);
+     }
+   }
+ }
+
+ .overlay{
+  .wrapper{
+    width: 80%;
+    margin: 50% auto auto auto;
+    background-color: @whiteColor;
+    border-radius: 10px;
+    padding-bottom: 15px;
+    h3{
+      text-align: center;
+      color: @redColor;
+      padding: 15px 0px 0px 0px;
+    }
+    p{
+      text-align: center;
+      font-size: 16px;
+      margin: 15px 0px;
+    }
+    .p1{
+      color: @greyColor;
+    }
+    .p2{
+      color: @blueColor;
+      padding: 0px 10px;
+    }
+  }
+  .clear{
+    margin: 50px 0px 0px 45%;
+    color: @whiteColor;
+    font-size: 40px;
+  }
+}
+.dialog{
+  .van-dialog__header{
+    color: @blackColor !important;
+  }
+  .con{
+    padding: 15px;
+    color: @greyColor;
+    line-height: 25px;
+    font-size: 16px;
+    text-align:left;
+    text-align: justify;
+  }
+}
 }
 // IndexEr
 .index-er{
@@ -265,71 +340,83 @@
 
 // 订单管理
 .order-admin{
-  ul li{
+  width: 100%;
+  overflow: hidden;
+  .order-list{
     width: 100%;
-    height: 100px;
-    background-color: @backgroundLightGrey;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    padding: 0px 10px;
-    box-sizing: border-box;
-    margin-top: 15px;
-    overflow: hidden;
-    .order-img{
-      width: 24%;
-      height: 80px;
-      margin-right: 10px;
+    li{
+      width: 100%;
       box-sizing: border-box;
-    }
-    .order-right{
-      width: 77%;
-      line-height: 22px;
-      box-sizing: border-box;
-      overflow: hidden;
-      .exchange-number{
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      .rece-address{
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
+      background-color: @backgroundLightGrey;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-top: 15px;
+      .left{
+        width: 70%;
         display: flex;
-        justify-content: space-between;
-        .address{
-          width: 78%;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+        flex-direction: column;
+        line-height: 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        .left-top{
+          font-size: 15px;
+          font-weight: 600;
+        }
+        .left-bottom{
           color: @greyColor;
         }
-        .state{
-          width: 22%;
-          color: @orangeColor;
-          text-align: right;
-          font-weight: 800;
-        }
-        .state-lan{
-          color: @blueColor;
-        }
       }
-      .shr-dhsj{
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        color: @greyColor;
+      .right{
+        width: 20%;
+        height: 32px;
+        border: none;
+        background-color: @lightOrangeColor;
+        color: @whiteColor;
+        border-radius: 5px;
       }
-
     }
   }
+  .van-overlay{
+  .wrapper{
+    width: 80%;
+    margin: 50% auto auto auto;
+    background-color: @whiteColor;
+    border-radius: 10px;
+    padding-bottom: 15px;
+    h3{
+      text-align: center;
+      color: @redColor;
+      padding: 15px 0px 0px 0px;
+    }
+    p{
+      text-align: center;
+      font-size: 16px;
+      margin: 15px 0px;
+    }
+    .p1{
+      color: @greyColor;
+    }
+    .p2{
+      color: @blueColor;
+      padding: 0px 10px;
+    }
+  }
+  .clear{
+    margin: 50px 0px 0px 45%;
+    color: @whiteColor;
+    font-size: 40px;
+  }
+}
 }
 
 // 我的团队
 .my-team{
-  background-color: @backgroundLightGrey;
+  background-color: @whiteColor;
   height: 100%;
+  overflow: hidden;
   .head-img{
     height: 100px;
     img{
@@ -342,59 +429,44 @@
     text-align: center;
     font-size: 14px;
     font-weight: 500;
-    padding: 5px;
+    padding: 10px 5px 0px 5px;
     box-sizing: border-box;
+    color: @greyColor;
   }
   .list{
-    ul li{
-      width: 95%;
-      height: 90px;
-      margin: auto;
-      border-bottom: 1px solid @backgroundLightGrey;
+    width: 100%;
+    box-sizing: border-box;
+    li{
+      width: 90%;
+      // margin:25px auto auto auto;
+      margin:auto;
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
-      overflow: hidden;
-      .head-portrait{
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        margin-right: 10px;
+      border-bottom: 1px solid @backgroundLightGrey;
+      padding: 18px 0px;
+      .list-img{
+        width: 13.335%;
+        height: 45px;
+        border-radius: 50px;
+        margin-right: 15px;
       }
-      .name{
-        width: 33%;
+      .name-time{
+        display: flex;
+        flex-direction: column;
+        line-height: 21px;
         overflow: hidden;
-        font-size: 16px;
-        font-weight: 600;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-      .non-sweep-code{
-        width: 16%;
-        text-align: right;
-        color: @backgroundBlue;
-      }
-      .sweep-code{
-        width: 62%;
-        white-space: nowrap;
-        overflow: hidden;
-        line-height: 25px;
-        padding-top: 15px;
-        .code{
-          color: @backgroundBlue;
+        .name{
+          font-size: 15px;
           font-weight: 600;
-          text-align: right;
-          padding-left: 10px;
-          white-space:nowrap;
-          overflow:hidden;
-          text-overflow:ellipsis;
+          white-space: nowrap;
         }
         .time{
           color: @greyColor;
-          text-align: right;
+          white-space: nowrap;
         }
       }
-    }
+   }
   }
 }
 

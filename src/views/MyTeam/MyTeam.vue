@@ -3,38 +3,73 @@
     <div class="head-img">
       <img src="../../assets/img/headImg.png" />
     </div>
-
-        <h3 class="title">~~已扫码活动指定规格的用户~~</h3>
-        <div class="list">
-            <ul>
-              <li>
-                <img class="head-portrait" src="" />
-                <span class="name formal-name">XXXXX</span>
-                <span class="sweep-code">
-                  <p class="code">已扫码中支凌云</p>
-                  <p class="time">扫码时间：2020-11-02 11:00:00</p>
-                </span>
+        <h3 class="title">~~ 目前团队人数{{totalCount}}人 ~~</h3>
+        <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" id="mescroll">
+            <ul class="list">
+              <li v-for="(item,index) in list" :key="index">
+                <img :src="item.headimgurl" class="list-img">
+                <div class="name-time">
+                  <span class="name">{{item.nickname}}</span>
+                  <span class="time">邀请时间：{{item.createTime}}</span>
+                </div>
               </li>
-              <!-- <van-divider v-if="formalList==''">暂无相关数据~~</van-divider> -->
             </ul>
-        </div>
-
+        </mescroll-vue>
   </div>
 </template>
 
 <script>
-import {} from '../../api/api'
+import {myTeam} from '../../api/api'
 export default {
   name: "MyTeam",
   data() {
     return {
+      list:[],
+          mescroll: null,
+          mescrollDown: {
+           use: false,
+          },
+          mescrollUp: {
+            callback: this.upCallback,
+            noMoreSize: 1,
+            page: {
+                num: 0, 
+                size: 10,
+                time: null
+            },
+            empty: {
+                warpId: "mescroll",
+                tip: '暂无相关数据',
+            },
+            htmlNodata: '<p class="upwarp-nodata">-- 已加载完 --</p>',
+            htmlLoading: '<p class="upwarp-progress mescroll-rotate"></p><p class="upwarp-tip">加载中...</p>',
+          },
+          totalCount:''
     };
   },
   mounted() {
-
+    let that = this
+    that.mescroll.resetUpScroll();
   },
   methods: {
-
+    mescrollInit (mescroll) {
+      this.mescroll = mescroll
+    },
+    upCallback(page,mescroll) {
+        this.$getRequest(myTeam,{currPage:page.num,pageSize:page.size}).then(res => {
+            if(res.data.code === 0){
+                let arr = res.data.page.list
+                this.totalCount = res.data.page.totalCount
+                if(page.num === 1) this.list = []
+                this.list = this.list.concat(arr)
+                this.$nextTick(() => {
+                this.mescroll.endSuccess(arr.length);
+              })
+            }else{
+            
+            }
+        })
+      },
   }
 };
 </script>

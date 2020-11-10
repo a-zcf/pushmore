@@ -1,6 +1,6 @@
 <template>
   <div class="my-qr-code">
-     <img class="codeImg" src="" />
+     <img class="codeImg" :src="url" />
   </div>
 </template>
 
@@ -10,10 +10,11 @@ export default {
   name:'MyQrCode',
   data() {
       return {
-
+        url:''
       }
   },
   mounted() {
+    this.url = this.$route.query.url
   },
   methods:{
 
