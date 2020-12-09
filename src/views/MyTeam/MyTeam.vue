@@ -1,7 +1,7 @@
 <template>
   <div class="my-team">
     <div class="head-img">
-      <img src="../../assets/img/headImg.png" />
+      <img src="../../assets/img/headImg.jpg" />
     </div>
         <h3 class="title">~~ 目前团队人数{{totalCount}}人 ~~</h3>
         <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit" id="mescroll">

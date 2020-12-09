@@ -4,7 +4,9 @@
     <ul class="order-list">
       <li v-for="(item,index) in list" :key="index">
         <div class="left">
-          <span class="left-top">邀请扫码获得+{{item.prizeName}}</span>
+          <span class="left-top">
+            {{item.awardsType === '1'?'加入活动获得':''||item.awardsType === '2'?'推荐扫码获得':''||item.awardsType === '3'?'绑定成为顶级推主获得':''}}+{{item.prizeName}}
+            </span>
           <span class="left-bottom">{{item.createTime}}</span>
         </div>
         <button class="right" @click="clickReceive(item.id,item.status)" :style="item.status=='0'?'background-color: #ff6600;':'background-color:#00cc99'">{{item.status=='0'?'点击领取':'已领取'}}</button>
@@ -13,9 +15,9 @@
     </mescroll-vue>
     <van-overlay :show="show" @click="show = false">
       <div class="wrapper">
-        <h3>恭喜您</h3>
+        <h3>恭喜您！</h3>
         <p class="p1">成功领取龙币</p>
-        <p class="p2" @click="clickPointsmall">赶快进入积分商城兑换商品吧 》》</p>
+        <p class="p2" @click="clickPointsmall">赶快进入龙币商城兑换商品吧 》》</p>
       </div>
       <van-icon name="clear" class="clear" @click="clickClear"/>
     </van-overlay>

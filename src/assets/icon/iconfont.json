@@ -1,51 +1,23 @@
 {
-  "id": "1692541",
-  "name": "真龙公众号推多多活动项目icon",
+  "id": "2199269",
+  "name": "佛山推多多",
   "font_family": "iconfont",
-  "css_prefix_text": "icon-",
+  "css_prefix_text": "icon",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "12795620",
-      "name": "礼品",
-      "font_class": "lipin",
-      "unicode": "e63f",
-      "unicode_decimal": 58943
+      "icon_id": "9956829",
+      "name": "积分商城",
+      "font_class": "jifenshangcheng-",
+      "unicode": "e8e8",
+      "unicode_decimal": 59624
     },
     {
-      "icon_id": "5501601",
-      "name": "圆圈",
-      "font_class": "AppIcon-copy",
-      "unicode": "e602",
-      "unicode_decimal": 58882
-    },
-    {
-      "icon_id": "5611896",
-      "name": "手指",
-      "font_class": "shouzhixuanzhong-copy",
-      "unicode": "e604",
-      "unicode_decimal": 58884
-    },
-    {
-      "icon_id": "6125834",
-      "name": "点",
-      "font_class": "dian-red",
-      "unicode": "e603",
-      "unicode_decimal": 58883
-    },
-    {
-      "icon_id": "9111112",
-      "name": "警告",
-      "font_class": "jinggao",
-      "unicode": "e6d8",
-      "unicode_decimal": 59096
-    },
-    {
-      "icon_id": "10052611",
-      "name": "成功",
-      "font_class": "chenggong",
-      "unicode": "e704",
-      "unicode_decimal": 59140
+      "icon_id": "5109458",
+      "name": "金币",
+      "font_class": "jinbi",
+      "unicode": "e6c8",
+      "unicode_decimal": 59080
     },
     {
       "icon_id": "752842",
@@ -88,6 +60,41 @@
       "font_class": "guanbi",
       "unicode": "e638",
       "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "9111112",
+      "name": "警告",
+      "font_class": "jinggao",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
+      "icon_id": "10052611",
+      "name": "成功",
+      "font_class": "chenggong",
+      "unicode": "e704",
+      "unicode_decimal": 59140
+    },
+    {
+      "icon_id": "6125834",
+      "name": "点",
+      "font_class": "dian-red",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "5501601",
+      "name": "圆圈",
+      "font_class": "AppIcon-copy",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "5611896",
+      "name": "手指",
+      "font_class": "shouzhixuanzhong-copy",
+      "unicode": "e604",
+      "unicode_decimal": 58884
     }
   ]
 }

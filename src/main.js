@@ -8,6 +8,7 @@ import './assets/icon/iconfont.css'
 import MescrollVue from 'mescroll.js/mescroll'
 Vue.component('mescroll-vue', MescrollVue)
 import { getRequest, postRequest } from './utils/request'
+import { wxWholeShare} from './utils/weixinApi'
 Vue.use(Vuex)
 
 import { 
@@ -27,6 +28,13 @@ Vue.config.productionTip = false
 Vue.prototype.$getRequest = getRequest // get请求
 Vue.prototype.$postRequest = postRequest // post请求
 
+let url = window.location.href.split("?")[0];
+wxWholeShare({
+  shareTitle: '佛山推多多',
+  shareDesc: '佛山推多多，快点进来看看吧！',
+  shareLink: url,
+  shareImg: './assets/img/Headless.png'
+});
 router.beforeEach((to, from, next) => {
   // 路由发生改变修改页面的title
   if (to.meta.title) {
@@ -34,6 +42,7 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+
 /* eslint-disable no-new */
 new Vue({
   router,
