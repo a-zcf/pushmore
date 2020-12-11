@@ -54,5 +54,26 @@ module.exports = {
 
 
     bundleAnalyzerReport: process.env.npm_config_report
+  },
+  test: {
+    // Template for index.html
+    index: path.resolve(__dirname, '../zltddui/index.html'),
+
+    // Paths
+    assetsRoot: path.resolve(__dirname, '../zltddui'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: './',
+
+    /**
+     * Source Maps
+     */
+
+    productionSourceMap: true,
+    devtool: '#source-map',
+    productionGzip: false,
+    productionGzipExtensions: ['js', 'css'],
+
+
+    bundleAnalyzerReport: process.env.npm_config_report
   }
 }

@@ -1,8 +1,4 @@
 const urls = {
-  base: 'http://wx.thewm.cn/zltdd',
-  origin: 'http://wx.thewm.cn/zltdd',
-
-  red_url: 'http://wx.thewm.cn/zltdd/frontpage/h5login/login?redirect_url=', // 登陆地址url
   userInfo: '/api/index/userinfo', // 用户信息接口
   bindRecomend: '/api/index/bindRecomend', // 绑定成为天使用户接口
   myTeam: '/api/index/myTeam', // 我的团队接口

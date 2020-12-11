@@ -1,11 +1,12 @@
 import axios from 'axios'
-import Api from '../api/api'
 import Vue from 'vue'
 import store from '../store/store'
 import * as types from '../store/types'
 import { Toast } from 'vant'
 Vue.use(Toast);
 
+const baseUrl = process.env.API_ROOT
+const red_url = baseUrl + '/frontpage/h5login/login?redirect_url=' // 登陆地址url
 let T = {};
 var url = function (name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -38,7 +39,7 @@ axios.interceptors.response.use(response => {
     let url = location.href
     store.commit(types.LOGOUT)
     Toast.fail(response.data.msg);
-    window.location.href = Api.red_url + url
+    window.location.href = red_url + url
   } else {
 
   }
@@ -59,11 +60,10 @@ axios.interceptors.response.use(response => {
     }
     return Promise.reject(error.response.data)
   })
-let base = Api.base
 export const postRequest = (url, params) => {
   return axios({
     method: 'post',
-    url: `${base}${url}`,
+    url: `${baseUrl}${url}`,
     data: params,
     dataType: 'jsonp',
     headers: {
@@ -75,7 +75,7 @@ export const getRequest = (url,params) => {
   return axios({
     method: 'get',
     params:params,
-    url: `${base}${url}`,
+    url: `${baseUrl}${url}`,
     headers: {
       'Content-Type': 'application/json'
     }
