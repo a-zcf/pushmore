@@ -1,0 +1,23 @@
+{
+  "id": "2015210",
+  "name": "真龙微店",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11206299",
+      "name": "性别",
+      "font_class": "xingbie",
+      "unicode": "e84a",
+      "unicode_decimal": 59466
+    },
+    {
+      "icon_id": "7452929",
+      "name": "导航",
+      "font_class": "daohang_huabanfuben",
+      "unicode": "e730",
+      "unicode_decimal": 59184
+    }
+  ]
+}
